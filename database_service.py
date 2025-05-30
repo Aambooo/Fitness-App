@@ -36,10 +36,3 @@ def update_workout_today(workout_data, insert=False):
         return db.insert(SCHEMA, TABLE_TODAY,[workout_data])
     return db.update(SCHEMA,TABLE_TODAY,[workout_data])
 
-from yt_extractor import get_info   
-
-infos = get_info("https://www.youtube.com/watch?v=U2JSwaYjWhM")
-print(infos)
-insert_workout(infos)
-workouts = get_all_workouts()
-print(workouts)
