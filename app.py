@@ -43,7 +43,7 @@ if selection == "All workouts":
             
         st.video(url)
     else:
-        st.text("Currently,no workouts in Database !")
+        st.text("No workouts in Database !")
 elif selection == "Add workout":
     st.markdown(f"## Add workout")
 
