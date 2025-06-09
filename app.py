@@ -22,7 +22,7 @@ def get_duration_text(duration_s):
 
 st.title("Workout APP")
 
-menu_options= ("Today's Workout", "All workouts", "Add workout")
+menu_options= ("Today's Workout", "All workouts", "Add workout", "Set Email Reminder")
 selection = st.sidebar.selectbox("Menu",menu_options)
 
 if selection == "All workouts":
@@ -60,7 +60,30 @@ elif selection == "Add workout":
                 dbs.insert_workout(workout_data)
                 st.text("Added workout!")
                 st.cache_data.clear()
+elif selection == "Set Email Reminder":
+    st.markdown("## Email Reminder Setup")
 
+    email = st.text_input("Enter your email:")
+    schedule_time = st.time_input("Choose workout time:")
+
+    workout_today = dbs.get_workout_today()
+    if not workout_today:
+        st.warning("No workout chosen for today!")
+    else:
+        workout = workout_today[0]
+        if email and schedule_time:
+            data = {
+                "email": email,
+                "time": schedule_time.strftime("%H:%M"),
+                "video_id": workout['video_id'],
+                "title": workout['title'],
+                "channel": workout['channel'],
+                "duration": workout['duration']
+            }
+
+            if st.button("Set Reminder"):
+                dbs.insert_schedule(data)
+                st.success("Workout reminder set successfully!")
 else:
     st.markdown(f"## Today's workout")
 
