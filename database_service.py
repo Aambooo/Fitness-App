@@ -1,7 +1,7 @@
 import harperdb
 
 # Configure HarperDB
-url = "http://localhost:9925"  # Replace with cloud URL if needed
+url = "http://localhost:9925"  
 username = "Nabin"
 password = "Projectkolagi369$"
 
