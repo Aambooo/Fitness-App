@@ -5,3 +5,8 @@ __pycache__/
 *.pyd
 .vscode/
 .DS_Store
+# Environment files
+.env                # Blocks the specific file
+*.env               # Blocks all .env files
+.env*               # Extra protection for variants
+!.env.example       # Exception (keep template files)

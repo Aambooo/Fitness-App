@@ -61,3 +61,29 @@ def update_schedule(email, new_time, new_video_id):
             "video_id": new_video_id
         }]
     )
+def create_users_table():
+    db.create_table(
+        SCHEMA,
+        "users",
+        "user_id",  # Primary key
+        [
+            {"name": "email", "type": "string"},
+            {"name": "password", "type": "string"},
+            {"name": "name", "type": "string"},
+            {"name": "google_id", "type": "string"},
+            {"name": "created_at", "type": "datetime"}
+        ]
+    )
+
+def register_user(email, password, name, google_id=None):
+    user_data = {
+        "email": email,
+        "password": password,  # In production, hash this!
+        "name": name,
+        "google_id": google_id,
+        "created_at": datetime.now().isoformat()
+    }
+    return db.insert(SCHEMA, "users", [user_data])
+
+def get_user_by_email(email):
+    return db.sql(f"SELECT * FROM {SCHEMA}.users WHERE email = '{email}'")[0]
