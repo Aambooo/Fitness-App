@@ -1,14 +1,11 @@
 import harperdb
 
-# Configure HarperDB
-url = "http://localhost:9925"  
-username = "Nabin"
-password = "Projectkolagi369$"
 
 db = harperdb.HarperDB(
-    url=url,
-    username=username,
-    password=password
+    url="http://localhost:9925",  
+    username="Nabin",
+    password="Projectkolagi369$",
+    timeout=30  
 )
 
 SCHEMA = "workout_repo"
