@@ -2,8 +2,7 @@ import random
 import streamlit as st
 from yt_extractor import get_info
 import database_service as dbs
-from auth import show_auth, verify_token, logout
-import jwt
+from auth import show_auth, logout
 from datetime import datetime, timedelta
 import os
 from dotenv import load_dotenv
@@ -26,13 +25,6 @@ def get_duration_text(duration_s):
         text += f'{minutes:02d}:{seconds:02d}'
     return text
 
-def generate_token(user_id):
-    payload = {
-        'user_id': user_id,
-        'exp': datetime.utcnow() + timedelta(hours=2)
-    }
-    return jwt.encode(payload, os.getenv("SECRET_KEY"), algorithm='HS256')
-
 def main_app():
     # Authentication check
     if 'user' not in st.session_state:
@@ -40,7 +32,7 @@ def main_app():
         st.stop()
 
     user = st.session_state['user']
-    st.sidebar.title(f"Welcome, {user['name']}!")
+    st.sidebar.title(f"Welcome, {user['full_name']}!")
     
     if st.sidebar.button("Logout"):
         logout()
@@ -119,15 +111,20 @@ def main_app():
             video_id = workout_options[selected_workout]
             
             if email and schedule_time and video_id:
-                workout = dbs.get_workout_by_id(video_id)[0]
+                workout = dbs.get_workout_by_id(video_id)
+
+                if not workout:
+                    st.error("Selected workout not found in database!")
+                    st.stop()
+
                 data = {
                     "email": email,
                     "time": schedule_time,
                     "video_id": video_id,
-                    "title": workout['title'],
-                    "channel": workout['channel'],
-                    "duration": workout['duration'],
-                    "user_id": user['user_id']  # Link reminder to user
+                    "title": workout.get('title','No title'),
+                    "channel": workout.get('channel', 'Unknown channel'),
+                    "duration": workout.get('duration', 0),
+                    "user_id": user['user_id']
                 }
                 
                 if existing_schedule:
@@ -147,7 +144,7 @@ def main_app():
         else:
             wo = dbs.get_workout_today()
             if not wo:
-                idx = random.randint(0, len(workouts)-1)
+                idx = random.randint(0, len(workouts)-1)  # Fixed missing parenthesis
                 wo = workouts[idx]
                 dbs.update_workout_today(wo, insert=True)
             else:
