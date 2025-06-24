@@ -31,17 +31,22 @@ EMAIL_PASSWORD = os.getenv('EMAIL_PASSWORD')
 if not all([EMAIL_ADDRESS, EMAIL_PASSWORD]):
     logging.error("Missing email configuration in environment variables")
     exit(1)
+def get_current_time_formatted() -> str:
+    """Get current time in HH:MM format with leading zeros"""
+    now = datetime.now()
+    return f"{now.hour:02d}:{now.minute:02d}" 
 
 def send_email(to_email: str, subject: str, body: str) -> bool:
     """Send email with proper error handling"""
     try:
         msg = MIMEText(body)
         msg["Subject"] = subject
-        msg["From"] = EMAIL_ADDRESS
+        msg["From"] = f"FitTrackPro <{EMAIL_ADDRESS}>"
         msg["To"] = to_email
         
         # This is where your SMTP code lives now (secure version)
         with smtplib.SMTP(SMTP_SERVER, SMTP_PORT, timeout=10) as server:
+            server.set_debuglevel(1) 
             server.starttls()
             server.login(EMAIL_ADDRESS, EMAIL_PASSWORD)
             server.send_message(msg)
@@ -56,20 +61,26 @@ def send_email(to_email: str, subject: str, body: str) -> bool:
 
 def check_alerts() -> None:
     """Check for scheduled alerts and send emails"""
-    current_time = datetime.now().strftime("%H:%M")
-    logging.info(f"Checking alerts at {current_time}")
+    current_time = get_current_time_formatted()
+    current_datetime = datetime.now()
+    logging.info(f"Checking alerts at {current_time} (System time: {current_datetime})")
     
     try:
+        # Add debug output for schedules
         schedules = dbs.get_schedules_by_time(current_time)
+        
         if not schedules:
-            logging.info("No scheduled reminders found for this time")
+            logging.info(f"No scheduled reminders found for {current_time}")
             return
             
         logging.info(f"Found {len(schedules)} scheduled reminders")
         
         for schedule in schedules:
-            if not all(key in schedule for key in ['email', 'title', 'video_id']):
-                logging.warning("Invalid schedule data, skipping")
+            # Enhanced validation
+            required_keys = ['email', 'title', 'video_id']
+            if not all(key in schedule for key in required_keys):
+                missing = [k for k in required_keys if k not in schedule]
+                logging.warning(f"Invalid schedule data - missing {missing}, skipping")
                 continue
                 
             email = schedule['email']
@@ -78,18 +89,23 @@ def check_alerts() -> None:
             
             logging.info(f"Processing reminder for {email} (Workout: {title})")
             
-            email_sent = send_email(
-                email,
-                "⏰ Workout Reminder!",
-                f"Time for your workout: {title}\nWatch: https://youtu.be/{video_id}"
-            )
-            
-            if email_sent:
-                # Optional: Update database to mark as sent
-                pass
+            try:
+                email_sent = send_email(
+                    email,
+                    "⏰ Workout Reminder!",
+                    f"Time for your workout: {title}\nWatch: https://youtu.be/{video_id}"
+                )
+                
+                if email_sent:
+                    logging.info(f"Successfully sent email to {email}")
+                else:
+                    logging.error(f"Failed to send email to {email}")
+                    
+            except Exception as e:
+                logging.error(f"Error sending email to {email}: {str(e)}")
                 
     except Exception as e:
-        logging.error(f"Error processing alerts: {str(e)}")
+        logging.error(f"Error processing alerts: {str(e)}", exc_info=True)
 
 def main() -> None:
     """Main scheduler loop"""
