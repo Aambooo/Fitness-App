@@ -387,24 +387,56 @@ class DatabaseService:
             if conn:
                 conn.close()
     
-    def get_schedules_by_time(self, time_str: str) -> List[Dict[str, Any]]:
-        """Get all schedules for a specific time"""
+    def get_schedules_by_time(self, target_time: str) -> List[Dict[str, Any]]:
+        """Get schedules matching the target time (in 24-hour format HH:MM).
+           Converts database times (12-hour AM/PM) to 24-hour for comparison."""
         conn = None
         try:
+            # Convert 24-hour format to 12-hour format for DB query
+            hour, minute = map(int, target_time.split(':'))
+            period = "AM" if hour < 12 else "PM"
+            hour_12 = hour if hour <= 12 else hour - 12
+            db_time_format = f"{hour_12}:{minute:02d} {period}"
+            
+            logging.debug(f"Converted {target_time} (24h) → {db_time_format} (12h)")
+
             conn = self.get_connection()
             cursor = conn.cursor(dictionary=True)
-            cursor.execute("""
-                SELECT email, video_id, title 
-                FROM schedule 
+            
+            query = """
+                SELECT * FROM schedule 
                 WHERE time = %s
-            """, (time_str,))
-            return cursor.fetchall()
+            """
+            cursor.execute(query, (db_time_format,))
+            result = cursor.fetchall()
+            
+            logging.debug(f"Found {len(result)} matching schedules")
+            return result
+            
+        except ValueError as e:
+            logging.error(f"Invalid time format {target_time}: {e}")
+            return []
         except Error as e:
-            logging.error(f"Database error getting schedules: {e}")
+            logging.error(f"Database error in get_schedules_by_time: {e}")
             return []
         finally:
             if conn:
                 conn.close()
+    
+    def get_all_schedules(self) -> List[Dict[str, Any]]:
+        """Get all schedules for debugging"""
+        conn = None
+        try:
+            conn = self.get_connection()
+            cursor = conn.cursor(dictionary=True)
+            cursor.execute("SELECT * FROM schedule")
+            return cursor.fetchall()
+        except Error as e:
+            logging.error(f"Error getting schedules: {e}")
+            return []
+        finally:
+            if conn:
+               conn.close()
 
 # Singleton instance
 dbs = DatabaseService()
