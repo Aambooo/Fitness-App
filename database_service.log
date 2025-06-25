@@ -1,0 +1,1161 @@
+2025-06-25 07:24:42,098 - INFO - MySQL Connection pool created successfully
+2025-06-25 07:24:42,098 - INFO - DatabaseService initialized
+2025-06-25 07:24:42,098 - INFO - DatabaseService initialized successfully with all methods
+2025-06-25 07:24:42,122 - INFO - MySQL Connection pool created successfully
+2025-06-25 07:24:42,122 - INFO - DatabaseService initialized
+2025-06-25 07:24:42,128 - INFO - DatabaseService initialized successfully with all methods
+2025-06-25 07:30:31,874 - INFO - MySQL Connection pool created successfully
+2025-06-25 07:30:31,874 - INFO - DatabaseService initialized
+2025-06-25 07:30:31,876 - INFO - DatabaseService initialized successfully with all methods
+2025-06-25 07:30:31,901 - INFO - MySQL Connection pool created successfully
+2025-06-25 07:30:31,903 - INFO - DatabaseService initialized
+2025-06-25 07:30:31,903 - ERROR - Error during cleanup: 'MySQLConnectionPool' object has no attribute '_connections'
+2025-06-25 07:30:31,903 - INFO - DatabaseService initialized successfully with all methods
+2025-06-25 07:30:31,921 - ERROR - Error during cleanup: 'MySQLConnectionPool' object has no attribute '_connections'
+2025-06-25 07:34:46,592 - INFO - MySQL Connection pool created successfully
+2025-06-25 07:34:46,593 - INFO - DatabaseService initialized
+2025-06-25 07:34:46,593 - INFO - DatabaseService initialized successfully with all methods
+2025-06-25 07:34:46,609 - ERROR - Error during cleanup: 'MySQLConnectionPool' object has no attribute '_connections'
+2025-06-25 07:37:47,076 - INFO - MySQL Connection pool created successfully
+2025-06-25 07:37:47,077 - INFO - DatabaseService initialized
+2025-06-25 07:37:47,192 - ERROR - Error during cleanup: 'MySQLConnectionPool' object has no attribute '_connections'
+2025-06-25 07:49:24,269 - ERROR - Cleanup error: name 'self' is not defined
+2025-06-25 07:49:24,339 - INFO - MySQL Connection pool created successfully
+2025-06-25 07:49:24,339 - INFO - DatabaseService initialized
+2025-06-25 07:49:24,346 - INFO - 
+==================================================
+2025-06-25 07:49:24,412 - INFO - ==================================================
+
+2025-06-25 07:50:00,013 - INFO - 
+==================================================
+2025-06-25 07:50:00,025 - INFO - ==================================================
+2025-06-25 07:51:00,003 - INFO - 
+==================================================
+2025-06-25 07:51:00,030 - INFO - ==================================================
+2025-06-25 07:52:00,003 - INFO - 
+==================================================
+2025-06-25 07:52:00,054 - INFO - ==================================================
+2025-06-25 07:53:00,010 - INFO - 
+==================================================
+2025-06-25 07:53:00,055 - INFO - ==================================================
+2025-06-25 07:54:00,006 - INFO - 
+==================================================
+2025-06-25 07:54:00,014 - INFO - ==================================================
+2025-06-25 07:55:00,007 - INFO - 
+==================================================
+2025-06-25 07:55:00,020 - INFO - ==================================================
+2025-06-25 07:56:00,001 - INFO - 
+==================================================
+2025-06-25 07:56:00,038 - INFO - ==================================================
+2025-06-25 07:57:00,007 - INFO - 
+==================================================
+2025-06-25 07:57:00,061 - INFO - ==================================================
+2025-06-25 07:58:00,015 - INFO - 
+==================================================
+2025-06-25 07:58:00,051 - INFO - ==================================================
+2025-06-25 07:59:00,002 - INFO - 
+==================================================
+2025-06-25 07:59:00,014 - INFO - ==================================================
+2025-06-25 08:00:00,015 - INFO - 
+==================================================
+2025-06-25 08:00:00,037 - INFO - ==================================================
+2025-06-25 08:01:00,010 - INFO - 
+==================================================
+2025-06-25 08:01:00,027 - INFO - ==================================================
+2025-06-25 08:02:00,009 - INFO - 
+==================================================
+2025-06-25 08:02:00,040 - INFO - ==================================================
+2025-06-25 08:02:23,733 - ERROR - Cleanup error: name 'self' is not defined
+2025-06-25 08:02:23,805 - INFO - MySQL Connection pool created successfully
+2025-06-25 08:02:23,806 - INFO - DatabaseService initialized
+2025-06-25 08:02:23,809 - INFO - Starting FitTrackPro Email Scheduler
+2025-06-25 08:02:54,237 - ERROR - Cleanup error: name 'self' is not defined
+2025-06-25 08:02:54,309 - INFO - MySQL Connection pool created successfully
+2025-06-25 08:02:54,309 - INFO - DatabaseService initialized
+2025-06-25 08:03:00,006 - INFO - Checking alerts at 08:03 (System time: 2025-06-25 08:03:00.006681)
+2025-06-25 08:03:00,007 - WARNING - get_all_schedules() not available - checking by time only
+2025-06-25 08:03:00,008 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 84, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 08:04:00,005 - INFO - Checking alerts at 08:04 (System time: 2025-06-25 08:04:00.005963)
+2025-06-25 08:04:00,007 - WARNING - get_all_schedules() not available - checking by time only
+2025-06-25 08:04:00,008 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 84, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 08:05:00,014 - INFO - Checking alerts at 08:05 (System time: 2025-06-25 08:05:00.014701)
+2025-06-25 08:05:00,014 - WARNING - get_all_schedules() not available - checking by time only
+2025-06-25 08:05:00,015 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 84, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 08:06:00,014 - INFO - Checking alerts at 08:06 (System time: 2025-06-25 08:06:00.014568)
+2025-06-25 08:06:00,014 - WARNING - get_all_schedules() not available - checking by time only
+2025-06-25 08:06:00,016 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 84, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 08:07:00,002 - INFO - Checking alerts at 08:07 (System time: 2025-06-25 08:07:00.002126)
+2025-06-25 08:07:00,003 - WARNING - get_all_schedules() not available - checking by time only
+2025-06-25 08:07:00,003 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 84, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 08:08:00,015 - INFO - Checking alerts at 08:08 (System time: 2025-06-25 08:08:00.015218)
+2025-06-25 08:08:00,018 - WARNING - get_all_schedules() not available - checking by time only
+2025-06-25 08:08:00,019 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 84, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 08:09:00,008 - INFO - Checking alerts at 08:09 (System time: 2025-06-25 08:09:00.008348)
+2025-06-25 08:09:00,009 - WARNING - get_all_schedules() not available - checking by time only
+2025-06-25 08:09:00,010 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 84, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 08:10:00,003 - INFO - Checking alerts at 08:10 (System time: 2025-06-25 08:10:00.004000)
+2025-06-25 08:10:00,005 - WARNING - get_all_schedules() not available - checking by time only
+2025-06-25 08:10:00,007 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 84, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 08:11:00,007 - INFO - Checking alerts at 08:11 (System time: 2025-06-25 08:11:00.007385)
+2025-06-25 08:11:00,008 - WARNING - get_all_schedules() not available - checking by time only
+2025-06-25 08:11:00,009 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 84, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 08:12:00,000 - INFO - Checking alerts at 08:12 (System time: 2025-06-25 08:12:00.000960)
+2025-06-25 08:12:00,001 - WARNING - get_all_schedules() not available - checking by time only
+2025-06-25 08:12:00,003 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 84, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 08:13:00,014 - INFO - Checking alerts at 08:13 (System time: 2025-06-25 08:13:00.014331)
+2025-06-25 08:13:00,015 - WARNING - get_all_schedules() not available - checking by time only
+2025-06-25 08:13:00,015 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 84, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 08:14:00,011 - INFO - Checking alerts at 08:14 (System time: 2025-06-25 08:14:00.011008)
+2025-06-25 08:14:00,013 - WARNING - get_all_schedules() not available - checking by time only
+2025-06-25 08:14:00,015 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 84, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 08:15:00,014 - INFO - Checking alerts at 08:15 (System time: 2025-06-25 08:15:00.014833)
+2025-06-25 08:15:00,015 - WARNING - get_all_schedules() not available - checking by time only
+2025-06-25 08:15:00,016 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 84, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 08:16:00,007 - INFO - Checking alerts at 08:16 (System time: 2025-06-25 08:16:00.007708)
+2025-06-25 08:16:00,008 - WARNING - get_all_schedules() not available - checking by time only
+2025-06-25 08:16:00,012 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 84, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 08:17:00,014 - INFO - Checking alerts at 08:17 (System time: 2025-06-25 08:17:00.014869)
+2025-06-25 08:17:00,017 - WARNING - get_all_schedules() not available - checking by time only
+2025-06-25 08:17:00,020 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 84, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 08:17:53,279 - INFO - MySQL Connection pool created successfully
+2025-06-25 08:17:53,280 - INFO - DatabaseService initialized
+2025-06-25 08:17:53,295 - ERROR - Cleanup error: 'Queue' object is not iterable
+2025-06-25 08:18:00,008 - INFO - Checking alerts at 08:18 (System time: 2025-06-25 08:18:00.008421)
+2025-06-25 08:18:00,010 - WARNING - get_all_schedules() not available - checking by time only
+2025-06-25 08:18:00,012 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 84, in check_alerts
+    logging.info(f"Found {len(schedules)} reminders to process")
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 08:19:00,009 - INFO - Checking alerts at 08:19 (System time: 2025-06-25 08:19:00.009809)
+2025-06-25 08:19:00,010 - WARNING - get_all_schedules() not available - checking by time only
+2025-06-25 08:19:00,011 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 84, in check_alerts
+    logging.info(f"Found {len(schedules)} reminders to process")
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 08:20:00,005 - INFO - Checking alerts at 08:20 (System time: 2025-06-25 08:20:00.005219)
+2025-06-25 08:20:00,007 - WARNING - get_all_schedules() not available - checking by time only
+2025-06-25 08:20:00,008 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 84, in check_alerts
+    logging.info(f"Found {len(schedules)} reminders to process")
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 08:21:00,012 - INFO - Checking alerts at 08:21 (System time: 2025-06-25 08:21:00.012662)
+2025-06-25 08:21:00,013 - WARNING - get_all_schedules() not available - checking by time only
+2025-06-25 08:21:00,016 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 84, in check_alerts
+    logging.info(f"Found {len(schedules)} reminders to process")
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 08:22:00,007 - INFO - Checking alerts at 08:22 (System time: 2025-06-25 08:22:00.007860)
+2025-06-25 08:22:00,007 - WARNING - get_all_schedules() not available - checking by time only
+2025-06-25 08:22:00,008 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 84, in check_alerts
+    logging.info(f"Found {len(schedules)} reminders to process")
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 08:23:00,002 - INFO - Checking alerts at 08:23 (System time: 2025-06-25 08:23:00.002142)
+2025-06-25 08:23:00,017 - WARNING - get_all_schedules() not available - checking by time only
+2025-06-25 08:23:00,017 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 84, in check_alerts
+    logging.info(f"Found {len(schedules)} reminders to process")
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 08:23:53,840 - INFO - MySQL Connection pool created successfully
+2025-06-25 08:23:53,842 - INFO - DatabaseService initialized
+2025-06-25 08:23:53,845 - ERROR - Invalid time format: 11:57 AM
+2025-06-25 08:23:53,864 - ERROR - Cleanup error: 'MySQLConnectionPool' object has no attribute 'close'
+2025-06-25 08:24:00,001 - INFO - Checking alerts at 08:24 (System time: 2025-06-25 08:24:00.001801)
+2025-06-25 08:24:00,001 - WARNING - get_all_schedules() not available - checking by time only
+2025-06-25 08:24:00,003 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 84, in check_alerts
+    logging.info(f"Found {len(schedules)} reminders to process")
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 08:25:00,013 - INFO - Checking alerts at 08:25 (System time: 2025-06-25 08:25:00.013017)
+2025-06-25 08:25:00,015 - WARNING - get_all_schedules() not available - checking by time only
+2025-06-25 08:25:00,016 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 84, in check_alerts
+    logging.info(f"Found {len(schedules)} reminders to process")
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 08:26:00,014 - INFO - Checking alerts at 08:26 (System time: 2025-06-25 08:26:00.014724)
+2025-06-25 08:26:00,015 - WARNING - get_all_schedules() not available - checking by time only
+2025-06-25 08:26:00,015 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 84, in check_alerts
+    logging.info(f"Found {len(schedules)} reminders to process")
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 08:27:00,015 - INFO - Checking alerts at 08:27 (System time: 2025-06-25 08:27:00.015515)
+2025-06-25 08:27:00,015 - WARNING - get_all_schedules() not available - checking by time only
+2025-06-25 08:27:00,016 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 84, in check_alerts
+    logging.info(f"Found {len(schedules)} reminders to process")
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 08:28:00,008 - INFO - Checking alerts at 08:28 (System time: 2025-06-25 08:28:00.008902)
+2025-06-25 08:28:00,008 - WARNING - get_all_schedules() not available - checking by time only
+2025-06-25 08:28:00,010 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 84, in check_alerts
+    logging.info(f"Found {len(schedules)} reminders to process")
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 08:29:00,009 - INFO - Checking alerts at 08:29 (System time: 2025-06-25 08:29:00.009547)
+2025-06-25 08:29:00,010 - WARNING - get_all_schedules() not available - checking by time only
+2025-06-25 08:29:00,011 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 84, in check_alerts
+    logging.info(f"Found {len(schedules)} reminders to process")
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 08:30:00,009 - INFO - Checking alerts at 08:30 (System time: 2025-06-25 08:30:00.009957)
+2025-06-25 08:30:00,009 - WARNING - get_all_schedules() not available - checking by time only
+2025-06-25 08:30:00,010 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 84, in check_alerts
+    logging.info(f"Found {len(schedules)} reminders to process")
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 08:31:00,014 - INFO - Checking alerts at 08:31 (System time: 2025-06-25 08:31:00.014299)
+2025-06-25 08:31:00,014 - WARNING - get_all_schedules() not available - checking by time only
+2025-06-25 08:31:00,015 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 84, in check_alerts
+    logging.info(f"Found {len(schedules)} reminders to process")
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 08:32:00,002 - INFO - Checking alerts at 08:32 (System time: 2025-06-25 08:32:00.002980)
+2025-06-25 08:32:00,003 - WARNING - get_all_schedules() not available - checking by time only
+2025-06-25 08:32:00,003 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 84, in check_alerts
+    logging.info(f"Found {len(schedules)} reminders to process")
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 08:33:00,004 - INFO - Checking alerts at 08:33 (System time: 2025-06-25 08:33:00.004244)
+2025-06-25 08:33:00,005 - WARNING - get_all_schedules() not available - checking by time only
+2025-06-25 08:33:00,005 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 84, in check_alerts
+    logging.info(f"Found {len(schedules)} reminders to process")
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 08:34:00,002 - INFO - Checking alerts at 08:34 (System time: 2025-06-25 08:34:00.002157)
+2025-06-25 08:34:00,002 - WARNING - get_all_schedules() not available - checking by time only
+2025-06-25 08:34:00,002 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 84, in check_alerts
+    logging.info(f"Found {len(schedules)} reminders to process")
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 08:35:00,014 - INFO - Checking alerts at 08:35 (System time: 2025-06-25 08:35:00.014964)
+2025-06-25 08:35:00,016 - WARNING - get_all_schedules() not available - checking by time only
+2025-06-25 08:35:00,017 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 84, in check_alerts
+    logging.info(f"Found {len(schedules)} reminders to process")
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 08:36:00,013 - INFO - Checking alerts at 08:36 (System time: 2025-06-25 08:36:00.013856)
+2025-06-25 08:36:00,013 - WARNING - get_all_schedules() not available - checking by time only
+2025-06-25 08:36:00,013 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 84, in check_alerts
+    logging.info(f"Found {len(schedules)} reminders to process")
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 08:37:00,011 - INFO - Checking alerts at 08:37 (System time: 2025-06-25 08:37:00.011127)
+2025-06-25 08:37:00,011 - WARNING - get_all_schedules() not available - checking by time only
+2025-06-25 08:37:00,012 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 84, in check_alerts
+    logging.info(f"Found {len(schedules)} reminders to process")
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 08:37:10,010 - INFO - MySQL Connection pool created successfully
+2025-06-25 08:37:10,010 - INFO - DatabaseService initialized
+2025-06-25 08:37:10,056 - INFO - Connection pool closed successfully
+2025-06-25 08:38:00,005 - INFO - Checking alerts at 08:38 (System time: 2025-06-25 08:38:00.005086)
+2025-06-25 08:38:00,005 - WARNING - get_all_schedules() not available - checking by time only
+2025-06-25 08:38:00,006 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 84, in check_alerts
+    logging.info(f"Found {len(schedules)} reminders to process")
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 08:39:00,002 - INFO - Checking alerts at 08:39 (System time: 2025-06-25 08:39:00.002479)
+2025-06-25 08:39:00,002 - WARNING - get_all_schedules() not available - checking by time only
+2025-06-25 08:39:00,003 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 84, in check_alerts
+    logging.info(f"Found {len(schedules)} reminders to process")
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 08:40:00,007 - INFO - Checking alerts at 08:40 (System time: 2025-06-25 08:40:00.007112)
+2025-06-25 08:40:00,008 - WARNING - get_all_schedules() not available - checking by time only
+2025-06-25 08:40:00,008 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 84, in check_alerts
+    logging.info(f"Found {len(schedules)} reminders to process")
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 08:41:00,011 - INFO - Checking alerts at 08:41 (System time: 2025-06-25 08:41:00.011998)
+2025-06-25 08:41:00,012 - WARNING - get_all_schedules() not available - checking by time only
+2025-06-25 08:41:00,012 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 84, in check_alerts
+    logging.info(f"Found {len(schedules)} reminders to process")
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 08:42:00,004 - INFO - Checking alerts at 08:42 (System time: 2025-06-25 08:42:00.004182)
+2025-06-25 08:42:00,005 - WARNING - get_all_schedules() not available - checking by time only
+2025-06-25 08:42:00,006 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 84, in check_alerts
+    logging.info(f"Found {len(schedules)} reminders to process")
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 08:42:31,310 - INFO - MySQL Connection pool created successfully
+2025-06-25 08:42:31,311 - INFO - DatabaseService initialized
+2025-06-25 08:42:31,324 - INFO - Connection pool closed successfully
+2025-06-25 08:42:40,585 - INFO - MySQL Connection pool created successfully
+2025-06-25 08:42:40,586 - INFO - DatabaseService initialized
+2025-06-25 08:42:40,600 - INFO - Connection pool closed successfully
+2025-06-25 08:43:00,010 - INFO - Checking alerts at 08:43 (System time: 2025-06-25 08:43:00.010865)
+2025-06-25 08:43:00,010 - WARNING - get_all_schedules() not available - checking by time only
+2025-06-25 08:43:00,011 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 84, in check_alerts
+    logging.info(f"Found {len(schedules)} reminders to process")
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 08:44:00,002 - INFO - Checking alerts at 08:44 (System time: 2025-06-25 08:44:00.002623)
+2025-06-25 08:44:00,002 - WARNING - get_all_schedules() not available - checking by time only
+2025-06-25 08:44:00,006 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 84, in check_alerts
+    logging.info(f"Found {len(schedules)} reminders to process")
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 08:45:19,298 - INFO - MySQL Connection pool created successfully
+2025-06-25 08:45:19,298 - INFO - DatabaseService initialized
+2025-06-25 08:45:19,298 - INFO - Starting FitTrackPro Email Scheduler
+2025-06-25 08:46:00,010 - INFO - Checking alerts at 08:46 (System time: 2025-06-25 08:46:00.010476)
+2025-06-25 08:46:00,010 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 08:47:00,016 - INFO - Checking alerts at 08:47 (System time: 2025-06-25 08:47:00.016296)
+2025-06-25 08:47:00,016 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 08:48:00,008 - INFO - Checking alerts at 08:48 (System time: 2025-06-25 08:48:00.008534)
+2025-06-25 08:48:00,009 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 08:49:00,005 - INFO - Checking alerts at 08:49 (System time: 2025-06-25 08:49:00.005693)
+2025-06-25 08:49:00,005 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 08:50:00,008 - INFO - Checking alerts at 08:50 (System time: 2025-06-25 08:50:00.008586)
+2025-06-25 08:50:00,008 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 08:51:00,010 - INFO - Checking alerts at 08:51 (System time: 2025-06-25 08:51:00.010450)
+2025-06-25 08:51:00,010 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 08:52:00,012 - INFO - Checking alerts at 08:52 (System time: 2025-06-25 08:52:00.012584)
+2025-06-25 08:52:00,012 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 08:53:00,001 - INFO - Checking alerts at 08:53 (System time: 2025-06-25 08:53:00.001859)
+2025-06-25 08:53:00,002 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 08:54:00,014 - INFO - Checking alerts at 08:54 (System time: 2025-06-25 08:54:00.014993)
+2025-06-25 08:54:00,015 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 08:55:00,008 - INFO - Checking alerts at 08:55 (System time: 2025-06-25 08:55:00.008173)
+2025-06-25 08:55:00,008 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 08:56:00,002 - INFO - Checking alerts at 08:56 (System time: 2025-06-25 08:56:00.002392)
+2025-06-25 08:56:00,002 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 08:57:00,011 - INFO - Checking alerts at 08:57 (System time: 2025-06-25 08:57:00.011343)
+2025-06-25 08:57:00,012 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 08:58:00,008 - INFO - Checking alerts at 08:58 (System time: 2025-06-25 08:58:00.008131)
+2025-06-25 08:58:00,009 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 08:59:00,008 - INFO - Checking alerts at 08:59 (System time: 2025-06-25 08:59:00.008408)
+2025-06-25 08:59:00,009 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 09:00:00,014 - INFO - Checking alerts at 09:00 (System time: 2025-06-25 09:00:00.014057)
+2025-06-25 09:00:00,014 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 09:01:00,010 - INFO - Checking alerts at 09:01 (System time: 2025-06-25 09:01:00.010142)
+2025-06-25 09:01:00,010 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 09:02:00,003 - INFO - Checking alerts at 09:02 (System time: 2025-06-25 09:02:00.003452)
+2025-06-25 09:02:00,004 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 09:03:00,001 - INFO - Checking alerts at 09:03 (System time: 2025-06-25 09:03:00.001326)
+2025-06-25 09:03:00,001 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 09:04:00,012 - INFO - Checking alerts at 09:04 (System time: 2025-06-25 09:04:00.012273)
+2025-06-25 09:04:00,012 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 09:05:00,013 - INFO - Checking alerts at 09:05 (System time: 2025-06-25 09:05:00.013453)
+2025-06-25 09:05:00,013 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 09:06:00,012 - INFO - Checking alerts at 09:06 (System time: 2025-06-25 09:06:00.012719)
+2025-06-25 09:06:00,012 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 09:07:00,003 - INFO - Checking alerts at 09:07 (System time: 2025-06-25 09:07:00.003559)
+2025-06-25 09:07:00,004 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 09:08:00,013 - INFO - Checking alerts at 09:08 (System time: 2025-06-25 09:08:00.013484)
+2025-06-25 09:08:00,013 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 09:09:00,008 - INFO - Checking alerts at 09:09 (System time: 2025-06-25 09:09:00.008741)
+2025-06-25 09:09:00,008 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 09:10:00,006 - INFO - Checking alerts at 09:10 (System time: 2025-06-25 09:10:00.006483)
+2025-06-25 09:10:00,006 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 09:11:00,008 - INFO - Checking alerts at 09:11 (System time: 2025-06-25 09:11:00.008495)
+2025-06-25 09:11:00,008 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 09:12:00,004 - INFO - Checking alerts at 09:12 (System time: 2025-06-25 09:12:00.004977)
+2025-06-25 09:12:00,004 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 09:13:00,005 - INFO - Checking alerts at 09:13 (System time: 2025-06-25 09:13:00.005478)
+2025-06-25 09:13:00,005 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 09:14:00,008 - INFO - Checking alerts at 09:14 (System time: 2025-06-25 09:14:00.008587)
+2025-06-25 09:14:00,009 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 09:15:00,009 - INFO - Checking alerts at 09:15 (System time: 2025-06-25 09:15:00.009863)
+2025-06-25 09:15:00,009 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 09:16:00,010 - INFO - Checking alerts at 09:16 (System time: 2025-06-25 09:16:00.010410)
+2025-06-25 09:16:00,010 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 09:17:00,008 - INFO - Checking alerts at 09:17 (System time: 2025-06-25 09:17:00.008307)
+2025-06-25 09:17:00,009 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 09:18:00,012 - INFO - Checking alerts at 09:18 (System time: 2025-06-25 09:18:00.012579)
+2025-06-25 09:18:00,013 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 09:19:00,003 - INFO - Checking alerts at 09:19 (System time: 2025-06-25 09:19:00.003512)
+2025-06-25 09:19:00,004 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 09:20:00,014 - INFO - Checking alerts at 09:20 (System time: 2025-06-25 09:20:00.014341)
+2025-06-25 09:20:00,014 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 09:21:00,000 - INFO - Checking alerts at 09:21 (System time: 2025-06-25 09:21:00.000923)
+2025-06-25 09:21:00,002 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 09:22:00,008 - INFO - Checking alerts at 09:22 (System time: 2025-06-25 09:22:00.008058)
+2025-06-25 09:22:00,008 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 09:23:00,009 - INFO - Checking alerts at 09:23 (System time: 2025-06-25 09:23:00.009585)
+2025-06-25 09:23:00,010 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 09:24:00,006 - INFO - Checking alerts at 09:24 (System time: 2025-06-25 09:24:00.006221)
+2025-06-25 09:24:00,006 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 09:25:00,003 - INFO - Checking alerts at 09:25 (System time: 2025-06-25 09:25:00.003894)
+2025-06-25 09:25:00,004 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 09:26:00,008 - INFO - Checking alerts at 09:26 (System time: 2025-06-25 09:26:00.008851)
+2025-06-25 09:26:00,009 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 09:27:00,007 - INFO - Checking alerts at 09:27 (System time: 2025-06-25 09:27:00.007545)
+2025-06-25 09:27:00,008 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 09:28:00,012 - INFO - Checking alerts at 09:28 (System time: 2025-06-25 09:28:00.012118)
+2025-06-25 09:28:00,013 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 09:29:00,010 - INFO - Checking alerts at 09:29 (System time: 2025-06-25 09:29:00.010401)
+2025-06-25 09:29:00,010 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 09:30:00,008 - INFO - Checking alerts at 09:30 (System time: 2025-06-25 09:30:00.008676)
+2025-06-25 09:30:00,008 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 09:31:00,009 - INFO - Checking alerts at 09:31 (System time: 2025-06-25 09:31:00.009233)
+2025-06-25 09:31:00,009 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 09:32:00,005 - INFO - Checking alerts at 09:32 (System time: 2025-06-25 09:32:00.005690)
+2025-06-25 09:32:00,005 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 09:33:00,009 - INFO - Checking alerts at 09:33 (System time: 2025-06-25 09:33:00.009192)
+2025-06-25 09:33:00,009 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 09:34:00,000 - INFO - Checking alerts at 09:34 (System time: 2025-06-25 09:34:00.000912)
+2025-06-25 09:34:00,000 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 09:35:00,009 - INFO - Checking alerts at 09:35 (System time: 2025-06-25 09:35:00.009103)
+2025-06-25 09:35:00,009 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 09:36:00,014 - INFO - Checking alerts at 09:36 (System time: 2025-06-25 09:36:00.014924)
+2025-06-25 09:36:00,014 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 09:37:00,011 - INFO - Checking alerts at 09:37 (System time: 2025-06-25 09:37:00.011181)
+2025-06-25 09:37:00,011 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 09:38:00,012 - INFO - Checking alerts at 09:38 (System time: 2025-06-25 09:38:00.012087)
+2025-06-25 09:38:00,012 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 09:39:00,006 - INFO - Checking alerts at 09:39 (System time: 2025-06-25 09:39:00.006864)
+2025-06-25 09:39:00,006 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 09:40:00,005 - INFO - Checking alerts at 09:40 (System time: 2025-06-25 09:40:00.005206)
+2025-06-25 09:40:00,005 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 09:41:00,009 - INFO - Checking alerts at 09:41 (System time: 2025-06-25 09:41:00.009266)
+2025-06-25 09:41:00,009 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 10:25:36,140 - INFO - Checking alerts at 10:25 (System time: 2025-06-25 10:25:36.140859)
+2025-06-25 10:25:36,140 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 10:26:00,011 - INFO - Checking alerts at 10:26 (System time: 2025-06-25 10:26:00.011882)
+2025-06-25 10:26:00,012 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 10:27:00,009 - INFO - Checking alerts at 10:27 (System time: 2025-06-25 10:27:00.009822)
+2025-06-25 10:27:00,011 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 10:27:50,798 - INFO - MySQL Connection pool created successfully
+2025-06-25 10:27:50,798 - INFO - DatabaseService initialized
+2025-06-25 10:27:50,804 - INFO - Starting FitTrackPro Email Scheduler
+2025-06-25 10:28:00,002 - INFO - Checking alerts at 10:28 (System time: 2025-06-25 10:28:00.002773)
+2025-06-25 10:28:00,002 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 10:29:00,005 - INFO - Checking alerts at 10:29 (System time: 2025-06-25 10:29:00.005986)
+2025-06-25 10:29:00,007 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 10:30:00,003 - INFO - Checking alerts at 10:30 (System time: 2025-06-25 10:30:00.003756)
+2025-06-25 10:30:00,006 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 10:31:00,004 - INFO - Checking alerts at 10:31 (System time: 2025-06-25 10:31:00.004040)
+2025-06-25 10:31:00,004 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 10:32:00,003 - INFO - Checking alerts at 10:32 (System time: 2025-06-25 10:32:00.003300)
+2025-06-25 10:32:00,005 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 10:33:00,013 - INFO - Checking alerts at 10:33 (System time: 2025-06-25 10:33:00.013945)
+2025-06-25 10:33:00,015 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 10:34:00,007 - INFO - Checking alerts at 10:34 (System time: 2025-06-25 10:34:00.007399)
+2025-06-25 10:34:00,007 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 10:35:00,003 - INFO - Checking alerts at 10:35 (System time: 2025-06-25 10:35:00.003566)
+2025-06-25 10:35:00,004 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 10:36:00,008 - INFO - Checking alerts at 10:36 (System time: 2025-06-25 10:36:00.008601)
+2025-06-25 10:36:00,010 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 10:37:00,004 - INFO - Checking alerts at 10:37 (System time: 2025-06-25 10:37:00.004788)
+2025-06-25 10:37:00,006 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 10:38:00,006 - INFO - Checking alerts at 10:38 (System time: 2025-06-25 10:38:00.006250)
+2025-06-25 10:38:00,008 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 10:39:00,006 - INFO - Checking alerts at 10:39 (System time: 2025-06-25 10:39:00.006212)
+2025-06-25 10:39:00,008 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 10:40:00,002 - INFO - Checking alerts at 10:40 (System time: 2025-06-25 10:40:00.002107)
+2025-06-25 10:40:00,002 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 10:41:00,015 - INFO - Checking alerts at 10:41 (System time: 2025-06-25 10:41:00.015457)
+2025-06-25 10:41:00,016 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 10:42:00,010 - INFO - Checking alerts at 10:42 (System time: 2025-06-25 10:42:00.010240)
+2025-06-25 10:42:00,010 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 10:43:00,012 - INFO - Checking alerts at 10:43 (System time: 2025-06-25 10:43:00.012664)
+2025-06-25 10:43:00,015 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 10:44:00,011 - INFO - Checking alerts at 10:44 (System time: 2025-06-25 10:44:00.011414)
+2025-06-25 10:44:00,013 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 10:45:00,006 - INFO - Checking alerts at 10:45 (System time: 2025-06-25 10:45:00.006512)
+2025-06-25 10:45:00,008 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 10:46:00,005 - INFO - Checking alerts at 10:46 (System time: 2025-06-25 10:46:00.005439)
+2025-06-25 10:46:00,007 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 10:47:00,011 - INFO - Checking alerts at 10:47 (System time: 2025-06-25 10:47:00.011591)
+2025-06-25 10:47:00,014 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 10:48:00,003 - INFO - Checking alerts at 10:48 (System time: 2025-06-25 10:48:00.003533)
+2025-06-25 10:48:00,007 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 10:49:00,003 - INFO - Checking alerts at 10:49 (System time: 2025-06-25 10:49:00.003846)
+2025-06-25 10:49:00,004 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 10:50:00,001 - INFO - Checking alerts at 10:50 (System time: 2025-06-25 10:50:00.001344)
+2025-06-25 10:50:00,003 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 10:51:00,013 - INFO - Checking alerts at 10:51 (System time: 2025-06-25 10:51:00.013577)
+2025-06-25 10:51:00,015 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 10:52:00,011 - INFO - Checking alerts at 10:52 (System time: 2025-06-25 10:52:00.011493)
+2025-06-25 10:52:00,013 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 10:53:00,007 - INFO - Checking alerts at 10:53 (System time: 2025-06-25 10:53:00.007776)
+2025-06-25 10:53:00,008 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 10:54:00,005 - INFO - Checking alerts at 10:54 (System time: 2025-06-25 10:54:00.005938)
+2025-06-25 10:54:00,005 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 10:55:00,016 - INFO - Checking alerts at 10:55 (System time: 2025-06-25 10:55:00.016203)
+2025-06-25 10:55:00,016 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 10:56:00,006 - INFO - Checking alerts at 10:56 (System time: 2025-06-25 10:56:00.006439)
+2025-06-25 10:56:00,008 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 10:57:00,004 - INFO - Checking alerts at 10:57 (System time: 2025-06-25 10:57:00.003737)
+2025-06-25 10:57:00,006 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 10:58:00,010 - INFO - Checking alerts at 10:58 (System time: 2025-06-25 10:58:00.010954)
+2025-06-25 10:58:00,012 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 10:59:00,005 - INFO - Checking alerts at 10:59 (System time: 2025-06-25 10:59:00.005742)
+2025-06-25 10:59:00,005 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 11:00:00,011 - INFO - Checking alerts at 11:00 (System time: 2025-06-25 11:00:00.011636)
+2025-06-25 11:00:00,019 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 11:01:00,004 - INFO - Checking alerts at 11:01 (System time: 2025-06-25 11:01:00.004071)
+2025-06-25 11:01:00,006 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 11:02:00,006 - INFO - Checking alerts at 11:02 (System time: 2025-06-25 11:02:00.006087)
+2025-06-25 11:02:00,008 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 11:03:00,006 - INFO - Checking alerts at 11:03 (System time: 2025-06-25 11:03:00.006795)
+2025-06-25 11:03:00,009 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 11:04:00,011 - INFO - Checking alerts at 11:04 (System time: 2025-06-25 11:04:00.011743)
+2025-06-25 11:04:00,016 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 11:05:00,005 - INFO - Checking alerts at 11:05 (System time: 2025-06-25 11:05:00.005006)
+2025-06-25 11:05:00,006 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 11:06:00,014 - INFO - Checking alerts at 11:06 (System time: 2025-06-25 11:06:00.014652)
+2025-06-25 11:06:00,016 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 11:07:00,001 - INFO - Checking alerts at 11:07 (System time: 2025-06-25 11:07:00.001557)
+2025-06-25 11:07:00,006 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 11:08:00,003 - INFO - Checking alerts at 11:08 (System time: 2025-06-25 11:08:00.003628)
+2025-06-25 11:08:00,005 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 11:09:00,004 - INFO - Checking alerts at 11:09 (System time: 2025-06-25 11:09:00.004733)
+2025-06-25 11:09:00,005 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 11:10:00,013 - INFO - Checking alerts at 11:10 (System time: 2025-06-25 11:10:00.013624)
+2025-06-25 11:10:00,015 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 11:11:00,005 - INFO - Checking alerts at 11:11 (System time: 2025-06-25 11:11:00.005367)
+2025-06-25 11:11:00,006 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 11:12:00,012 - INFO - Checking alerts at 11:12 (System time: 2025-06-25 11:12:00.012727)
+2025-06-25 11:12:00,014 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 11:13:00,005 - INFO - Checking alerts at 11:13 (System time: 2025-06-25 11:13:00.005733)
+2025-06-25 11:13:00,005 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 11:14:00,006 - INFO - Checking alerts at 11:14 (System time: 2025-06-25 11:14:00.006382)
+2025-06-25 11:14:00,006 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 11:15:00,011 - INFO - Checking alerts at 11:15 (System time: 2025-06-25 11:15:00.011953)
+2025-06-25 11:15:00,011 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 11:16:00,012 - INFO - Checking alerts at 11:16 (System time: 2025-06-25 11:16:00.012213)
+2025-06-25 11:16:00,014 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 11:17:00,014 - INFO - Checking alerts at 11:17 (System time: 2025-06-25 11:17:00.014662)
+2025-06-25 11:17:00,014 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 11:17:43,298 - INFO - MySQL Connection pool created successfully
+2025-06-25 11:17:43,298 - INFO - DatabaseService initialized
+2025-06-25 11:17:43,304 - INFO - Starting FitTrackPro Email Scheduler
+2025-06-25 11:18:00,016 - INFO - Checking alerts at 11:18 (System time: 2025-06-25 11:18:00.016839)
+2025-06-25 11:18:00,016 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 11:19:00,015 - INFO - Checking alerts at 11:19 (System time: 2025-06-25 11:19:00.015621)
+2025-06-25 11:19:00,015 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 11:20:00,005 - INFO - Checking alerts at 11:20 (System time: 2025-06-25 11:20:00.005330)
+2025-06-25 11:20:00,005 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 11:21:00,002 - INFO - Checking alerts at 11:21 (System time: 2025-06-25 11:21:00.002565)
+2025-06-25 11:21:00,006 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 11:22:00,006 - INFO - Checking alerts at 11:22 (System time: 2025-06-25 11:22:00.006033)
+2025-06-25 11:22:00,008 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 11:23:00,012 - INFO - Checking alerts at 11:23 (System time: 2025-06-25 11:23:00.012455)
+2025-06-25 11:23:00,013 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 11:24:00,008 - INFO - Checking alerts at 11:24 (System time: 2025-06-25 11:24:00.008743)
+2025-06-25 11:24:00,009 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 11:25:00,011 - INFO - Checking alerts at 11:25 (System time: 2025-06-25 11:25:00.011615)
+2025-06-25 11:25:00,016 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 11:26:00,007 - INFO - Checking alerts at 11:26 (System time: 2025-06-25 11:26:00.007079)
+2025-06-25 11:26:00,011 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    schedules = dbs.get_schedules_by_time(current_time)
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 11:27:00,003 - INFO - Checking alerts at 11:27 (System time: 2025-06-25 11:27:00.003722)
+2025-06-25 11:27:00,010 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    # Get schedules for current time
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 11:28:00,002 - INFO - Checking alerts at 11:28 (System time: 2025-06-25 11:28:00.002405)
+2025-06-25 11:28:00,005 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    # Get schedules for current time
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 11:29:00,004 - INFO - Checking alerts at 11:29 (System time: 2025-06-25 11:29:00.004747)
+2025-06-25 11:29:00,005 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    # Get schedules for current time
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 11:30:00,002 - INFO - Checking alerts at 11:30 (System time: 2025-06-25 11:30:00.002012)
+2025-06-25 11:30:00,004 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    # Get schedules for current time
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 11:31:00,013 - INFO - Checking alerts at 11:31 (System time: 2025-06-25 11:31:00.013807)
+2025-06-25 11:31:00,016 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    # Get schedules for current time
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 11:32:00,001 - INFO - Checking alerts at 11:32 (System time: 2025-06-25 11:32:00.001896)
+2025-06-25 11:32:00,003 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    # Get schedules for current time
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 11:33:00,006 - INFO - Checking alerts at 11:33 (System time: 2025-06-25 11:33:00.006897)
+2025-06-25 11:33:00,009 - ERROR - Error processing alerts: module 'database_service' has no attribute 'get_schedules_by_time'
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\email_scheduler.py", line 78, in check_alerts
+    # Get schedules for current time
+AttributeError: module 'database_service' has no attribute 'get_schedules_by_time'
+2025-06-25 11:33:55,693 - INFO - MySQL Connection pool created successfully
+2025-06-25 11:33:55,693 - INFO - DatabaseService initialized
+2025-06-25 11:33:55,693 - INFO - Starting FitTrackPro Email Scheduler
+2025-06-25 11:34:00,005 - INFO - Checking alerts at 11:34 (System time: 2025-06-25 11:34:00.005003)
+2025-06-25 11:34:00,011 - INFO - No reminders found for 11:34
+2025-06-25 11:35:00,010 - INFO - Checking alerts at 11:35 (System time: 2025-06-25 11:35:00.010849)
+2025-06-25 11:35:00,014 - INFO - No reminders found for 11:35
+2025-06-25 11:36:00,009 - INFO - Checking alerts at 11:36 (System time: 2025-06-25 11:36:00.009554)
+2025-06-25 11:36:00,013 - INFO - No reminders found for 11:36
+2025-06-25 11:37:00,002 - INFO - Checking alerts at 11:37 (System time: 2025-06-25 11:37:00.002302)
+2025-06-25 11:37:00,010 - INFO - Found 1 reminders to process
+2025-06-25 11:37:00,012 - INFO - Processing reminder for nabdabop10@gmail.com (Workout: 5 MIN ABS WORKOUT | TOTAL ABS WORKOUT)
+2025-06-25 11:37:04,843 - INFO - Email sent successfully to nabdabop10@gmail.com
+2025-06-25 11:37:04,844 - INFO - Successfully sent email to nabdabop10@gmail.com
+2025-06-25 11:38:00,007 - INFO - Checking alerts at 11:38 (System time: 2025-06-25 11:38:00.007714)
+2025-06-25 11:38:00,021 - INFO - No reminders found for 11:38
+2025-06-25 11:39:00,008 - INFO - Checking alerts at 11:39 (System time: 2025-06-25 11:39:00.008374)
+2025-06-25 11:39:00,012 - INFO - No reminders found for 11:39
