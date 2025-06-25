@@ -2,21 +2,30 @@ import time
 import smtplib
 from email.mime.text import MIMEText
 from datetime import datetime, timedelta
-import database_service as dbs
+from database_service import DatabaseService
 import os
 from dotenv import load_dotenv
 import logging
 from typing import List, Dict, Any
+import sys
+
+# Fix Windows console encoding
+if sys.platform == "win32":
+    import io
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
+    sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8', errors='replace')
 
 # Load environment variables
 load_dotenv()
+dbs = DatabaseService()
+
 
 # Configure logging
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s',
     handlers=[
-        logging.FileHandler('email_scheduler.log'),
+        logging.FileHandler('email_scheduler.log', encoding='utf-8'),
         logging.StreamHandler()
     ]
 )
@@ -31,22 +40,22 @@ EMAIL_PASSWORD = os.getenv('EMAIL_PASSWORD')
 if not all([EMAIL_ADDRESS, EMAIL_PASSWORD]):
     logging.error("Missing email configuration in environment variables")
     exit(1)
+
 def get_current_time_formatted() -> str:
     """Get current time in HH:MM format with leading zeros"""
     now = datetime.now()
-    return f"{now.hour:02d}:{now.minute:02d}" 
+    return f"{now.hour:02d}:{now.minute:02d}"
 
 def send_email(to_email: str, subject: str, body: str) -> bool:
-    """Send email with proper error handling"""
+    """Send email with enhanced error handling and debugging"""
     try:
         msg = MIMEText(body)
         msg["Subject"] = subject
-        msg["From"] = f"FitTrackPro <{EMAIL_ADDRESS}>"
+        msg["From"] = f"FitTrackPro <{EMAIL_ADDRESS}>"  # Professional sender name
         msg["To"] = to_email
         
-        # This is where your SMTP code lives now (secure version)
-        with smtplib.SMTP(SMTP_SERVER, SMTP_PORT, timeout=10) as server:
-            server.set_debuglevel(1) 
+        with smtplib.SMTP(SMTP_SERVER, SMTP_PORT, timeout=10) as server:  # Increased timeout
+            server.set_debuglevel(1)  # Full SMTP debug output
             server.starttls()
             server.login(EMAIL_ADDRESS, EMAIL_PASSWORD)
             server.send_message(msg)
@@ -66,15 +75,17 @@ def check_alerts() -> None:
     logging.info(f"Checking alerts at {current_time} (System time: {current_datetime})")
     
     try:
-        # Add debug output for schedules
+        # ===== UPDATE STARTS HERE =====
+        # Get schedules for current time
         schedules = dbs.get_schedules_by_time(current_time)
         
         if not schedules:
-            logging.info(f"No scheduled reminders found for {current_time}")
+            logging.info(f"No reminders found for {current_time}")
             return
             
-        logging.info(f"Found {len(schedules)} scheduled reminders")
-        
+        logging.info(f"Found {len(schedules)} reminders to process")
+        # ===== UPDATE ENDS HERE =====
+
         for schedule in schedules:
             # Enhanced validation
             required_keys = ['email', 'title', 'video_id']
@@ -92,7 +103,7 @@ def check_alerts() -> None:
             try:
                 email_sent = send_email(
                     email,
-                    "⏰ Workout Reminder!",
+                    "Workout Reminder!",
                     f"Time for your workout: {title}\nWatch: https://youtu.be/{video_id}"
                 )
                 
@@ -106,10 +117,9 @@ def check_alerts() -> None:
                 
     except Exception as e:
         logging.error(f"Error processing alerts: {str(e)}", exc_info=True)
-
 def main() -> None:
     """Main scheduler loop"""
-    logging.info("🚀 Email scheduler started")
+    logging.info("Starting FitTrackPro Email Scheduler")
     
     # Calculate sleep time to align with whole minutes
     next_minute = (datetime.now() + timedelta(minutes=1)).replace(second=0, microsecond=0)
@@ -122,7 +132,7 @@ def main() -> None:
             # Sleep until next whole minute
             time.sleep(60 - time.time() % 60)
         except KeyboardInterrupt:
-            logging.info("🛑 Scheduler stopped by user")
+            logging.info("Scheduler stopped by user")
             break
         except Exception as e:
             logging.error(f"Unexpected error in main loop: {str(e)}")

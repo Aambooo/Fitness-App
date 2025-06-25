@@ -20,11 +20,20 @@ logging.basicConfig(
 load_dotenv()
 
 class DatabaseService:
+    _instance = None
+    
+    def __new__(cls):
+        if cls._instance is None:
+            cls._instance = super(DatabaseService, cls).__new__(cls)
+            cls._instance._initialized = False
+        return cls._instance
+    
     def __init__(self):
-        """Initialize the database service with connection pool"""
-        self.connection_pool = None
-        self.create_connection_pool()
-        logging.info("DatabaseService initialized")
+        if not self._initialized:
+            self.connection_pool = None
+            self.create_connection_pool()
+            self._initialized = True
+            logging.info("DatabaseService initialized")
 
     def create_connection_pool(self):
         """Create a connection pool for better performance"""
@@ -52,10 +61,14 @@ class DatabaseService:
             raise
     
     def __del__(self):
-        """Clean up when object is destroyed"""
-        if self.connection_pool:
-            self.connection_pool.close()
-            logging.info("Connection pool closed")
+        """Proper connection pool cleanup"""
+        try:
+            if hasattr(self, 'connection_pool') and self.connection_pool:
+            # Correct way to close MySQL connection pool
+               self.connection_pool._remove_connections()
+               logging.info("Connection pool closed successfully")
+        except Exception as e:
+            logging.error(f"Cleanup error: {e}")
 
     # User Authentication Methods
     def verify_user_password(self, email: str, password: str) -> bool:
@@ -388,43 +401,36 @@ class DatabaseService:
                 conn.close()
     
     def get_schedules_by_time(self, target_time: str) -> List[Dict[str, Any]]:
-        """Get schedules matching the target time (in 24-hour format HH:MM).
-           Converts database times (12-hour AM/PM) to 24-hour for comparison."""
+        """Get schedules matching target_time (24-hour format only)"""
         conn = None
         try:
-            # Convert 24-hour format to 12-hour format for DB query
-            hour, minute = map(int, target_time.split(':'))
-            period = "AM" if hour < 12 else "PM"
-            hour_12 = hour if hour <= 12 else hour - 12
-            db_time_format = f"{hour_12}:{minute:02d} {period}"
-            
-            logging.debug(f"Converted {target_time} (24h) → {db_time_format} (12h)")
-
+        # Validate and normalize to 24-hour format
+            try:
+                hour, minute = map(int, target_time.split(':'))
+                if not (0 <= hour <= 23 and 0 <= minute <= 59):
+                   raise ValueError
+                normalized_time = f"{hour:02d}:{minute:02d}"
+            except ValueError:
+                logging.error(f"Invalid time format: {target_time}")
+                return []
+        
             conn = self.get_connection()
             cursor = conn.cursor(dictionary=True)
-            
-            query = """
-                SELECT * FROM schedule 
-                WHERE time = %s
-            """
-            cursor.execute(query, (db_time_format,))
-            result = cursor.fetchall()
-            
-            logging.debug(f"Found {len(result)} matching schedules")
-            return result
-            
-        except ValueError as e:
-            logging.error(f"Invalid time format {target_time}: {e}")
-            return []
+        
+        # Query using exact 24-hour format match
+            cursor.execute("SELECT * FROM schedule WHERE time = %s", (normalized_time,))
+        
+            return cursor.fetchall()
         except Error as e:
-            logging.error(f"Database error in get_schedules_by_time: {e}")
+            logging.error(f"Database error: {e}")
             return []
         finally:
             if conn:
-                conn.close()
-    
+               conn.close()
+
+    # Add this method to your DatabaseService class
     def get_all_schedules(self) -> List[Dict[str, Any]]:
-        """Get all schedules for debugging"""
+        """Get all schedules from the database"""
         conn = None
         try:
             conn = self.get_connection()
@@ -432,34 +438,16 @@ class DatabaseService:
             cursor.execute("SELECT * FROM schedule")
             return cursor.fetchall()
         except Error as e:
-            logging.error(f"Error getting schedules: {e}")
+            logging.error(f"Error getting all schedules: {e}")
             return []
         finally:
-            if conn:
-               conn.close()
+           if conn:
+            conn.close()
 
-# Singleton instance
-dbs = DatabaseService()
 
-# Debug verification
-if hasattr(dbs, 'verify_user_password'):
-    logging.info("DatabaseService initialized successfully with all methods")
+if __name__ == "__main__":
+    dbs = DatabaseService()
+    print("✓ DatabaseService verified")
+    print("Available methods:", [m for m in dir(dbs) if not m.startswith('_')])
 else:
-    logging.error("CRITICAL: verify_user_password method missing!")
-
-# Debug verification
-print("✓ DatabaseService methods verified")
-print(f"verify_user_password exists: {hasattr(dbs, 'verify_user_password')}")
-print(f"All methods: {dir(dbs)}")
-
-# Force reload implementation
-def _reload_module():
-    import sys
-    import importlib
-    if 'database_service' in sys.modules:
-        importlib.reload(sys.modules['database_service'])
-        global dbs
-        dbs = sys.modules['database_service'].dbs
-        print("✓ DatabaseService forcibly reloaded")
-
-_reload_module()
+    dbs = DatabaseService()
