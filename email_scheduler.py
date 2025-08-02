@@ -2,14 +2,15 @@ import time
 import smtplib
 from email.mime.text import MIMEText
 from datetime import datetime, timedelta
-from database_service import DatabaseService
+from database_service import dbs
 import os
 from dotenv import load_dotenv
 import logging
-from typing import List, Dict, Any
+from typing import List, Dict, Any, Optional
 import sys
+import ssl  # Added for better SSL handling
 
-# Fix Windows console encoding
+# Windows console encoding fix
 if sys.platform == "win32":
     import io
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
@@ -17,8 +18,6 @@ if sys.platform == "win32":
 
 # Load environment variables
 load_dotenv()
-dbs = DatabaseService()
-
 
 # Configure logging
 logging.basicConfig(
@@ -29,114 +28,144 @@ logging.basicConfig(
         logging.StreamHandler()
     ]
 )
+logger = logging.getLogger(__name__)
 
-# Email configuration from environment
-SMTP_SERVER = os.getenv('SMTP_SERVER', 'smtp.gmail.com')
-SMTP_PORT = int(os.getenv('SMTP_PORT', 587))
-EMAIL_ADDRESS = os.getenv('EMAIL_ADDRESS')
-EMAIL_PASSWORD = os.getenv('EMAIL_PASSWORD')
+# Email configuration
+SMTP_CONFIG = {
+    'server': os.getenv('SMTP_SERVER', 'smtp.gmail.com'),
+    'port': int(os.getenv('SMTP_PORT', 587)),
+    'address': os.getenv('EMAIL_ADDRESS'),
+    'password': os.getenv('EMAIL_PASSWORD'),
+    'timeout': 30  # Increased timeout for slow connections
+}
 
 # Validate configuration
-if not all([EMAIL_ADDRESS, EMAIL_PASSWORD]):
-    logging.error("Missing email configuration in environment variables")
+if not all(SMTP_CONFIG.values()):
+    logger.error("Missing email configuration in environment variables")
     exit(1)
 
-def get_current_time_formatted() -> str:
-    """Get current time in HH:MM format with leading zeros"""
-    now = datetime.now()
-    return f"{now.hour:02d}:{now.minute:02d}"
+class EmailScheduler:
+    def __init__(self):
+        self.last_run = None
+        self.retry_count = 0
+        self.max_retries = 3
 
-def send_email(to_email: str, subject: str, body: str) -> bool:
-    """Send email with enhanced error handling and debugging"""
-    try:
-        msg = MIMEText(body)
-        msg["Subject"] = subject
-        msg["From"] = f"FitTrackPro <{EMAIL_ADDRESS}>"  # Professional sender name
-        msg["To"] = to_email
-        
-        with smtplib.SMTP(SMTP_SERVER, SMTP_PORT, timeout=10) as server:  # Increased timeout
-            server.set_debuglevel(1)  # Full SMTP debug output
-            server.starttls()
-            server.login(EMAIL_ADDRESS, EMAIL_PASSWORD)
-            server.send_message(msg)
-        
-        logging.info(f"Email sent successfully to {to_email}")
-        return True
-    except smtplib.SMTPException as e:
-        logging.error(f"SMTP error sending to {to_email}: {str(e)}")
-    except Exception as e:
-        logging.error(f"Unexpected error sending to {to_email}: {str(e)}")
-    return False
+    @staticmethod
+    def get_current_time_formatted() -> str:
+        """Get current time in HH:MM format"""
+        now = datetime.now()
+        return f"{now.hour:02d}:{now.minute:02d}"
 
-def check_alerts() -> None:
-    """Check for scheduled alerts and send emails"""
-    current_time = get_current_time_formatted()
-    current_datetime = datetime.now()
-    logging.info(f"Checking alerts at {current_time} (System time: {current_datetime})")
-    
-    try:
-        # ===== UPDATE STARTS HERE =====
-        # Get schedules for current time
-        schedules = dbs.get_schedules_by_time(current_time)
-        
-        if not schedules:
-            logging.info(f"No reminders found for {current_time}")
-            return
-            
-        logging.info(f"Found {len(schedules)} reminders to process")
-        # ===== UPDATE ENDS HERE =====
-
-        for schedule in schedules:
-            # Enhanced validation
-            required_keys = ['email', 'title', 'video_id']
-            if not all(key in schedule for key in required_keys):
-                missing = [k for k in required_keys if k not in schedule]
-                logging.warning(f"Invalid schedule data - missing {missing}, skipping")
-                continue
-                
-            email = schedule['email']
-            title = schedule['title']
-            video_id = schedule['video_id']
-            
-            logging.info(f"Processing reminder for {email} (Workout: {title})")
-            
-            try:
-                email_sent = send_email(
-                    email,
-                    "Workout Reminder!",
-                    f"Time for your workout: {title}\nWatch: https://youtu.be/{video_id}"
-                )
-                
-                if email_sent:
-                    logging.info(f"Successfully sent email to {email}")
-                else:
-                    logging.error(f"Failed to send email to {email}")
-                    
-            except Exception as e:
-                logging.error(f"Error sending email to {email}: {str(e)}")
-                
-    except Exception as e:
-        logging.error(f"Error processing alerts: {str(e)}", exc_info=True)
-def main() -> None:
-    """Main scheduler loop"""
-    logging.info("Starting FitTrackPro Email Scheduler")
-    
-    # Calculate sleep time to align with whole minutes
-    next_minute = (datetime.now() + timedelta(minutes=1)).replace(second=0, microsecond=0)
-    initial_delay = (next_minute - datetime.now()).total_seconds()
-    time.sleep(initial_delay)
-    
-    while True:
+    def create_smtp_connection(self) -> Optional[smtplib.SMTP]:
+        """Create secure SMTP connection with retry logic"""
         try:
-            check_alerts()
-            # Sleep until next whole minute
-            time.sleep(60 - time.time() % 60)
-        except KeyboardInterrupt:
-            logging.info("Scheduler stopped by user")
-            break
+            context = ssl.create_default_context()
+            server = smtplib.SMTP(
+                SMTP_CONFIG['server'], 
+                SMTP_CONFIG['port'],
+                timeout=SMTP_CONFIG['timeout']
+            )
+            
+            server.set_debuglevel(1)  # Debug output
+            server.starttls(context=context)
+            server.login(SMTP_CONFIG['address'], SMTP_CONFIG['password'])
+            return server
+            
+        except smtplib.SMTPException as e:
+            logger.error(f"SMTP connection failed: {str(e)}")
+            if self.retry_count < self.max_retries:
+                self.retry_count += 1
+                logger.info(f"Retrying connection ({self.retry_count}/{self.max_retries})")
+                time.sleep(5)
+                return self.create_smtp_connection()
+            return None
+
+    def send_email(self, to_email: str, subject: str, body: str) -> bool:
+        """Send email with enhanced error handling"""
+        try:
+            msg = MIMEText(body, 'plain', 'utf-8')
+            msg["Subject"] = subject
+            msg["From"] = f"FitTrackPro <{SMTP_CONFIG['address']}>"
+            msg["To"] = to_email
+
+            with self.create_smtp_connection() as server:
+                if server:
+                    server.send_message(msg)
+                    logger.info(f"Email sent to {to_email}")
+                    self.retry_count = 0  # Reset on success
+                    return True
+                return False
+                
         except Exception as e:
-            logging.error(f"Unexpected error in main loop: {str(e)}")
-            time.sleep(60)  # Prevent tight loop on errors
+            logger.error(f"Error sending email to {to_email}: {str(e)}")
+            return False
+
+    def process_schedule(self, schedule: Dict[str, Any]) -> bool:
+        """Process individual schedule entry"""
+        required_keys = {'email', 'title', 'video_id'}
+        if not required_keys.issubset(schedule.keys()):
+            missing = required_keys - set(schedule.keys())
+            logger.warning(f"Invalid schedule - missing {missing}")
+            return False
+
+        email = schedule['email']
+        title = schedule['title']
+        video_url = f"https://youtu.be/{schedule['video_id']}"
+        
+        logger.info(f"Processing reminder for {email} - {title}")
+        return self.send_email(
+            email,
+            "Your Daily Workout Reminder!",
+            f"""Hi there!\n\nIt's time for your scheduled workout:
+            \nWorkout: {title}
+            \nWatch now: {video_url}
+            \n\nStay fit!\nThe FitTrackPro Team"""
+        )
+
+    def check_alerts(self) -> None:
+        """Check and process all scheduled alerts"""
+        current_time = self.get_current_time_formatted()
+        logger.info(f"Checking alerts at {current_time}")
+        
+        try:
+            schedules = dbs.get_schedules_by_time(current_time)
+            if not schedules:
+                logger.debug(f"No reminders for {current_time}")
+                return
+
+            logger.info(f"Found {len(schedules)} reminders")
+            success_count = sum(self.process_schedule(s) for s in schedules)
+            logger.info(f"Processed {success_count}/{len(schedules)} successfully")
+
+        except Exception as e:
+            logger.error(f"Error processing alerts: {str(e)}", exc_info=True)
+
+    def run(self) -> None:
+        """Main scheduler loop with precise timing"""
+        logger.info("Starting FitTrackPro Email Scheduler")
+        
+        # Align with whole minutes
+        next_run = datetime.now().replace(second=0, microsecond=0) + timedelta(minutes=1)
+        initial_delay = (next_run - datetime.now()).total_seconds()
+        time.sleep(max(0, initial_delay))
+        
+        while True:
+            try:
+                start_time = time.time()
+                self.check_alerts()
+                self.last_run = datetime.now()
+                
+                # Sleep until next whole minute
+                sleep_time = 60 - (time.time() % 60)
+                time.sleep(sleep_time)
+                
+            except KeyboardInterrupt:
+                logger.info("Scheduler stopped by user")
+                break
+            except Exception as e:
+                logger.error(f"Main loop error: {str(e)}")
+                time.sleep(60)  # Prevent tight error loop
 
 if __name__ == "__main__":
-    main()
+    scheduler = EmailScheduler()
+    scheduler.run()
