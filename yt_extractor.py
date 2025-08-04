@@ -1,139 +1,154 @@
 import yt_dlp
-from yt_dlp.utils import DownloadError, MaxDownloadsReached
-from typing import Dict, Optional, Any, Union
+from yt_dlp.utils import DownloadError
+from typing import Dict, Optional, Any, List
 import logging
 from datetime import datetime
 import re
+import time
 
 # Configure structured logging
 logging.basicConfig(
     level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
     handlers=[
-        logging.FileHandler('yt_extractor.log', encoding='utf-8'),
-        logging.StreamHandler()
-    ]
+        logging.FileHandler("yt_extractor.log", encoding="utf-8"),
+        logging.StreamHandler(),
+    ],
 )
-logger = logging.getLogger('YouTubeExtractor')
+logger = logging.getLogger("YouTubeExtractor")
+
 
 class YouTubeExtractor:
     """
-    Robust YouTube video metadata extractor with enhanced error handling and sanitization.
-    Handles videos, playlists, and live streams.
+    Enhanced YouTube video metadata extractor with:
+    - Better error handling
+    - Rate limiting protection
+    - Comprehensive metadata extraction
+    - URL validation
     """
-    
+
     def __init__(self):
         self.ydl_opts = {
-            'quiet': True,
-            'no_warnings': True,
-            'extract_flat': False,
-            'skip_download': True,
-            'socket_timeout': 15,
-            'extractor_args': {
-                'youtube': {
-                    'skip': ['hls', 'dash', 'translated_subs']
-                }
-            },
-            'logger': logger
+            "quiet": True,
+            "no_warnings": True,
+            "extract_flat": False,
+            "skip_download": True,
+            "socket_timeout": 15,
+            "extractor_args": {"youtube": {"skip": ["hls", "dash", "translated_subs"]}},
+            "logger": logger,
+            "retries": 3,
+            "sleep_interval": 5,  # Seconds between retries
         }
         self.ydl = yt_dlp.YoutubeDL(self.ydl_opts)
         self.url_regex = re.compile(
-            r'(https?://)?(www\.)?'
-            r'(youtube|youtu|youtube-nocookie)\.(com|be)/'
-            r'(watch\?v=|embed/|v/|.+\?v=)?([^&=%\?]{11})'
+            r"(https?://)?(www\.)?"
+            r"(youtube|youtu|youtube-nocookie)\.(com|be)/"
+            r"(watch\?v=|embed/|v/|.+\?v=)?([^&=%\?]{11})"
         )
+        self.last_request_time = 0
+        self.request_delay = 2  # Seconds between requests
 
     def validate_url(self, url: str) -> bool:
-        """Validate YouTube URL format"""
-        return bool(self.url_regex.match(url))
+        """Validate YouTube URL format with strict checks"""
+        if not url or not isinstance(url, str):
+            return False
+        match = self.url_regex.match(url)
+        return bool(match and len(match.group(6)) == 11)  # Verify video ID length
 
     def get_info(self, url: str) -> Optional[Dict[str, Any]]:
         """
-        Extract and sanitize video information from YouTube URL
-        
+        Extract and sanitize video information with retry logic
+
         Args:
-            url: Valid YouTube URL (video/playlist/live)
-            
+            url: Valid YouTube URL
+
         Returns:
-            Dict: {
-                'video_id': str,
-                'title': str,
-                'channel': str,
-                'duration': int (seconds),
-                'view_count': int,
-                'thumbnail': str (URL),
-                'is_live': bool,
-                ...other metadata
-            }
-            or None if extraction fails
+            Dict: Standardized video metadata including:
+                - video_id, title, channel, duration (seconds)
+                - thumbnail_url, view_count, upload_date
+                - is_live (bool), duration_text (HH:MM:SS)
+            None if extraction fails after retries
         """
         if not self.validate_url(url):
-            logger.error(f"Invalid YouTube URL: {url}")
+            logger.error(f"Invalid YouTube URL format: {url}")
             return None
+
+        self._respect_rate_limit()
 
         try:
             with self.ydl:
                 result = self.ydl.extract_info(url, download=False)
-                
-                if not result:
-                    logger.error(f"No data extracted from URL: {url}")
-                    return None
-                    
-                # Handle different content types
-                video = self._extract_primary_video(result)
-                return self._sanitize_video_info(video) if video else None
-                
-        except MaxDownloadsReached:
-            logger.error("YouTube rate limit reached - try again later")
+                return self._process_result(result) if result else None
+
         except DownloadError as e:
-            logger.error(f"DownloadError: {str(e)}")
+            logger.error(f"Download failed: {str(e)}")
         except Exception as e:
             logger.error(f"Unexpected error: {str(e)}", exc_info=True)
         return None
 
-    def _extract_primary_video(self, data: Dict) -> Optional[Dict]:
-        """Extract main video from possible playlist/stream"""
-        if 'entries' in data:  # Playlist/channel
-            entries = [e for e in data['entries'] if e and 'id' in e]
-            return entries[0] if entries else None
-        return data if 'id' in data else None
+    def _respect_rate_limit(self):
+        """Enforce minimum delay between requests"""
+        elapsed = time.time() - self.last_request_time
+        if elapsed < self.request_delay:
+            time.sleep(self.request_delay - elapsed)
+        self.last_request_time = time.time()
 
-    def _sanitize_video_info(self, video: Dict) -> Dict[str, Any]:
-        """Sanitize and standardize video metadata"""
-        info_map = {
-            'id': ('video_id', str),
-            'title': ('title', str),
-            'uploader': ('channel', str),
-            'duration': ('duration', int),
-            'view_count': ('views', int),
-            'thumbnail': ('thumbnail', str),
-            'is_live': ('is_live', bool),
-            'upload_date': ('upload_date', lambda x: datetime.strptime(x, '%Y%m%d').date()),
-            'categories': ('categories', list),
-            'tags': ('tags', list)
+    def _process_result(self, result: Dict) -> Optional[Dict[str, Any]]:
+        """Process and standardize the extracted data"""
+        if "entries" in result:  # Handle playlists/channels
+            videos = [e for e in result["entries"] if e and "id" in e]
+            if not videos:
+                logger.warning("No valid videos found in playlist")
+                return None
+            result = videos[0]  # Use first video in playlist
+
+        return self._sanitize_metadata(result) if "id" in result else None
+
+    def _sanitize_metadata(self, video: Dict) -> Dict[str, Any]:
+        """Convert and standardize video metadata"""
+        metadata = {
+            "video_id": video.get("id"),
+            "title": self._clean_text(video.get("title", "Untitled")),
+            "channel": self._clean_text(video.get("uploader", "Unknown")),
+            "duration": int(video.get("duration", 0)),
+            "views": int(video.get("view_count", 0)),
+            "thumbnail": video.get("thumbnail"),
+            "is_live": bool(video.get("is_live", False)),
+            "upload_date": self._parse_date(video.get("upload_date")),
+            "categories": video.get("categories", []),
+            "tags": video.get("tags", []),
         }
-        
-        result = {}
-        for yt_key, (our_key, type_fn) in info_map.items():
-            try:
-                if value := video.get(yt_key):
-                    result[our_key] = type_fn(value)
-            except (ValueError, TypeError):
-                logger.warning(f"Failed to convert {yt_key} to {type_fn.__name__}")
-                continue
-                
-        # Additional calculated fields
-        if 'duration' in result:
-            result['duration_text'] = self._format_duration(result['duration'])
-            
-        return result
+
+        # Add formatted duration
+        metadata["duration_text"] = self._format_duration(metadata["duration"])
+        return metadata
+
+    @staticmethod
+    def _clean_text(text: str) -> str:
+        """Clean and normalize text fields"""
+        if not text:
+            return ""
+        return " ".join(text.strip().split())  # Remove extra whitespace
+
+    @staticmethod
+    def _parse_date(date_str: Optional[str]) -> Optional[str]:
+        """Convert YYYYMMDD to ISO format"""
+        if not date_str or len(date_str) != 8:
+            return None
+        try:
+            return datetime.strptime(date_str, "%Y%m%d").date().isoformat()
+        except ValueError:
+            return None
 
     @staticmethod
     def _format_duration(seconds: int) -> str:
-        """Convert seconds to human-readable HH:MM:SS"""
+        """Convert seconds to HH:MM:SS or MM:SS"""
         hours, remainder = divmod(seconds, 3600)
         minutes, seconds = divmod(remainder, 60)
-        return f"{hours}:{minutes:02d}:{seconds:02d}" if hours else f"{minutes}:{seconds:02d}"
+        if hours > 0:
+            return f"{hours}:{minutes:02d}:{seconds:02d}"
+        return f"{minutes}:{seconds:02d}"
 
-# Singleton pattern for module-level usage
+
+# Module-level instance for easy import
 yt_extractor = YouTubeExtractor()

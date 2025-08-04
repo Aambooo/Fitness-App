@@ -1664,3 +1664,7 @@ AttributeError: module 'database_service' has no attribute 'get_schedules_by_tim
 2025-08-04 17:26:57,285 - INFO - DatabaseService initialized
 2025-08-04 17:38:50,965 - INFO - MySQL connection pool created successfully
 2025-08-04 17:38:50,966 - INFO - DatabaseService initialized
+2025-08-04 19:43:23,097 - INFO - MySQL connection pool created successfully
+2025-08-04 19:43:23,098 - INFO - DatabaseService initialized
+2025-08-04 20:07:52,695 - INFO - MySQL connection pool created successfully
+2025-08-04 20:07:52,696 - INFO - DatabaseService initialized
