@@ -1617,3 +1617,50 @@ AttributeError: module 'database_service' has no attribute 'get_schedules_by_tim
 2025-08-04 11:39:11,042 - INFO - DatabaseService initialized
 2025-08-04 12:22:11,180 - INFO - MySQL connection pool created successfully
 2025-08-04 12:22:11,182 - INFO - DatabaseService initialized
+2025-08-04 13:19:03,530 - INFO - MySQL connection pool created successfully
+2025-08-04 13:19:03,531 - INFO - DatabaseService initialized
+2025-08-04 13:25:30,828 - INFO - MySQL connection pool created successfully
+2025-08-04 13:25:30,828 - INFO - DatabaseService initialized
+2025-08-04 13:48:00,436 - INFO - MySQL connection pool created successfully
+2025-08-04 13:48:00,437 - INFO - DatabaseService initialized
+2025-08-04 13:48:27,154 - INFO - MySQL connection pool created successfully
+2025-08-04 13:48:27,155 - INFO - DatabaseService initialized
+2025-08-04 15:21:36,668 - INFO - MySQL connection pool created successfully
+2025-08-04 15:21:36,668 - INFO - DatabaseService initialized
+2025-08-04 15:21:48,950 - INFO - MySQL connection pool created successfully
+2025-08-04 15:21:48,954 - INFO - DatabaseService initialized
+2025-08-04 15:21:49,395 - INFO - Connection pool closed
+2025-08-04 16:04:45,641 - INFO - MySQL connection pool created successfully
+2025-08-04 16:04:45,641 - INFO - DatabaseService initialized
+2025-08-04 16:17:56,636 - INFO - MySQL connection pool created successfully
+2025-08-04 16:17:56,640 - INFO - DatabaseService initialized
+2025-08-04 16:17:58,826 - INFO - Connection pool closed
+2025-08-04 16:18:29,390 - INFO - MySQL connection pool created successfully
+2025-08-04 16:18:29,391 - INFO - DatabaseService initialized
+2025-08-04 16:18:31,594 - INFO - Connection pool closed
+2025-08-04 16:18:40,109 - INFO - MySQL connection pool created successfully
+2025-08-04 16:18:40,110 - INFO - DatabaseService initialized
+2025-08-04 16:18:42,295 - INFO - Connection pool closed
+2025-08-04 16:19:09,674 - INFO - MySQL connection pool created successfully
+2025-08-04 16:19:09,674 - INFO - DatabaseService initialized
+2025-08-04 16:19:11,887 - INFO - Connection pool closed
+2025-08-04 16:19:33,053 - INFO - MySQL connection pool created successfully
+2025-08-04 16:19:33,053 - INFO - DatabaseService initialized
+2025-08-04 16:19:35,289 - INFO - Connection pool closed
+2025-08-04 16:20:33,088 - INFO - MySQL connection pool created successfully
+2025-08-04 16:20:33,089 - INFO - DatabaseService initialized
+2025-08-04 16:20:35,251 - INFO - Connection pool closed
+2025-08-04 16:31:20,510 - INFO - MySQL connection pool created successfully
+2025-08-04 16:31:20,511 - INFO - DatabaseService initialized
+2025-08-04 16:44:27,459 - INFO - MySQL connection pool created successfully
+2025-08-04 16:44:27,799 - INFO - DatabaseService initialized
+2025-08-04 17:01:13,210 - INFO - MySQL connection pool created successfully
+2025-08-04 17:01:13,211 - INFO - DatabaseService initialized
+2025-08-04 17:19:38,894 - INFO - MySQL connection pool created successfully
+2025-08-04 17:19:38,895 - INFO - DatabaseService initialized
+2025-08-04 17:23:14,614 - INFO - MySQL connection pool created successfully
+2025-08-04 17:23:14,615 - INFO - DatabaseService initialized
+2025-08-04 17:26:57,283 - INFO - MySQL connection pool created successfully
+2025-08-04 17:26:57,285 - INFO - DatabaseService initialized
+2025-08-04 17:38:50,965 - INFO - MySQL connection pool created successfully
+2025-08-04 17:38:50,966 - INFO - DatabaseService initialized
