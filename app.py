@@ -1,3 +1,4 @@
+from fitness_tracker.utils.auth import GoogleAuth
 import streamlit as st
 from datetime import datetime, timedelta
 import os
@@ -7,6 +8,11 @@ from database_service import dbs
 from yt_extractor import yt_extractor
 import time
 import re
+
+query_params = st.query_params
+if 'code' in query_params and 'state' in query_params:
+    auth = GoogleAuth()  # Initialize your auth class
+    auth._handle_auth_callback()  # Process the callback
 
 auth_service.dbs = dbs 
 

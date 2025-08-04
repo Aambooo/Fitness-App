@@ -163,7 +163,7 @@ class AuthService:
             # Generate a unique state token
             state = str(uuid.uuid4())
             st.session_state['oauth_state'] = state
-        
+    
             # Build the authorization URL
             auth_url = (
                 f"https://accounts.google.com/o/oauth2/v2/auth?"
@@ -176,30 +176,15 @@ class AuthService:
                 "prompt=select_account"
             )
         
-            # Create a custom button with JavaScript redirect
-            button_html = f"""
-            <button onclick="window.top.location.href='{auth_url}'" 
-                    style="background: white; 
-                           color: #757575; 
-                           border: 1px solid #757575;
-                           border-radius: 4px;
-                           padding: 10px 16px;
-                           font-size: 14px;
-                           font-weight: 500;
-                           display: inline-flex;
-                           align-items: center;
-                       cursor: pointer;">
-                <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" 
-                     alt="Google logo" 
-                     style="width: 18px; margin-right: 8px;">
-                Continue with Google
-            </button>
-            """
-        
-            # Render the button with a container
+            # Simple and reliable Streamlit button
             with st.container():
                 st.markdown("### Continue with Google")
-                html(button_html, height=50)
+                st.link_button(
+                    label="Continue with Google",
+                    url=auth_url,
+                    type="secondary",
+                    use_container_width=True
+                )
 
     def _handle_auth_callback(self):
         """Handles Google OAuth callback"""
