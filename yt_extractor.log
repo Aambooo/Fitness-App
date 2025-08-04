@@ -1,0 +1,39 @@
+2025-08-02 09:05:34,474 - root - ERROR - Connection attempt 1 failed: 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES)
+2025-08-02 09:05:36,500 - root - ERROR - Connection attempt 2 failed: 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES)
+2025-08-02 09:05:38,516 - root - ERROR - Connection attempt 3 failed: 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES)
+2025-08-02 09:12:17,678 - root - INFO - MySQL connection pool created successfully
+2025-08-02 09:12:17,679 - root - INFO - DatabaseService initialized
+2025-08-02 09:18:23,191 - root - INFO - MySQL connection pool created successfully
+2025-08-02 09:18:23,192 - root - INFO - DatabaseService initialized
+2025-08-02 09:43:14,759 - root - INFO - MySQL connection pool created successfully
+2025-08-02 09:43:14,759 - root - INFO - DatabaseService initialized
+2025-08-02 09:58:10,663 - root - INFO - MySQL connection pool created successfully
+2025-08-02 09:58:10,664 - root - INFO - DatabaseService initialized
+2025-08-02 10:07:12,841 - root - INFO - MySQL connection pool created successfully
+2025-08-02 10:07:12,842 - root - INFO - DatabaseService initialized
+2025-08-02 10:21:21,921 - root - INFO - MySQL connection pool created successfully
+2025-08-02 10:21:21,922 - root - INFO - DatabaseService initialized
+2025-08-02 10:30:53,716 - root - INFO - MySQL connection pool created successfully
+2025-08-02 10:30:53,716 - root - INFO - DatabaseService initialized
+2025-08-02 10:30:55,586 - root - INFO - MySQL connection pool created successfully
+2025-08-02 10:30:55,587 - root - INFO - DatabaseService initialized
+2025-08-02 10:33:10,038 - root - INFO - MySQL connection pool created successfully
+2025-08-02 10:33:10,039 - root - INFO - DatabaseService initialized
+2025-08-02 10:33:19,020 - root - INFO - Connection pool closed
+2025-08-02 10:36:13,615 - root - INFO - MySQL connection pool created successfully
+2025-08-02 10:36:13,615 - root - INFO - DatabaseService initialized
+2025-08-02 11:11:02,476 - root - INFO - MySQL connection pool created successfully
+2025-08-02 11:11:02,477 - root - INFO - DatabaseService initialized
+2025-08-02 11:29:21,798 - root - INFO - MySQL connection pool created successfully
+2025-08-02 11:29:21,799 - root - INFO - DatabaseService initialized
+2025-08-02 11:31:25,797 - root - INFO - MySQL connection pool created successfully
+2025-08-02 11:31:25,798 - root - INFO - DatabaseService initialized
+2025-08-02 14:06:33,963 - root - INFO - MySQL connection pool created successfully
+2025-08-02 14:06:33,964 - root - INFO - DatabaseService initialized
+2025-08-02 14:50:38,919 - root - INFO - MySQL connection pool created successfully
+2025-08-02 14:50:38,919 - root - INFO - DatabaseService initialized
+2025-08-02 15:20:23,449 - root - INFO - MySQL connection pool created successfully
+2025-08-02 15:20:23,452 - root - INFO - DatabaseService initialized
+2025-08-02 15:41:16,725 - root - INFO - MySQL connection pool created successfully
+2025-08-02 15:41:16,726 - root - INFO - DatabaseService initialized
+2025-08-02 15:41:16,992 - root - INFO - Connection pool closed

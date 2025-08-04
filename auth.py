@@ -2,7 +2,7 @@ import uuid
 import requests
 from requests.exceptions import RequestException
 import streamlit as st
-from streamlit.components.v1 import html
+from streamlit.components.v1 import html  # Correct import
 import os
 import jwt
 import bcrypt
@@ -12,45 +12,38 @@ import database_service as dbs
 from typing import Optional, Dict, Any
 import webbrowser
 from authlib.integrations.requests_client import OAuth2Session
+from google.oauth2 import id_token
+from google.auth.transport import requests as google_requests
+import time
 
 load_dotenv()
-REDIRECT_URI = 'http://localhost:8501/auth/callback'
+
+# Separate the redirect URIs for Google and Auth0
+GOOGLE_REDIRECT_URI = os.getenv('GOOGLE_REDIRECT_URI', 'http://localhost:8501/auth/callback')
+AUTH0_CALLBACK_URL = os.getenv('AUTH0_CALLBACK_URL', 'http://localhost:8501/auth/callback')
+
 
 class AuthService:
-    def __init__(self):
-        self.init_database_service()
-        self.validate_auth0_config()
+    def __init__(self, dbs_service=None):
+        self.dbs = dbs_service
+        self.validate_auth_config()
         self.oauth_client = OAuth2Session(
             client_id=self.AUTH0_CLIENT_ID,
             client_secret=self.AUTH0_CLIENT_SECRET,
-            redirect_uri=REDIRECT_URI,
-            scope="openid profile email"
+            redirect_uri=AUTH0_CALLBACK_URL,
+            scope='openid profile email'
         )
-
-    def init_database_service(self):
-        try:
-            import database_service
-            dbs = database_service.dbs
-            if not hasattr(dbs, 'verify_user_password'):
-                st.error('❌ Database Service Error: verify_user_password missing!')
-                print('CRITICAL ERROR: Missing methods in DatabaseService!')
-                print('Available methods:', [m for m in dir(dbs) if not m.startswith('_')])
-                st.stop()
-            self.dbs = dbs
-        except Exception as e:
-            st.error(f"Failed to initialize database: {str(e)}")
-            st.stop()
-
-    def validate_auth0_config(self):
+    def validate_auth_config(self):
         required_vars = {
             'AUTH0_CLIENT_ID': os.getenv('AUTH0_CLIENT_ID'),
             'AUTH0_CLIENT_SECRET': os.getenv('AUTH0_CLIENT_SECRET'),
             'AUTH0_DOMAIN': os.getenv('AUTH0_DOMAIN'),
             'SECRET_KEY': os.getenv('SECRET_KEY'),
-            'AUTH0_AUDIENCE': os.getenv('AUTH0_AUDIENCE')
+            'AUTH0_AUDIENCE': os.getenv('AUTH0_AUDIENCE'),
+            'GOOGLE_CLIENT_ID': os.getenv('GOOGLE_CLIENT_ID'),
+            'GOOGLE_CLIENT_SECRET': os.getenv('GOOGLE_CLIENT_SECRET')
         }
         missing_vars = [k for (k, v) in required_vars.items() if not v]
-        
         if missing_vars:
             raise RuntimeError(f"Missing required environment variables: {', '.join(missing_vars)}")
         
@@ -59,6 +52,8 @@ class AuthService:
         self.AUTH0_DOMAIN = required_vars['AUTH0_DOMAIN']
         self.SECRET_KEY = required_vars['SECRET_KEY']
         self.AUTH0_AUDIENCE = required_vars['AUTH0_AUDIENCE']
+        self.GOOGLE_CLIENT_ID = required_vars['GOOGLE_CLIENT_ID']
+        self.GOOGLE_CLIENT_SECRET = required_vars['GOOGLE_CLIENT_SECRET']
 
     def generate_token(self, user_id: str) -> str:
         payload = {
@@ -80,33 +75,64 @@ class AuthService:
 
     def verify_password(self, email: str, password: str) -> bool:
         try:
-            print(f"Debug: Trying to verify password for {email}")
-            if not hasattr(self.dbs, 'verify_user_password'):
-                st.error('Database service configuration error!')
-                print(f"Available methods: {dir(self.dbs)}")
-                return False
             return self.dbs.verify_user_password(email, password)
         except Exception as e:
             st.error(f"Login failed: {str(e)}")
-            print(f"Error details: {repr(e)}")
             return False
-
+    
     def show_auth(self):
+        """Main authentication interface"""
+        if 'oauth_state' in st.session_state:
+            del st.session_state['oauth_state']
+
         if st.query_params.get('code'):
-            self._handle_oauth_callback()
+            self._handle_auth_callback()
             return
-
-        st.title('Fitness App Login')
+            
+        st.title('Your Fitness Reminder')
         tab1, tab2 = st.tabs(['Email Login/Register', 'Continue with Google'])
-
+        
         with tab1:
             self._show_email_auth()
-
+        
         with tab2:
-            st.write("Debug: OAuth Tab Loaded")  # Debug line
-            if st.button('Continue with Google', key='google_btn'):
-                print("🟢 Google button clicked")  # Debug log
-                self._initiate_oauth_flow()
+            self._show_google_auth()
+
+    def _show_google_auth(self):
+        """Google Sign-In button with state parameter"""
+        state = str(uuid.uuid4())
+        st.session_state['oauth_state'] = state
+        
+        google_oauth_url = (
+            f"https://accounts.google.com/o/oauth2/v2/auth?"
+            f"client_id={self.GOOGLE_CLIENT_ID}&"
+            f"redirect_uri={GOOGLE_REDIRECT_URI}&"
+            f"response_type=code&"
+            f"scope=openid%20email%20profile&"
+            f"state={state}&"
+            f"access_type=offline&"
+            f"prompt=select_account"
+        )
+        
+        st.markdown(f"""
+            <a href="{google_oauth_url}" target="_blank">
+                <button style="
+                    background: #4285F4;
+                    color: white;
+                    border: none;
+                    padding: 10px 24px;
+                    border-radius: 4px;
+                    font-size: 16px;
+                    cursor: pointer;
+                    margin-top: 10px;
+                ">
+                    <img src="https://fonts.gstatic.com/s/i/productlogos/googleg/v6/24px.svg" 
+                         style="vertical-align: middle; margin-right: 8px;">
+                    Sign in with Google
+                </button>
+            </a>
+        """, unsafe_allow_html=True)
+        st.caption("You'll be redirected to Google in a new tab")
 
     def _show_email_auth(self):
         auth_type = st.radio('Action:', ['Login', 'Register'], horizontal=True)
@@ -122,73 +148,164 @@ class AuthService:
                 if not email.endswith('@gmail.com'):
                     st.error('Only Gmail accounts (@gmail.com) are allowed')
                     return
+                
                 self._handle_email_auth_submit(
-                    auth_type, email, password,
+                    auth_type,
+                    email,
+                    password,
                     full_name if auth_type == 'Register' else None,
                     confirm_pass if auth_type == 'Register' else None
                 )
 
-    def _initiate_oauth_flow(self):
-        st.session_state.oauth_state = str(uuid.uuid4())
-        auth_url = (
-            f"https://{self.AUTH0_DOMAIN}/authorize?"
-            f"response_type=code&"
-            f"client_id={self.AUTH0_CLIENT_ID}&"
-            f"redirect_uri={REDIRECT_URI}&"
-            f"scope=openid%20profile%20email&"
-            f"state={st.session_state.oauth_state}&"
-            f"audience={self.AUTH0_AUDIENCE}&"
-            f"connection=google-oauth2"
-        )
-        print("\n=== Initiating OAuth Flow ===")
-        print(f"State: {st.session_state.oauth_state}")
-        print(f"Auth URL: {auth_url}")
+    def _show_google_auth(self):
+        # First ensure we're not in a callback state
+        if 'code' not in st.query_params and 'state' not in st.query_params:
+            # Generate a unique state token
+            state = str(uuid.uuid4())
+            st.session_state['oauth_state'] = state
         
-        # More reliable than JS redirect
-        webbrowser.open(auth_url)
-        st.info('Please check your browser for Google login')
+            # Build the authorization URL
+            auth_url = (
+                f"https://accounts.google.com/o/oauth2/v2/auth?"
+                f"client_id={self.GOOGLE_CLIENT_ID}&"
+                f"redirect_uri={GOOGLE_REDIRECT_URI}&"
+                "response_type=code&"
+                "scope=openid%20email%20profile&"
+                f"state={state}&"
+                "access_type=offline&"
+                "prompt=select_account"
+            )
+        
+            # Create a custom button with JavaScript redirect
+            button_html = f"""
+            <button onclick="window.top.location.href='{auth_url}'" 
+                    style="background: white; 
+                           color: #757575; 
+                           border: 1px solid #757575;
+                           border-radius: 4px;
+                           padding: 10px 16px;
+                           font-size: 14px;
+                           font-weight: 500;
+                           display: inline-flex;
+                           align-items: center;
+                       cursor: pointer;">
+                <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" 
+                     alt="Google logo" 
+                     style="width: 18px; margin-right: 8px;">
+                Continue with Google
+            </button>
+            """
+        
+            # Render the button with a container
+            with st.container():
+                st.markdown("### Continue with Google")
+                html(button_html, height=50)
 
-    def _handle_oauth_callback(self):
-        print("🔄 Handling OAuth callback...")
-        print("Query params:", dict(st.query_params))  # Debug
+    def _handle_auth_callback(self):
+        """Handles Google OAuth callback"""
+        st.write("## 🕵️‍♂️ OAuth Debug")
+        st.write("Current session state:", st.session_state.get('oauth_state'))
+        st.write("Received URL state:", st.query_params.get('state'))
+        st.write("All URL parameters:", dict(st.query_params))
+
+        # State validation
+        if 'state' not in st.query_params:
+            st.error("❌ Missing state parameter - possible security issue")
+            st.stop()
         
-        code = st.query_params.get("code")
-        state = st.query_params.get("state")
-        
-        if not code:
-            st.error("❌ Missing authorization code. Full params: " + str(dict(st.query_params)))
-            return
-        
-        if state != st.session_state.get('oauth_state'):
-            st.error("❌ Invalid state parameter")
-            print(f"Expected: {st.session_state.get('oauth_state')}, Got: {state}")
-            return
+        if st.query_params['state'] != st.session_state.get('oauth_state'):
+            st.error("❌ State mismatch - possible CSRF attack")
+            st.stop()
+
+        # Token exchange
+        if 'code' not in st.query_params:
+            st.error("⚠️ Missing authorization code")
+            st.stop()
 
         try:
-            token = self.oauth_client.fetch_token(
-                f"https://{self.AUTH0_DOMAIN}/oauth/token",
-                code=code,
-                grant_type='authorization_code'
+            # Exchange code for tokens
+            oauth = OAuth2Session(
+                client_id=self.GOOGLE_CLIENT_ID,
+                client_secret=self.GOOGLE_CLIENT_SECRET,
+                redirect_uri=GOOGLE_REDIRECT_URI,
+                scope=['openid', 'email', 'profile']
             )
-            print("🟢 Token received:", token)  # Debug
             
-            userinfo = requests.get(
-                f"https://{self.AUTH0_DOMAIN}/userinfo",
-                headers={'Authorization': f"Bearer {token['access_token']}"}
-            ).json()
-            print("🟢 User info:", userinfo)  # Debug
-            
-            email = userinfo.get('email')
-            if not email:
-                st.error('No email found in user profile')
-                return
+            token = oauth.fetch_token(
+                url="https://oauth2.googleapis.com/token",
+                code=st.query_params['code'],
+                authorization_response=dict(st.query_params)
+            )
 
-            name = userinfo.get('name', email.split('@')[0])
-            google_id = userinfo.get('sub')
+            # Verify ID token
+            idinfo = id_token.verify_oauth2_token(
+                token['id_token'],
+                google_requests.Request(),
+                self.GOOGLE_CLIENT_ID
+            )
+
+            # Handle user registration/login
+            email = idinfo['email']
+            name = idinfo.get('name', email.split('@')[0])
+            google_id = idinfo['sub']
+
             user = self.dbs.get_user_by_email(email)
-
+        
             if not user:
-                print('Registering new OAuth user')
+                success, result = self.dbs.register_user(
+                    email=email,
+                    password=None,
+                    full_name=name,
+                    google_id=google_id
+                )
+            
+                if not success:
+                    st.error(f"❌ Registration failed: {result}")
+                    st.stop()
+            
+                user = self.dbs.get_user_by_email(email)
+
+            # Update session
+            st.session_state.update({
+                'authenticated': True,
+                'user': {
+                    'user_id': user['user_id'],
+                    'email': user['email'],
+                    'full_name': user.get('full_name', name),
+                    'google_token': token['access_token']
+                }
+            })
+
+            # Cleanup and redirect
+            if 'oauth_state' in st.session_state:
+                del st.session_state['oauth_state']
+            
+            st.experimental_set_query_params()
+            st.success("🎉 Authentication Successful! Redirecting...")
+            time.sleep(1.5)
+            st.rerun()
+
+        except Exception as e:
+            st.error(f"❌ Authentication Failed: {str(e)}")
+            st.stop()
+
+    def _handle_google_callback(self):
+        st.write("Google callback received!")  # Temporary debug
+        st.write(st.query_params)
+        try:
+            token = st.query_params['google_token']
+            idinfo = id_token.verify_oauth2_token(
+                token,
+                google_requests.Request(),
+                self.GOOGLE_CLIENT_ID
+            )
+            
+            email = idinfo['email']
+            name = idinfo.get('name', email.split('@')[0])
+            google_id = idinfo['sub']
+            
+            user = self.dbs.get_user_by_email(email)
+            if not user:
                 success, result = self.dbs.register_user(
                     email=email,
                     password=None,
@@ -199,7 +316,68 @@ class AuthService:
                     st.error(f"Account creation failed: {result}")
                     return
                 user = self.dbs.get_user_by_email(email)
+            
+            st.session_state.update({
+                'authenticated': True,
+                'user': {
+                    'user_id': user['user_id'],
+                    'email': user['email'],
+                    'full_name': user.get('full_name', name),
+                    'google_id': google_id
+                }
+            })
+            st.query_params.clear()
+            st.rerun()
+            
+        except ValueError as e:
+            st.error(f"Google login failed: {str(e)}")
+            st.stop()
 
+    def _handle_auth0_callback(self):
+        code = st.query_params.get('code')
+        state = st.query_params.get('state')
+        
+        if not code:
+            st.error('❌ Missing authorization code')
+            return
+            
+        if state != st.session_state.get('oauth_state'):
+            st.error('❌ Invalid state parameter')
+            return
+            
+        try:
+            token = self.oauth_client.fetch_token(
+                f"https://{self.AUTH0_DOMAIN}/oauth/token",
+                code=code,
+                grant_type='authorization_code'
+            )
+            
+            userinfo = requests.get(
+                f"https://{self.AUTH0_DOMAIN}/userinfo",
+                headers={'Authorization': f"Bearer {token['access_token']}"}
+            ).json()
+            
+            email = userinfo.get('email')
+            if not email:
+                st.error('No email found in user profile')
+                return
+                
+            name = userinfo.get('name', email.split('@')[0])
+            google_id = userinfo.get('sub')
+            
+            user = self.dbs.get_user_by_email(email)
+            if not user:
+                success, result = self.dbs.register_user(
+                    email=email,
+                    password=None,
+                    full_name=name,
+                    google_id=google_id
+                )
+                if not success:
+                    st.error(f"Account creation failed: {result}")
+                    return
+                user = self.dbs.get_user_by_email(email)
+            
             st.session_state.update({
                 'authenticated': True,
                 'user': {
@@ -212,48 +390,51 @@ class AuthService:
             })
             st.query_params.clear()
             st.rerun()
-
+            
         except Exception as e:
             st.error(f"❌ Authentication failed: {str(e)}")
-            print(f"🔴 OAuth callback error: {repr(e)}")
+            st.stop()
 
-    def _handle_email_auth_submit(self, auth_type: str, email: str, password: str, 
-                                full_name: Optional[str] = None, 
-                                confirm_password: Optional[str] = None):
+    def _handle_email_auth_submit(self, auth_type: str, email: str, password: str,
+                                full_name: Optional[str] = None, confirm_password: Optional[str] = None):
         if not email or not password:
             st.error('Email and password are required')
             return
-
+            
         if auth_type == 'Register':
             if not full_name:
                 st.error('Full name is required')
                 return
+                
             if password != confirm_password:
                 st.error('Passwords do not match')
                 return
+                
             if len(password) < 8:
                 st.error('Password must be at least 8 characters')
                 return
-            
+                
             success, result = self.dbs.register_user(
                 email=email,
                 password=password,
                 full_name=full_name
             )
+            
             if not success:
                 st.error(result)
                 return
+                
             st.success('Account created successfully! Please log in.')
         else:
             if not self.verify_password(email, password):
                 st.error('Invalid email or password')
                 return
-            
+                
             user = self.dbs.get_user_by_email(email)
             if not user:
                 st.error('User not found')
                 return
-            
+                
             st.session_state.update({
                 'authenticated': True,
                 'user': {
@@ -264,17 +445,27 @@ class AuthService:
             })
             st.rerun()
 
-    def logout(self):
-        keys_to_clear = ['authenticated', 'user', 'oauth_state', 'auth_error', 'token']
-        for key in keys_to_clear:
+    def logout(self):  # <- Method is now properly defined
+        """Clear all authentication-related session state"""
+        keys_to_remove = [
+            'authenticated',
+            'user',
+            'oauth_state',
+            'token',
+            'auth_error'
+        ]
+        for key in keys_to_remove:
             if key in st.session_state:
                 del st.session_state[key]
-        st.success('You have been successfully logged out.')
-        st.experimental_set_query_params()
+        st.query_params.clear()
+        st.success("You have been successfully logged out!")
         st.rerun()
+if not hasattr(AuthService, 'logout'):
+    raise NotImplementedError("AuthService must implement logout() method")
 
-# Singleton instance
-auth_service = AuthService()
+# Initialize the auth service
+auth_service = AuthService(dbs_service=None)
+
 show_auth = auth_service.show_auth
 logout = auth_service.logout
 generate_token = auth_service.generate_token

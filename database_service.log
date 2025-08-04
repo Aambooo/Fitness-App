@@ -1159,3 +1159,461 @@ AttributeError: module 'database_service' has no attribute 'get_schedules_by_tim
 2025-06-25 11:38:00,021 - INFO - No reminders found for 11:38
 2025-06-25 11:39:00,008 - INFO - Checking alerts at 11:39 (System time: 2025-06-25 11:39:00.008374)
 2025-06-25 11:39:00,012 - INFO - No reminders found for 11:39
+2025-08-02 13:52:11,109 - INFO - MySQL connection pool created successfully
+2025-08-02 13:52:11,109 - INFO - DatabaseService initialized
+2025-08-02 13:52:11,109 - INFO - Starting FitTrackPro Email Scheduler
+2025-08-02 13:53:00,009 - ERROR - Main loop error: 'DatabaseService' object has no attribute 'get_schedules_by_time'
+2025-08-02 13:54:00,011 - ERROR - Main loop error: 'DatabaseService' object has no attribute 'get_schedules_by_time'
+2025-08-02 13:54:52,455 - INFO - MySQL connection pool created successfully
+2025-08-02 13:54:52,456 - INFO - DatabaseService initialized
+2025-08-02 13:54:52,481 - INFO - Connection pool closed
+2025-08-02 13:54:52,482 - ERROR - Cleanup error: I/O operation on closed file.
+2025-08-02 13:57:22,401 - INFO - MySQL connection pool created successfully
+2025-08-02 13:57:22,401 - INFO - DatabaseService initialized
+2025-08-02 13:57:22,408 - INFO - Starting FitTrackPro Email Scheduler
+2025-08-02 13:58:00,007 - ERROR - Main loop error: 'DatabaseService' object has no attribute 'get_schedules_by_time'
+2025-08-02 13:58:15,375 - INFO - Connection pool closed
+2025-08-02 13:58:15,376 - ERROR - Cleanup error: I/O operation on closed file.
+2025-08-02 14:04:45,761 - INFO - MySQL connection pool created successfully
+2025-08-02 14:04:45,761 - INFO - DatabaseService initialized
+2025-08-02 14:04:45,768 - INFO - Starting FitTrackPro Email Scheduler
+2025-08-02 14:05:00,022 - INFO - Checking alerts at 14:05
+2025-08-02 14:06:00,003 - INFO - Checking alerts at 14:06
+2025-08-02 14:07:00,014 - INFO - Checking alerts at 14:07
+2025-08-02 14:08:00,006 - INFO - Checking alerts at 14:08
+2025-08-02 14:09:00,018 - INFO - Checking alerts at 14:09
+2025-08-02 14:09:00,022 - INFO - Found 1 reminders
+2025-08-02 14:09:00,022 - INFO - Processing reminder for nabdabop10@gmail.com - Biceps Workout 6 Best Exercises to build Strong Bicep
+2025-08-02 14:09:04,237 - INFO - Email sent to nabdabop10@gmail.com
+2025-08-02 14:09:04,547 - INFO - Processed 1/1 successfully
+2025-08-02 14:10:00,004 - INFO - Checking alerts at 14:10
+2025-08-02 14:11:00,004 - INFO - Checking alerts at 14:11
+2025-08-02 14:12:00,008 - INFO - Checking alerts at 14:12
+2025-08-02 14:13:00,017 - INFO - Checking alerts at 14:13
+2025-08-02 14:14:00,006 - INFO - Checking alerts at 14:14
+2025-08-02 14:15:00,013 - INFO - Checking alerts at 14:15
+2025-08-02 15:41:45,907 - INFO - MySQL connection pool created successfully
+2025-08-02 15:41:45,908 - INFO - DatabaseService initialized
+2025-08-02 16:09:38,776 - INFO - MySQL connection pool created successfully
+2025-08-02 16:09:38,777 - INFO - DatabaseService initialized
+2025-08-02 17:14:04,867 - INFO - MySQL connection pool created successfully
+2025-08-02 17:14:04,869 - INFO - DatabaseService initialized
+2025-08-02 17:23:23,844 - INFO - MySQL connection pool created successfully
+2025-08-02 17:23:23,877 - INFO - DatabaseService initialized
+2025-08-02 18:06:38,113 - INFO - MySQL connection pool created successfully
+2025-08-02 18:06:38,113 - INFO - DatabaseService initialized
+2025-08-02 18:19:13,715 - INFO - MySQL connection pool created successfully
+2025-08-02 18:19:13,715 - INFO - DatabaseService initialized
+2025-08-02 18:25:15,242 - INFO - MySQL connection pool created successfully
+2025-08-02 18:25:15,242 - INFO - DatabaseService initialized
+2025-08-02 18:57:43,558 - INFO - MySQL connection pool created successfully
+2025-08-02 18:57:43,558 - INFO - DatabaseService initialized
+2025-08-02 19:02:59,219 - INFO - MySQL connection pool created successfully
+2025-08-02 19:02:59,227 - INFO - DatabaseService initialized
+2025-08-02 20:58:02,945 - INFO - MySQL connection pool created successfully
+2025-08-02 20:58:02,946 - INFO - DatabaseService initialized
+2025-08-02 20:58:22,173 - INFO - MySQL connection pool created successfully
+2025-08-02 20:58:22,174 - INFO - DatabaseService initialized
+2025-08-02 21:11:33,582 - INFO - MySQL connection pool created successfully
+2025-08-02 21:11:33,583 - INFO - DatabaseService initialized
+2025-08-02 21:12:36,602 - INFO - MySQL connection pool created successfully
+2025-08-02 21:12:36,602 - INFO - DatabaseService initialized
+2025-08-02 21:12:41,507 - INFO - Connection pool closed
+2025-08-02 21:22:55,010 - INFO - MySQL connection pool created successfully
+2025-08-02 21:22:55,011 - INFO - DatabaseService initialized
+2025-08-02 21:23:10,922 - INFO - Connection pool closed
+2025-08-02 21:28:58,085 - INFO - MySQL connection pool created successfully
+2025-08-02 21:28:58,086 - INFO - DatabaseService initialized
+2025-08-02 21:29:08,753 - INFO - Connection pool closed
+2025-08-02 21:30:32,809 - INFO - MySQL connection pool created successfully
+2025-08-02 21:30:32,809 - INFO - DatabaseService initialized
+2025-08-02 21:30:42,722 - INFO - Connection pool closed
+2025-08-02 21:36:01,314 - INFO - MySQL connection pool created successfully
+2025-08-02 21:36:01,319 - INFO - DatabaseService initialized
+2025-08-02 21:36:10,931 - INFO - Connection pool closed
+2025-08-02 21:37:05,627 - WARNING - ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies
+2025-08-02 21:37:15,508 - WARNING - ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies
+2025-08-02 21:37:21,529 - WARNING - ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies
+2025-08-02 21:38:27,679 - WARNING - ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies
+2025-08-02 21:38:35,609 - WARNING - ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies
+2025-08-02 21:38:35,637 - ERROR - Error adding workout: 1062 (23000): Duplicate entry 'ug6mEbSjWME' for key 'PRIMARY'
+2025-08-02 21:38:53,947 - INFO - MySQL connection pool created successfully
+2025-08-02 21:38:53,947 - INFO - DatabaseService initialized
+2025-08-02 21:48:10,024 - INFO - MySQL connection pool created successfully
+2025-08-02 21:48:10,027 - INFO - DatabaseService initialized
+2025-08-02 21:54:57,648 - INFO - MySQL connection pool created successfully
+2025-08-02 21:54:57,649 - INFO - DatabaseService initialized
+2025-08-02 21:55:22,978 - INFO - Deleted workout ug6mEbSjWME
+2025-08-02 21:55:27,884 - INFO - Deleted workout kWodISSgIqI
+2025-08-02 21:56:00,515 - WARNING - ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies
+2025-08-02 21:56:10,976 - WARNING - ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies
+2025-08-02 21:56:17,282 - WARNING - ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies
+2025-08-02 22:05:51,902 - INFO - MySQL connection pool created successfully
+2025-08-02 22:05:51,903 - INFO - DatabaseService initialized
+2025-08-02 22:05:51,910 - INFO - Starting FitTrackPro Email Scheduler
+2025-08-02 22:06:00,017 - ERROR - Error fetching schedules for time 22:06: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'python email_scheduler.py
+                SELECT * FROM schedule 
+           ...' at line 1
+2025-08-02 22:06:00,018 - INFO - Checking alerts at 22:06
+2025-08-02 22:06:00,019 - ERROR - Error fetching schedules for time 22:06: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'python email_scheduler.py
+                SELECT * FROM schedule 
+           ...' at line 1
+2025-08-02 22:07:00,004 - ERROR - Error fetching schedules for time 22:07: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'python email_scheduler.py
+                SELECT * FROM schedule 
+           ...' at line 1
+2025-08-02 22:07:00,006 - INFO - Checking alerts at 22:07
+2025-08-02 22:07:00,007 - ERROR - Error fetching schedules for time 22:07: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'python email_scheduler.py
+                SELECT * FROM schedule 
+           ...' at line 1
+2025-08-02 22:08:00,011 - ERROR - Error fetching schedules for time 22:08: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'python email_scheduler.py
+                SELECT * FROM schedule 
+           ...' at line 1
+2025-08-02 22:08:00,013 - INFO - Checking alerts at 22:08
+2025-08-02 22:08:00,014 - ERROR - Error fetching schedules for time 22:08: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'python email_scheduler.py
+                SELECT * FROM schedule 
+           ...' at line 1
+2025-08-02 22:09:00,004 - ERROR - Error fetching schedules for time 22:09: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'python email_scheduler.py
+                SELECT * FROM schedule 
+           ...' at line 1
+2025-08-02 22:09:00,004 - INFO - Checking alerts at 22:09
+2025-08-02 22:09:00,004 - ERROR - Error fetching schedules for time 22:09: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'python email_scheduler.py
+                SELECT * FROM schedule 
+           ...' at line 1
+2025-08-02 22:10:00,015 - ERROR - Error fetching schedules for time 22:10: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'python email_scheduler.py
+                SELECT * FROM schedule 
+           ...' at line 1
+2025-08-02 22:10:00,016 - INFO - Checking alerts at 22:10
+2025-08-02 22:10:00,018 - ERROR - Error fetching schedules for time 22:10: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'python email_scheduler.py
+                SELECT * FROM schedule 
+           ...' at line 1
+2025-08-02 22:11:00,005 - ERROR - Error fetching schedules for time 22:11: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'python email_scheduler.py
+                SELECT * FROM schedule 
+           ...' at line 1
+2025-08-02 22:11:00,006 - INFO - Checking alerts at 22:11
+2025-08-02 22:11:00,008 - ERROR - Error fetching schedules for time 22:11: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'python email_scheduler.py
+                SELECT * FROM schedule 
+           ...' at line 1
+2025-08-02 22:12:00,002 - ERROR - Error fetching schedules for time 22:12: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'python email_scheduler.py
+                SELECT * FROM schedule 
+           ...' at line 1
+2025-08-02 22:12:00,003 - INFO - Checking alerts at 22:12
+2025-08-02 22:12:00,005 - ERROR - Error fetching schedules for time 22:12: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'python email_scheduler.py
+                SELECT * FROM schedule 
+           ...' at line 1
+2025-08-02 22:13:00,009 - ERROR - Error fetching schedules for time 22:13: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'python email_scheduler.py
+                SELECT * FROM schedule 
+           ...' at line 1
+2025-08-02 22:13:00,011 - INFO - Checking alerts at 22:13
+2025-08-02 22:13:00,013 - ERROR - Error fetching schedules for time 22:13: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'python email_scheduler.py
+                SELECT * FROM schedule 
+           ...' at line 1
+2025-08-02 22:13:22,640 - INFO - MySQL connection pool created successfully
+2025-08-02 22:13:22,641 - INFO - DatabaseService initialized
+2025-08-02 22:13:30,783 - INFO - MySQL connection pool created successfully
+2025-08-02 22:13:30,783 - INFO - DatabaseService initialized
+2025-08-02 22:13:30,788 - INFO - Starting FitTrackPro Email Scheduler
+2025-08-02 22:14:00,018 - ERROR - Main loop error: Unread result found
+2025-08-02 22:15:00,021 - ERROR - Main loop error: Unread result found
+2025-08-02 22:16:00,038 - ERROR - Main loop error: Unread result found
+2025-08-02 22:17:00,054 - ERROR - Main loop error: Unread result found
+2025-08-02 22:18:00,069 - ERROR - Main loop error: Unread result found
+2025-08-02 22:19:00,080 - ERROR - Error getting connection: Unread result found
+2025-08-02 22:19:00,080 - ERROR - Error fetching schedules for time 22:19: Unread result found
+2025-08-02 22:19:00,083 - INFO - Checking alerts at 22:19
+2025-08-02 22:19:00,084 - ERROR - Error getting connection: Unread result found
+2025-08-02 22:19:00,085 - ERROR - Error fetching schedules for time 22:19: Unread result found
+2025-08-02 22:20:00,012 - ERROR - Error getting connection: Unread result found
+2025-08-02 22:20:00,013 - ERROR - Error fetching schedules for time 22:20: Unread result found
+2025-08-02 22:20:00,014 - INFO - Checking alerts at 22:20
+2025-08-02 22:20:00,015 - ERROR - Error getting connection: Unread result found
+2025-08-02 22:20:00,015 - ERROR - Error fetching schedules for time 22:20: Unread result found
+2025-08-02 22:21:00,008 - ERROR - Error getting connection: Unread result found
+2025-08-02 22:21:00,009 - ERROR - Error fetching schedules for time 22:21: Unread result found
+2025-08-02 22:21:00,010 - INFO - Checking alerts at 22:21
+2025-08-02 22:21:00,012 - ERROR - Error getting connection: Failed getting connection; pool exhausted
+2025-08-02 22:21:00,012 - ERROR - Error fetching schedules for time 22:21: Failed getting connection; pool exhausted
+2025-08-02 22:22:00,011 - ERROR - Error getting connection: Failed getting connection; pool exhausted
+2025-08-02 22:22:00,011 - ERROR - Error fetching schedules for time 22:22: Failed getting connection; pool exhausted
+2025-08-02 22:22:00,012 - INFO - Checking alerts at 22:22
+2025-08-02 22:22:00,013 - ERROR - Error getting connection: Failed getting connection; pool exhausted
+2025-08-02 22:22:00,013 - ERROR - Error fetching schedules for time 22:22: Failed getting connection; pool exhausted
+2025-08-02 22:23:00,008 - ERROR - Error getting connection: Failed getting connection; pool exhausted
+2025-08-02 22:23:00,009 - ERROR - Error fetching schedules for time 22:23: Failed getting connection; pool exhausted
+2025-08-02 22:23:00,009 - INFO - Checking alerts at 22:23
+2025-08-02 22:23:00,010 - ERROR - Error getting connection: Failed getting connection; pool exhausted
+2025-08-02 22:23:00,011 - ERROR - Error fetching schedules for time 22:23: Failed getting connection; pool exhausted
+2025-08-02 22:24:00,005 - ERROR - Error getting connection: Failed getting connection; pool exhausted
+2025-08-02 22:24:00,006 - ERROR - Error fetching schedules for time 22:24: Failed getting connection; pool exhausted
+2025-08-02 22:24:00,006 - INFO - Checking alerts at 22:24
+2025-08-02 22:24:00,007 - ERROR - Error getting connection: Failed getting connection; pool exhausted
+2025-08-02 22:24:00,008 - ERROR - Error fetching schedules for time 22:24: Failed getting connection; pool exhausted
+2025-08-02 22:25:00,002 - ERROR - Error getting connection: Failed getting connection; pool exhausted
+2025-08-02 22:25:00,003 - ERROR - Error fetching schedules for time 22:25: Failed getting connection; pool exhausted
+2025-08-02 22:25:00,003 - INFO - Checking alerts at 22:25
+2025-08-02 22:25:00,004 - ERROR - Error getting connection: Failed getting connection; pool exhausted
+2025-08-02 22:25:00,005 - ERROR - Error fetching schedules for time 22:25: Failed getting connection; pool exhausted
+2025-08-02 22:26:00,001 - ERROR - Error getting connection: Failed getting connection; pool exhausted
+2025-08-02 22:26:00,002 - ERROR - Error fetching schedules for time 22:26: Failed getting connection; pool exhausted
+2025-08-02 22:26:00,003 - INFO - Checking alerts at 22:26
+2025-08-02 22:26:00,004 - ERROR - Error getting connection: Failed getting connection; pool exhausted
+2025-08-02 22:26:00,004 - ERROR - Error fetching schedules for time 22:26: Failed getting connection; pool exhausted
+2025-08-02 22:27:00,014 - ERROR - Error getting connection: Failed getting connection; pool exhausted
+2025-08-02 22:27:00,015 - ERROR - Error fetching schedules for time 22:27: Failed getting connection; pool exhausted
+2025-08-02 22:27:00,015 - INFO - Checking alerts at 22:27
+2025-08-02 22:27:00,015 - ERROR - Error getting connection: Failed getting connection; pool exhausted
+2025-08-02 22:27:00,016 - ERROR - Error fetching schedules for time 22:27: Failed getting connection; pool exhausted
+2025-08-02 22:28:00,013 - ERROR - Error getting connection: Failed getting connection; pool exhausted
+2025-08-02 22:28:00,013 - ERROR - Error fetching schedules for time 22:28: Failed getting connection; pool exhausted
+2025-08-02 22:28:00,013 - INFO - Checking alerts at 22:28
+2025-08-02 22:28:00,013 - ERROR - Error getting connection: Failed getting connection; pool exhausted
+2025-08-02 22:28:00,013 - ERROR - Error fetching schedules for time 22:28: Failed getting connection; pool exhausted
+2025-08-02 22:29:00,013 - ERROR - Error getting connection: Failed getting connection; pool exhausted
+2025-08-02 22:29:00,014 - ERROR - Error fetching schedules for time 22:29: Failed getting connection; pool exhausted
+2025-08-02 22:29:00,014 - INFO - Checking alerts at 22:29
+2025-08-02 22:29:00,015 - ERROR - Error getting connection: Failed getting connection; pool exhausted
+2025-08-02 22:29:00,015 - ERROR - Error fetching schedules for time 22:29: Failed getting connection; pool exhausted
+2025-08-02 22:30:00,008 - ERROR - Error getting connection: Failed getting connection; pool exhausted
+2025-08-02 22:30:00,009 - ERROR - Error fetching schedules for time 22:30: Failed getting connection; pool exhausted
+2025-08-02 22:30:00,010 - INFO - Checking alerts at 22:30
+2025-08-02 22:30:00,010 - ERROR - Error getting connection: Failed getting connection; pool exhausted
+2025-08-02 22:30:00,011 - ERROR - Error fetching schedules for time 22:30: Failed getting connection; pool exhausted
+2025-08-02 22:31:00,010 - ERROR - Error getting connection: Failed getting connection; pool exhausted
+2025-08-02 22:31:00,011 - ERROR - Error fetching schedules for time 22:31: Failed getting connection; pool exhausted
+2025-08-02 22:31:00,011 - INFO - Checking alerts at 22:31
+2025-08-02 22:31:00,012 - ERROR - Error getting connection: Failed getting connection; pool exhausted
+2025-08-02 22:31:00,012 - ERROR - Error fetching schedules for time 22:31: Failed getting connection; pool exhausted
+2025-08-02 22:32:00,010 - ERROR - Error getting connection: Failed getting connection; pool exhausted
+2025-08-02 22:32:00,010 - ERROR - Error fetching schedules for time 22:32: Failed getting connection; pool exhausted
+2025-08-02 22:32:00,010 - INFO - Checking alerts at 22:32
+2025-08-02 22:32:00,013 - ERROR - Error getting connection: Failed getting connection; pool exhausted
+2025-08-02 22:32:00,013 - ERROR - Error fetching schedules for time 22:32: Failed getting connection; pool exhausted
+2025-08-02 22:33:00,002 - ERROR - Error getting connection: Failed getting connection; pool exhausted
+2025-08-02 22:33:00,002 - ERROR - Error fetching schedules for time 22:33: Failed getting connection; pool exhausted
+2025-08-02 22:33:00,002 - INFO - Checking alerts at 22:33
+2025-08-02 22:33:00,002 - ERROR - Error getting connection: Failed getting connection; pool exhausted
+2025-08-02 22:33:00,002 - ERROR - Error fetching schedules for time 22:33: Failed getting connection; pool exhausted
+2025-08-02 22:34:00,003 - ERROR - Error getting connection: Failed getting connection; pool exhausted
+2025-08-02 22:34:00,003 - ERROR - Error fetching schedules for time 22:34: Failed getting connection; pool exhausted
+2025-08-02 22:34:00,003 - INFO - Checking alerts at 22:34
+2025-08-02 22:34:00,005 - ERROR - Error getting connection: Failed getting connection; pool exhausted
+2025-08-02 22:34:00,006 - ERROR - Error fetching schedules for time 22:34: Failed getting connection; pool exhausted
+2025-08-02 22:35:00,003 - ERROR - Error getting connection: Failed getting connection; pool exhausted
+2025-08-02 22:35:00,004 - ERROR - Error fetching schedules for time 22:35: Failed getting connection; pool exhausted
+2025-08-02 22:35:00,004 - INFO - Checking alerts at 22:35
+2025-08-02 22:35:00,005 - ERROR - Error getting connection: Failed getting connection; pool exhausted
+2025-08-02 22:35:00,006 - ERROR - Error fetching schedules for time 22:35: Failed getting connection; pool exhausted
+2025-08-02 22:36:00,012 - ERROR - Error getting connection: Failed getting connection; pool exhausted
+2025-08-02 22:36:00,013 - ERROR - Error fetching schedules for time 22:36: Failed getting connection; pool exhausted
+2025-08-02 22:36:00,013 - INFO - Checking alerts at 22:36
+2025-08-02 22:36:00,014 - ERROR - Error getting connection: Failed getting connection; pool exhausted
+2025-08-02 22:36:00,015 - ERROR - Error fetching schedules for time 22:36: Failed getting connection; pool exhausted
+2025-08-02 22:36:12,895 - INFO - MySQL connection pool created successfully
+2025-08-02 22:36:12,895 - INFO - DatabaseService initialized
+2025-08-02 22:36:15,245 - INFO - MySQL connection pool created successfully
+2025-08-02 22:36:15,245 - INFO - DatabaseService initialized
+2025-08-02 22:36:15,253 - INFO - Starting standalone reminder scheduler
+2025-08-02 22:51:42,796 - INFO - MySQL connection pool created successfully
+2025-08-02 22:51:42,797 - INFO - DatabaseService initialized
+2025-08-02 22:51:50,221 - INFO - MySQL connection pool created successfully
+2025-08-02 22:51:50,222 - INFO - DatabaseService initialized
+2025-08-02 22:51:50,262 - INFO - Connection pool closed
+2025-08-02 22:51:50,263 - ERROR - Cleanup error: I/O operation on closed file.
+2025-08-02 22:58:59,788 - INFO - MySQL connection pool created successfully
+2025-08-02 22:58:59,789 - INFO - DatabaseService initialized
+2025-08-02 22:58:59,794 - INFO - Starting FitTrackPro Email Scheduler
+2025-08-02 22:58:59,794 - INFO - Starting reminder scheduler
+2025-08-02 22:58:59,795 - INFO - Checking reminders at 22:58
+2025-08-02 22:58:59,814 - INFO - Found 0 reminders to process
+2025-08-02 22:58:59,815 - INFO - Processed 0/0 reminders successfully
+2025-08-02 22:59:00,009 - INFO - Checking reminders at 22:59
+2025-08-02 22:59:00,011 - INFO - Found 0 reminders to process
+2025-08-02 22:59:00,012 - INFO - Processed 0/0 reminders successfully
+2025-08-02 23:00:00,005 - INFO - Checking reminders at 23:00
+2025-08-02 23:00:00,007 - INFO - Found 0 reminders to process
+2025-08-02 23:00:00,008 - INFO - Processed 0/0 reminders successfully
+2025-08-02 23:01:00,009 - INFO - Checking reminders at 23:01
+2025-08-02 23:01:00,011 - INFO - Found 0 reminders to process
+2025-08-02 23:01:00,011 - INFO - Processed 0/0 reminders successfully
+2025-08-02 23:02:00,000 - INFO - Checking reminders at 23:02
+2025-08-02 23:02:00,031 - INFO - Found 1 reminders to process
+2025-08-02 23:02:02,652 - INFO - SMTP connection established
+2025-08-02 23:02:04,356 - INFO - Email sent to fitness@gmail.com
+2025-08-02 23:02:04,606 - INFO - Processed 1/1 reminders successfully
+2025-08-02 23:03:00,009 - INFO - Checking reminders at 23:03
+2025-08-02 23:03:00,011 - INFO - Found 0 reminders to process
+2025-08-02 23:03:00,012 - INFO - Processed 0/0 reminders successfully
+2025-08-02 23:04:00,004 - INFO - Checking reminders at 23:04
+2025-08-02 23:04:00,004 - INFO - Found 0 reminders to process
+2025-08-02 23:04:00,004 - INFO - Processed 0/0 reminders successfully
+2025-08-02 23:05:00,003 - INFO - Checking reminders at 23:05
+2025-08-02 23:05:00,005 - INFO - Found 1 reminders to process
+2025-08-02 23:05:02,523 - INFO - SMTP connection established
+2025-08-02 23:05:03,963 - INFO - Email sent to nabdabop10@gmail.com
+2025-08-02 23:05:04,203 - INFO - Processed 1/1 reminders successfully
+2025-08-03 07:03:57,516 - INFO - MySQL connection pool created successfully
+2025-08-03 07:03:57,518 - INFO - DatabaseService initialized
+2025-08-03 07:05:38,802 - WARNING - ffmpeg not found. The downloaded format may not be the best available. Installing ffmpeg is strongly recommended: https://github.com/yt-dlp/yt-dlp#dependencies
+2025-08-03 07:41:10,034 - INFO - MySQL connection pool created successfully
+2025-08-03 07:41:10,035 - INFO - DatabaseService initialized
+2025-08-03 07:45:37,725 - INFO - MySQL connection pool created successfully
+2025-08-03 07:45:37,725 - INFO - DatabaseService initialized
+2025-08-03 11:55:07,147 - INFO - MySQL connection pool created successfully
+2025-08-03 11:55:07,149 - INFO - DatabaseService initialized
+2025-08-03 12:09:13,198 - INFO - MySQL connection pool created successfully
+2025-08-03 12:09:13,206 - INFO - DatabaseService initialized
+2025-08-03 12:09:23,859 - INFO - Connection pool closed
+2025-08-03 12:29:55,714 - INFO - MySQL connection pool created successfully
+2025-08-03 12:29:55,715 - INFO - DatabaseService initialized
+2025-08-03 12:36:45,060 - INFO - MySQL connection pool created successfully
+2025-08-03 12:36:45,061 - INFO - DatabaseService initialized
+2025-08-03 14:20:31,792 - INFO - MySQL connection pool created successfully
+2025-08-03 14:20:31,794 - INFO - DatabaseService initialized
+2025-08-03 14:21:42,761 - INFO - MySQL connection pool created successfully
+2025-08-03 14:21:42,762 - INFO - DatabaseService initialized
+2025-08-03 14:28:05,933 - INFO - MySQL connection pool created successfully
+2025-08-03 14:28:05,935 - INFO - DatabaseService initialized
+2025-08-03 14:28:48,102 - INFO - MySQL connection pool created successfully
+2025-08-03 14:28:48,103 - INFO - DatabaseService initialized
+2025-08-03 14:37:53,380 - INFO - MySQL connection pool created successfully
+2025-08-03 14:37:53,381 - INFO - DatabaseService initialized
+2025-08-03 14:38:29,589 - INFO - MySQL connection pool created successfully
+2025-08-03 14:38:29,590 - INFO - DatabaseService initialized
+2025-08-03 15:05:41,111 - INFO - MySQL connection pool created successfully
+2025-08-03 15:05:41,111 - INFO - DatabaseService initialized
+2025-08-03 15:14:17,949 - INFO - MySQL connection pool created successfully
+2025-08-03 15:14:17,950 - INFO - DatabaseService initialized
+2025-08-03 15:38:41,056 - INFO - MySQL connection pool created successfully
+2025-08-03 15:38:41,058 - INFO - DatabaseService initialized
+2025-08-03 15:39:03,159 - INFO - MySQL connection pool created successfully
+2025-08-03 15:39:03,160 - INFO - DatabaseService initialized
+2025-08-03 15:47:33,349 - INFO - MySQL connection pool created successfully
+2025-08-03 15:47:33,349 - INFO - DatabaseService initialized
+2025-08-03 15:56:37,205 - INFO - MySQL connection pool created successfully
+2025-08-03 15:56:37,207 - INFO - DatabaseService initialized
+2025-08-03 16:00:26,185 - INFO - MySQL connection pool created successfully
+2025-08-03 16:00:26,186 - INFO - DatabaseService initialized
+2025-08-03 16:02:21,634 - INFO - MySQL connection pool created successfully
+2025-08-03 16:02:21,634 - INFO - DatabaseService initialized
+2025-08-03 16:18:57,138 - INFO - MySQL connection pool created successfully
+2025-08-03 16:18:57,139 - INFO - DatabaseService initialized
+2025-08-03 17:33:19,374 - INFO - MySQL connection pool created successfully
+2025-08-03 17:33:19,374 - INFO - DatabaseService initialized
+2025-08-03 17:33:38,635 - INFO - MySQL connection pool created successfully
+2025-08-03 17:33:38,635 - INFO - DatabaseService initialized
+2025-08-03 17:33:38,635 - INFO - Starting FitTrackPro Email Scheduler
+2025-08-03 17:33:38,635 - INFO - Starting reminder scheduler
+2025-08-03 17:33:38,635 - INFO - Checking reminders at 17:33
+2025-08-03 17:33:38,697 - INFO - Found 0 reminders to process
+2025-08-03 17:33:38,697 - INFO - Processed 0/0 reminders successfully
+2025-08-03 17:34:00,011 - INFO - Checking reminders at 17:34
+2025-08-03 17:34:00,014 - INFO - Found 0 reminders to process
+2025-08-03 17:34:00,014 - INFO - Processed 0/0 reminders successfully
+2025-08-03 17:34:48,066 - INFO - MySQL connection pool created successfully
+2025-08-03 17:34:48,066 - INFO - DatabaseService initialized
+2025-08-03 17:35:00,004 - INFO - Checking reminders at 17:35
+2025-08-03 17:35:00,006 - INFO - Found 0 reminders to process
+2025-08-03 17:35:00,008 - INFO - Processed 0/0 reminders successfully
+2025-08-03 17:36:00,014 - INFO - Checking reminders at 17:36
+2025-08-03 17:36:00,019 - INFO - Found 0 reminders to process
+2025-08-03 17:36:00,020 - INFO - Processed 0/0 reminders successfully
+2025-08-03 17:37:00,015 - INFO - Checking reminders at 17:37
+2025-08-03 17:37:00,018 - INFO - Found 0 reminders to process
+2025-08-03 17:37:00,019 - INFO - Processed 0/0 reminders successfully
+2025-08-03 17:38:00,016 - INFO - Checking reminders at 17:38
+2025-08-03 17:38:00,027 - INFO - Found 0 reminders to process
+2025-08-03 17:38:00,027 - INFO - Processed 0/0 reminders successfully
+2025-08-03 17:39:00,017 - INFO - Checking reminders at 17:39
+2025-08-03 17:39:00,018 - INFO - Found 0 reminders to process
+2025-08-03 17:39:00,018 - INFO - Processed 0/0 reminders successfully
+2025-08-03 17:40:00,014 - INFO - Checking reminders at 17:40
+2025-08-03 17:40:00,016 - INFO - Found 0 reminders to process
+2025-08-03 17:40:00,017 - INFO - Processed 0/0 reminders successfully
+2025-08-03 17:41:00,005 - INFO - Checking reminders at 17:41
+2025-08-03 17:41:00,008 - INFO - Found 0 reminders to process
+2025-08-03 17:41:00,008 - INFO - Processed 0/0 reminders successfully
+2025-08-03 17:42:00,000 - INFO - Checking reminders at 17:42
+2025-08-03 17:42:00,008 - INFO - Found 0 reminders to process
+2025-08-03 17:42:00,008 - INFO - Processed 0/0 reminders successfully
+2025-08-03 17:43:00,013 - INFO - Checking reminders at 17:43
+2025-08-03 17:43:00,015 - INFO - Found 0 reminders to process
+2025-08-03 17:43:00,016 - INFO - Processed 0/0 reminders successfully
+2025-08-03 17:44:00,013 - INFO - Checking reminders at 17:44
+2025-08-03 17:44:00,015 - INFO - Found 0 reminders to process
+2025-08-03 17:44:00,015 - INFO - Processed 0/0 reminders successfully
+2025-08-03 17:45:00,009 - INFO - Checking reminders at 17:45
+2025-08-03 17:45:00,013 - INFO - Found 0 reminders to process
+2025-08-03 17:45:00,013 - INFO - Processed 0/0 reminders successfully
+2025-08-03 17:46:00,003 - INFO - Checking reminders at 17:46
+2025-08-03 17:46:00,006 - INFO - Found 0 reminders to process
+2025-08-03 17:46:00,006 - INFO - Processed 0/0 reminders successfully
+2025-08-03 17:47:00,014 - INFO - Checking reminders at 17:47
+2025-08-03 17:47:00,016 - INFO - Found 0 reminders to process
+2025-08-03 17:47:00,017 - INFO - Processed 0/0 reminders successfully
+2025-08-03 17:48:00,001 - INFO - Checking reminders at 17:48
+2025-08-03 17:48:00,001 - INFO - Found 0 reminders to process
+2025-08-03 17:48:00,001 - INFO - Processed 0/0 reminders successfully
+2025-08-03 17:49:00,008 - INFO - Checking reminders at 17:49
+2025-08-03 17:49:00,010 - INFO - Found 0 reminders to process
+2025-08-03 17:49:00,010 - INFO - Processed 0/0 reminders successfully
+2025-08-03 17:50:00,013 - INFO - Checking reminders at 17:50
+2025-08-03 17:50:00,015 - INFO - Found 0 reminders to process
+2025-08-03 17:50:00,016 - INFO - Processed 0/0 reminders successfully
+2025-08-03 17:51:00,012 - INFO - Checking reminders at 17:51
+2025-08-03 17:51:00,015 - INFO - Found 0 reminders to process
+2025-08-03 17:51:00,015 - INFO - Processed 0/0 reminders successfully
+2025-08-03 17:52:00,010 - INFO - Checking reminders at 17:52
+2025-08-03 17:52:00,012 - INFO - Found 0 reminders to process
+2025-08-03 17:52:00,013 - INFO - Processed 0/0 reminders successfully
+2025-08-03 17:53:00,004 - INFO - Checking reminders at 17:53
+2025-08-03 17:53:00,006 - INFO - Found 0 reminders to process
+2025-08-03 17:53:00,007 - INFO - Processed 0/0 reminders successfully
+2025-08-03 17:54:00,015 - INFO - Checking reminders at 17:54
+2025-08-03 17:54:00,017 - INFO - Found 0 reminders to process
+2025-08-03 17:54:00,018 - INFO - Processed 0/0 reminders successfully
+2025-08-03 17:55:00,000 - INFO - Checking reminders at 17:55
+2025-08-03 17:55:00,002 - INFO - Found 0 reminders to process
+2025-08-03 17:55:00,003 - INFO - Processed 0/0 reminders successfully
+2025-08-03 17:56:00,005 - INFO - Checking reminders at 17:56
+2025-08-03 17:56:00,007 - INFO - Found 0 reminders to process
+2025-08-03 17:56:00,008 - INFO - Processed 0/0 reminders successfully
+2025-08-03 17:57:00,011 - INFO - Checking reminders at 17:57
+2025-08-03 17:57:00,013 - INFO - Found 0 reminders to process
+2025-08-03 17:57:00,013 - INFO - Processed 0/0 reminders successfully
+2025-08-03 17:58:00,004 - INFO - Checking reminders at 17:58
+2025-08-03 17:58:00,006 - INFO - Found 0 reminders to process
+2025-08-03 17:58:00,008 - INFO - Processed 0/0 reminders successfully
+2025-08-03 17:59:00,003 - INFO - Checking reminders at 17:59
+2025-08-03 17:59:00,006 - INFO - Found 0 reminders to process
+2025-08-03 17:59:00,006 - INFO - Processed 0/0 reminders successfully
+2025-08-03 18:00:00,005 - INFO - Checking reminders at 18:00
+2025-08-03 18:00:00,006 - INFO - Found 0 reminders to process
+2025-08-03 18:00:00,008 - INFO - Processed 0/0 reminders successfully
+2025-08-03 18:01:00,006 - INFO - Checking reminders at 18:01
+2025-08-03 18:01:00,008 - INFO - Found 0 reminders to process
+2025-08-03 18:01:00,009 - INFO - Processed 0/0 reminders successfully
+2025-08-03 18:02:00,007 - INFO - Checking reminders at 18:02
+2025-08-03 18:02:00,008 - INFO - Found 0 reminders to process
+2025-08-03 18:02:00,009 - INFO - Processed 0/0 reminders successfully
+2025-08-03 18:03:00,009 - INFO - Checking reminders at 18:03
+2025-08-03 18:03:00,011 - INFO - Found 0 reminders to process
+2025-08-03 18:03:00,011 - INFO - Processed 0/0 reminders successfully
+2025-08-03 18:04:00,009 - INFO - Checking reminders at 18:04
+2025-08-03 18:04:00,011 - INFO - Found 0 reminders to process
+2025-08-03 18:04:00,012 - INFO - Processed 0/0 reminders successfully
+2025-08-03 18:05:00,009 - INFO - Checking reminders at 18:05
+2025-08-03 18:05:00,011 - INFO - Found 0 reminders to process
+2025-08-03 18:05:00,011 - INFO - Processed 0/0 reminders successfully
+2025-08-03 18:06:00,009 - INFO - Checking reminders at 18:06
+2025-08-03 18:06:00,012 - INFO - Found 0 reminders to process
+2025-08-03 18:06:00,012 - INFO - Processed 0/0 reminders successfully
+2025-08-03 18:07:00,013 - INFO - Checking reminders at 18:07
+2025-08-03 18:07:00,015 - INFO - Found 0 reminders to process
+2025-08-03 18:07:00,016 - INFO - Processed 0/0 reminders successfully
+2025-08-03 18:07:37,183 - INFO - MySQL connection pool created successfully
+2025-08-03 18:07:37,183 - INFO - DatabaseService initialized
+2025-08-03 18:33:00,241 - INFO - MySQL connection pool created successfully
+2025-08-03 18:33:00,241 - INFO - DatabaseService initialized
+2025-08-04 11:39:11,041 - INFO - MySQL connection pool created successfully
+2025-08-04 11:39:11,042 - INFO - DatabaseService initialized
+2025-08-04 12:22:11,180 - INFO - MySQL connection pool created successfully
+2025-08-04 12:22:11,182 - INFO - DatabaseService initialized

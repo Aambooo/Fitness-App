@@ -1,148 +1,108 @@
-import random
 import streamlit as st
-from yt_extractor import yt_extractor
-from database_service import dbs
-from auth import show_auth, logout
 from datetime import datetime, timedelta
 import os
 from dotenv import load_dotenv
-from authlib.integrations.requests_client import OAuth2Session
-import requests
-import uuid
+from auth import auth_service
+from database_service import dbs
+from yt_extractor import yt_extractor
+import time
+import re
 
+auth_service.dbs = dbs 
+
+# Initialize environment
 load_dotenv()
 
-# Auth0 Configuration
-AUTH0_CLIENT_ID = os.getenv('AUTH0_CLIENT_ID')
-AUTH0_CLIENT_SECRET = os.getenv('AUTH0_CLIENT_SECRET')
-AUTH0_DOMAIN = 'dev-1cs4x3qaxbgw74q4.us.auth0.com'
-REDIRECT_URI = 'http://localhost:8501/auth/callback'
-AUTH0_AUDIENCE = os.getenv('AUTH0_AUDIENCE')
-
-# Initialize session state
+# Session state initialization
 if 'oauth_state' not in st.session_state:
     st.session_state.oauth_state = None
-if 'auth_initiated' not in st.session_state:
-    st.session_state.auth_initiated = False
 if 'authenticated' not in st.session_state:
     st.session_state.authenticated = False
-if 'token' not in st.session_state:
-    st.session_state.token = None
 if 'user' not in st.session_state:
     st.session_state.user = None
 
-def handle_auth_callback():
-    """Handle OAuth callback from Auth0"""
-    print("🔄 Handling Auth0 callback...")
-    
-    # Modern Streamlit query param handling
-    code = st.query_params.get("code")
-    state = st.query_params.get("state")
-    
-    if not code:
-        st.error("❌ Missing authorization code")
-        print("Query params:", dict(st.query_params))
-        return
-    
-    if state != st.session_state.oauth_state:
-        st.error("❌ Invalid state parameter")
-        print(f"Expected: {st.session_state.oauth_state}, Got: {state}")
-        return
-
-    try:
-        client = OAuth2Session(
-            AUTH0_CLIENT_ID,
-            AUTH0_CLIENT_SECRET,
-            redirect_uri=REDIRECT_URI
-        )
-        
-        token = client.fetch_token(
-            f"https://{AUTH0_DOMAIN}/oauth/token",
-            code=code,
-            grant_type='authorization_code'
-        )
-        
-        userinfo = requests.get(
-            f"https://{AUTH0_DOMAIN}/userinfo",
-            headers={'Authorization': f"Bearer {token['access_token']}"}
-        ).json()
-        
-        print("🟢 User info:", userinfo)
-        
-        st.session_state.update({
-            'token': token,
-            'user': {
-                'user_id': userinfo.get('sub'),
-                'email': userinfo.get('email'),
-                'full_name': userinfo.get('name', userinfo.get('nickname', 'User'))
-            },
-            'authenticated': True
-        })
-        
-        st.query_params.clear()
-        st.rerun()
-        
-    except Exception as e:
-        st.error(f"❌ Authentication failed: {str(e)}")
-        print(f"🔴 Error: {repr(e)}")
-        logout()
-
+# Utility Functions
 @st.cache_data(ttl=300)
 def get_workouts():
-    """Fetch all workouts with caching"""
+    """Get workouts with guaranteed video URLs"""
     try:
-        return dbs.get_all_workouts()
+        workouts = dbs.get_all_workouts_with_urls()
+        if not workouts:
+            st.warning("No workouts found in database")
+        return workouts
     except Exception as e:
         st.error(f"Failed to load workouts: {str(e)}")
         return []
 
 def get_duration_text(duration_s):
-    """Convert seconds to HH:MM:SS format"""
     seconds = duration_s % 60
     minutes = int(duration_s / 60 % 60)
     hours = int(duration_s / 3600 % 24)
     return f"{hours:02d}:{minutes:02d}:{seconds:02d}" if hours > 0 else f"{minutes:02d}:{seconds:02d}"
 
+def validate_email(email: str) -> bool:
+    pattern = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'
+    return re.match(pattern, email) is not None
+
 def display_workout(wo):
-    """Display workout video and info"""
-    if not wo or 'video_id' not in wo or not wo['video_id']:
-        st.error('Invalid workout data: missing video ID')
+    """Enhanced workout display with fallbacks"""
+    if not wo or 'video_id' not in wo:
+        st.error('Invalid workout data')
         return None
     
     try:
-        url = 'https://youtu.be/' + wo['video_id']
-        st.subheader(wo.get('title', 'Untitled Workout'))
-        st.caption(f"{wo.get('channel', 'Unknown channel')} - {get_duration_text(wo.get('duration', 0))}")
-        st.video(url)
+        # Use pre-formatted URL if available, otherwise construct
+        url = wo.get('video_url', f'https://youtu.be/{wo["video_id"]}')
+        
+        col1, col2 = st.columns([4, 1])
+        with col1:
+            st.subheader(wo.get('title', 'Untitled Workout'))
+            st.caption(f"{wo.get('channel', 'Unknown channel')} • {get_duration_text(wo.get('duration', 0))}")
+            st.video(url)
+            
         return url
     except Exception as e:
-        st.error(f"Error displaying workout: {str(e)}")
+        st.error(f"Display error: {str(e)}")
         return None
-
+# App Sections
 def all_workouts_section():
-    """Display all workouts with delete options"""
     st.markdown('## All Workouts')
-    workouts = get_workouts()
+    workouts = dbs.get_all_workouts_with_urls()
     
     if not workouts:
-        st.info('No workouts available in the database!')
+        st.info('No workouts available!')
         return
     
     for wo in workouts:
-        if wo and wo.get('video_id'):
-            url = display_workout(wo)
-            if url and st.button('Delete workout', key=f"del_{wo['video_id']}"):
-                if dbs.delete_workout(wo['video_id']):
-                    st.cache_data.clear()
-                    st.success('Workout deleted successfully!')
-                    st.rerun()
+        if not wo or 'video_id' not in wo:
+            st.warning('Invalid workout format - skipping')
+            continue
+            
+        col1, col2 = st.columns([4, 1])
+        
+        with col1:
+            url = wo.get('video_url', f"https://youtu.be/{wo['video_id']}")
+            st.subheader(wo.get('title', 'Untitled Workout'))
+            st.caption(f"{wo.get('channel', 'Unknown')} • {get_duration_text(wo.get('duration', 0))}")
+            st.video(url)
+        
+        with col2:
+            if st.button('Delete', key=f"del_{wo['video_id']}"):
+                # Add confirmation dialog
+                if st.session_state.get('confirm_delete') == wo['video_id']:
+                    if dbs.delete_workout(wo['video_id']):
+                        st.cache_data.clear()
+                        st.success('✅ Deleted!')
+                        time.sleep(1)
+                        st.rerun()
+                    else:
+                        st.error('❌ Deletion failed. Check logs.')
+                    del st.session_state['confirm_delete']
                 else:
-                    st.error('Failed to delete workout')
-        else:
-            st.warning('Skipping invalid workout entry')
+                    st.session_state['confirm_delete'] = wo['video_id']
+                    st.warning('Click Delete again to confirm')
 
 def add_workout_section():
-    """Add new workout from YouTube URL"""
     st.markdown('## Add Workout')
     url = st.text_input('Enter YouTube workout video URL')
     
@@ -168,71 +128,73 @@ def add_workout_section():
             st.error(f"Error processing video: {str(e)}")
 
 def email_reminder_section(user):
-    """Setup email reminders"""
     st.markdown('## Email Reminder Setup')
     email = st.text_input('Email', value=user['email'])
+    
+    if email and not validate_email(email):
+        st.error('Please enter a valid email address')
+        return
+    
     existing_schedule = dbs.get_schedule_by_email(email) if email else None
     
     col1, col2 = st.columns(2)
     with col1:
-        default_hour = existing_schedule['time'].split(':')[0] if existing_schedule and 'time' in existing_schedule else 12
+        default_hour = existing_schedule['time'].split(':')[0] if existing_schedule else 12
         hour = st.number_input('Hour (0-23)', min_value=0, max_value=23, value=int(default_hour))
     with col2:
-        default_minute = existing_schedule['time'].split(':')[1] if existing_schedule and 'time' in existing_schedule else 0
+        default_minute = existing_schedule['time'].split(':')[1] if existing_schedule else 0
         minute = st.number_input('Minute (0-59)', min_value=0, max_value=59, value=int(default_minute))
     
     schedule_time = f"{hour:02d}:{minute:02d}"
-    workouts = get_workouts()
     
+    workouts = dbs.get_all_workouts()
     if not workouts:
-        st.warning('No workouts in the database!')
-    else:
-        workout_options = {f"{wo['title']} ({wo['channel']})": wo['video_id'] for wo in workouts}
-        default_idx = 0
-        
-        if existing_schedule and 'video_id' in existing_schedule:
-            try:
-                default_idx = list(workout_options.values()).index(existing_schedule['video_id'])
-            except ValueError:
-                default_idx = 0
-                
-        selected_workout = st.selectbox(
-            'Choose a workout:',
-            options=list(workout_options.keys()),
-            index=default_idx
-        )
-        video_id = workout_options[selected_workout]
-        
-        if email and schedule_time and video_id:
-            workout = dbs.get_workout_by_id(video_id)
-            if not workout:
-                st.error('Selected workout not found in database!')
-                return
-                
-            data = {
-                'email': email,
-                'time': schedule_time,
+        st.warning('No workouts available! Add some first.')
+        return
+    
+    workout_options = {f"{wo['title']} ({wo['channel']})": wo['video_id'] for wo in workouts}
+    default_idx = 0
+    
+    if existing_schedule:
+        try:
+            default_idx = list(workout_options.values()).index(existing_schedule['video_id'])
+        except ValueError:
+            pass
+    
+    selected_workout = st.selectbox('Choose a workout:', options=list(workout_options.keys()), index=default_idx)
+    video_id = workout_options[selected_workout]
+    workout = dbs.get_workout_by_id(video_id)
+    
+    if not workout:
+        st.error('Selected workout not found in database!')
+        return
+    
+    st.markdown('### Workout Preview')
+    st.video(f"https://youtu.be/{video_id}")
+    
+    button_label = 'Save Reminder' if existing_schedule else 'Set Reminder'
+    if st.button(button_label, key=f"reminder_btn_{user['user_id']}"):
+        try:
+            success = dbs.save_schedule(email, {
                 'video_id': video_id,
+                'time': schedule_time,
                 'title': workout['title'],
                 'channel': workout['channel'],
                 'duration': workout['duration'],
                 'user_id': user['user_id']
-            }
+            })
+        
+            if success:
+                st.success("✅ Reminder saved successfully!")
+                time.sleep(1)
+                st.rerun()
+            else:
+                st.error("❌ Failed to save reminder")
             
-            if existing_schedule:
-                if st.button('Update Reminder'):
-                    if dbs.save_schedule(email, data):
-                        st.success(f"Updated reminder for {email} at {schedule_time}!")
-                    else:
-                        st.error('Failed to update reminder')
-            elif st.button('Set Reminder'):
-                if dbs.save_schedule(email, data):
-                    st.success(f"Reminder set for {selected_workout} at {schedule_time}!")
-                else:
-                    st.error('Failed to set reminder')
+        except Exception as e:
+            st.error(f"An error occurred: {str(e)}")
 
 def todays_workout_section():
-    """Select today's workout"""
     st.markdown("## Today's Workout Selection")
     all_workouts = get_workouts()
     current_workout = dbs.get_todays_workout()
@@ -277,27 +239,32 @@ def todays_workout_section():
         st.markdown('### Currently Selected Workout')
         display_workout(current_workout)
 
+# Main App Flow
 def main_app():
-    """Main application flow"""
-    if st.query_params.get('code'):
-        handle_auth_callback()
-        return
-        
+    # Handle authentication
     if not st.session_state.get('authenticated', False):
-        show_auth()
+        auth_service.show_auth()
         st.stop()
-        
+    
+    # Main app logic for authenticated users
     user = st.session_state.get('user', {})
     if not user:
         st.error('User session not found. Please log in again.')
-        logout()
-        st.stop()
+        logout()  # This will handle the cleanup
+        st.stop()  # No need for rerun() since logout() handles it
         
-    st.sidebar.title(f"Welcome, {user.get('full_name', 'User')}!")
-    if st.sidebar.button('Logout'):
-        logout()
-        st.rerun()
-        
+    # Enhanced sidebar with logout
+    st.sidebar.title(f"👋 Welcome, {user.get('full_name', 'User')}!")
+    
+    # Add visual separation and confirmation
+    st.sidebar.markdown("---")
+    if st.sidebar.button('🚪 Logout', key='logout_btn'):
+        if st.sidebar.checkbox("Are you sure you want to logout?", key='logout_confirm'):
+            logout()  # No need for rerun() here either
+        else:
+            st.sidebar.warning("Logout cancelled")
+    
+    # Rest of your menu remains unchanged
     menu_options = {
         "Today's Workout": todays_workout_section,
         'All Workouts': all_workouts_section,

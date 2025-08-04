@@ -1,3 +1,9 @@
+from google.oauth2 import id_token
+from google.auth.transport import requests
+import dns.resolver  # Add this line
+from email_validator import validate_email, EmailNotValidError
+import mysql.connector
+from email_validator import validate_email, EmailNotValidError 
 from typing import List, Dict, Any, Optional, Tuple
 import mysql.connector
 from mysql.connector import Error, pooling
@@ -22,6 +28,13 @@ load_dotenv()
 class DatabaseService:
     _instance = None
     
+
+    def get_cursor(self, conn):
+        """Get a cursor that automatically clears previous results"""
+        cursor = conn.cursor(dictionary=True)
+        cursor._connection = conn  # Keep reference to connection
+        return cursor
+
     def __new__(cls):
         if cls._instance is None:
             cls._instance = super(DatabaseService, cls).__new__(cls)
@@ -126,6 +139,18 @@ class DatabaseService:
             if conn:
                 conn.close()
 
+    def verify_email_domain(self, email: str) -> bool:
+        """Check if email domain has valid MX records"""
+        try:
+            domain = email.split('@')[1]
+            records = dns.resolver.resolve(domain, 'MX')
+            return bool(records)
+        except (dns.resolver.NoAnswer, dns.resolver.NXDOMAIN):
+            return False
+        except Exception as e:
+            logging.error(f"DNS verification failed for {email}: {e}")
+            return False  # Fail-safe: assume valid if DNS check fails
+
     def register_user(self, email: str, 
                     password: Optional[str] = None,
                     full_name: Optional[str] = None,
@@ -133,6 +158,14 @@ class DatabaseService:
         """Register new user with email or Google auth"""
         conn = None
         try:
+
+            if google_id is None:  # Only validate if not Google sign-in
+                valid = validate_email(email)
+                email = valid.email 
+            
+            if not self.verify_email_domain(email):
+                return False, "Email domain does not exist"
+
             conn = self.get_connection()
             cursor = conn.cursor()
             
@@ -162,10 +195,79 @@ class DatabaseService:
             
             cursor.execute(query, values)
             return True, 'Registration successful'
-            
+        
+        except EmailNotValidError as e:  # NEW EXCEPTION HANDLING
+            return False, f'Invalid email: {str(e)}'
+    
         except Error as e:
             logging.error(f"Registration failed for {email}: {e}")
             return False, str(e)
+        finally:
+            if conn:
+                conn.close()
+
+    def register_with_google(self, token: str) -> Tuple[bool, str]:
+        """Register/login user using Google OAuth token"""
+        try:
+            # Verify Google ID token
+            id_info = id_token.verify_oauth2_token(
+                token,
+                requests.Request(),
+                os.getenv('GOOGLE_CLIENT_ID')  # Ensure this is in your .env
+        )
+        
+            # Check if email exists
+            if self.get_user_by_email(id_info['email']):
+                return False, "Email already registered"
+            
+            # Create new user
+            user_id = f"usr_{int(time.time()*1000)}"
+            query = """
+                INSERT INTO users 
+                (user_id, email, full_name, google_id, created_at, updated_at)
+                VALUES (%s, %s, %s, %s, %s, %s)
+            """
+            values = (
+                user_id,
+                id_info['email'],
+                id_info.get('name', id_info['email'].split('@')[0]),  # Fallback to email prefix if no name
+                id_info['sub'],  # Google's unique user ID
+                int(time.time()*1000),
+                int(time.time()*1000)
+            )
+        
+            conn = self.get_connection()
+            conn.cursor().execute(query, values)
+            conn.commit()
+            return True, "Google registration successful"
+        
+        except ValueError as e:
+            logging.error(f"Google auth failed: {e}")
+            return False, f"Invalid Google token: {e}"
+        except Error as e:
+            logging.error(f"Database error during Google registration: {e}")
+            return False, "Registration error"
+
+    def get_todays_workout(self) -> Optional[Dict[str, Any]]:
+        """Get today's selected workout from database"""
+        conn = None
+        try:
+            conn = self.get_connection()
+            cursor = conn.cursor(dictionary=True)
+        
+        # Query that joins the todays_workout table with all_workouts
+            query = '''
+                SELECT w.* FROM todays_workout t
+                JOIN all_workouts w ON t.video_id = w.video_id
+                ORDER BY t.selected_at DESC
+                LIMIT 1
+            '''
+            cursor.execute(query)
+            return cursor.fetchone()
+        
+        except Error as e:
+            logging.error(f"Error fetching today's workout: {e}")
+            return None
         finally:
             if conn:
                 conn.close()
@@ -218,6 +320,102 @@ class DatabaseService:
         finally:
             if conn:
                 conn.close()
+    
+    def get_all_workouts_with_urls(self) -> List[Dict[str, Any]]:
+        """Fetch all workouts with properly formatted video URLs"""
+        try:
+            conn = self.get_connection()
+            cursor = conn.cursor(dictionary=True)
+            cursor.execute('''
+                SELECT 
+                    *,
+                    CONCAT('https://youtu.be/', video_id) AS video_url
+                FROM all_workouts 
+                ORDER BY added_at DESC
+            ''')
+            return cursor.fetchall()
+        except Error as e:
+            logging.error(f"Error fetching workouts: {e}")
+            return []
+        finally:
+            if conn: conn.close()
+    
+    def get_workout_by_id(self, video_id: str) -> Optional[Dict[str, Any]]:
+        """Get a specific workout by its video ID with complete details"""
+        conn = None
+        try:
+            conn = self.get_connection()
+            cursor = conn.cursor(dictionary=True)
+        
+            query = """
+                SELECT 
+                    w.*,
+                    IFNULL(t.video_id, NULL) AS is_todays_workout
+                FROM all_workouts w
+                LEFT JOIN todays_workout t ON w.video_id = t.video_id
+                WHERE w.video_id = %s
+                LIMIT 1
+            """
+            cursor.execute(query, (video_id,))
+            workout = cursor.fetchone()
+         
+            if workout:
+            # Convert duration to formatted string
+                workout['duration_text'] = self._format_duration(workout['duration'])
+            # Convert boolean flag
+                workout['is_todays_workout'] = bool(workout['is_todays_workout'])
+        
+            return workout
+        
+        except Error as e:
+            logging.error(f"Error fetching workout {video_id}: {e}")
+            return None
+        finally:
+            if conn:
+                conn.close()
+
+    def delete_workout(self, video_id: str) -> bool:
+        """Delete a workout from all_workouts table"""
+        conn = None
+        try:
+            # Validate input
+            if not video_id:
+                raise ValueError("Empty video_id provided")
+
+            conn = self.get_connection()
+            cursor = conn.cursor()
+        
+            # First check if workout exists
+            cursor.execute("SELECT 1 FROM all_workouts WHERE video_id = %s", (video_id,))
+            if not cursor.fetchone():
+                logging.warning(f"Workout {video_id} not found")
+                return False
+            
+        # Perform deletion
+            cursor.execute("DELETE FROM all_workouts WHERE video_id = %s", (video_id,))
+            conn.commit()
+        
+        # Verify deletion
+            cursor.execute("SELECT 1 FROM all_workouts WHERE video_id = %s", (video_id,))
+            if cursor.fetchone():
+                raise Exception("Deletion verification failed")
+            
+            logging.info(f"Deleted workout {video_id}")
+            return True
+        
+        except Exception as e:
+            logging.error(f"Delete failed for {video_id}: {e}")
+            if conn: conn.rollback()
+            return False
+        finally:
+            if conn: conn.close()
+
+    @staticmethod
+    def _format_duration(seconds: int) -> str:
+        """Helper to format duration seconds to HH:MM:SS"""
+        hours, remainder = divmod(seconds, 3600)
+        minutes, seconds = divmod(remainder, 60)
+        return f"{hours}:{minutes:02d}:{seconds:02d}" if hours else f"{minutes}:{seconds:02d}"
 
     def set_todays_workout(self, video_id: str) -> Tuple[bool, str]:
         """Set today's featured workout"""
@@ -259,21 +457,59 @@ class DatabaseService:
         finally:
             if conn:
                 conn.close()
+    
+    
 
     # Schedule Management
+    def get_schedule_by_email(self, email: str) -> Optional[Dict[str, Any]]:
+        """Get schedule for a specific email with all timestamp fields"""
+        conn = None
+        try:
+            conn = self.get_connection()
+            cursor = conn.cursor(dictionary=True)
+            cursor.execute(
+                "SELECT *, "
+                "FROM_UNIXTIME(created_at/1000) as created_at_formatted, "
+                "FROM_UNIXTIME(updated_at/1000) as updated_at_formatted "
+                "FROM schedule WHERE email = %s",
+                (email,)
+            )
+            return cursor.fetchone()
+        except Error as e:
+            logging.error(f"Error fetching schedule for {email}: {e}")
+            return None
+        finally:
+            if conn:
+                conn.close()
+
+    def get_schedules_by_time(self, time_str: str) -> List[Dict[str, Any]]:
+        """Get schedules matching a specific time (HH:MM format)."""
+        conn = None
+        try:
+            conn = self.get_connection()
+            cursor = self.get_cursor(conn)
+            cursor.execute('''
+                SELECT * FROM schedule
+                WHERE time = %s AND is_sent = FALSE
+                ORDER BY time ASC               
+            ''',(time_str,))
+            return cursor.fetchall() 
+        except Error as e:
+            logging.error(f"Error fetching schedules for time {time_str}: {e}")
+            return []
+        finally:
+            if conn: conn.close()
+
     def save_schedule(self, email: str, schedule_data: Dict[str, Any]) -> bool:
-        """Save or update email schedule"""
+        """Create or update a schedule with proper timestamp handling"""
         conn = None
         try:
             conn = self.get_connection()
             cursor = conn.cursor()
+
+            current_time = int(time.time() * 1000) 
             existing = self.get_schedule_by_email(email)
             
-            data = {
-                'email': email,
-                **schedule_data,
-                'updated_at': int(time.time()*1000)
-            }
             
             if existing:
                 query = '''
@@ -288,13 +524,13 @@ class DatabaseService:
                     WHERE email = %s
                 '''
                 values = (
-                    data['video_id'],
-                    data['time'],
-                    data['title'],
-                    data['channel'],
-                    data['duration'],
-                    data['user_id'],
-                    data['updated_at'],
+                    schedule_data['video_id'],
+                    schedule_data['time'],
+                    schedule_data['title'],
+                    schedule_data['channel'],
+                    schedule_data['duration'],
+                    schedule_data['user_id'],
+                    current_time,
                     email
                 )
             else:
@@ -305,25 +541,63 @@ class DatabaseService:
                 '''
                 values = (
                     email,
-                    data['video_id'],
-                    data['time'],
-                    data['title'],
-                    data['channel'],
-                    data['duration'],
-                    data['user_id'],
-                    int(time.time()*1000),
-                    data['updated_at']
+                    schedule_data['video_id'],
+                    schedule_data['time'],
+                    schedule_data['title'],
+                    schedule_data['channel'],
+                    schedule_data['duration'],
+                    schedule_data['user_id'],
+                    current_time,
+                    current_time
                 )
             
             cursor.execute(query, values)
+            conn.commit()
             return True
             
         except Error as e:
             logging.error(f"Error saving schedule: {e}")
+            if conn:
+                conn.rollback()
             return False
         finally:
             if conn:
                 conn.close()
+    
+    def get_due_reminders(self, current_time: int) -> List[Dict[str, Any]]:
+        """Fetch reminders where time <= current_time AND is_sent = False."""
+        conn = None
+        try:
+            conn = self.get_connection()
+            cursor = conn.cursor(dictionary=True)
+            query = """
+                SELECT * FROM schedule 
+                WHERE time <= %s AND is_sent = FALSE
+                ORDER BY time ASC
+            """
+            cursor.execute(query, (current_time,))
+            return cursor.fetchall()
+        except Error as e:
+            logging.error(f"Error fetching due reminders: {e}")
+            return []
+        finally:
+            if conn: conn.close()
+
+    def mark_reminder_as_sent(self, email: str) -> bool:
+        """Set is_sent = TRUE after sending the email."""
+        conn = None
+        try:
+            conn = self.get_connection()
+            cursor = conn.cursor()
+            query = "UPDATE schedule SET is_sent = TRUE WHERE email = %s"
+            cursor.execute(query, (email,))
+            conn.commit()
+            return True
+        except Error as e:
+            logging.error(f"Error marking reminder as sent: {e}")
+            return False
+        finally:
+            if conn: conn.close()
 
 # Singleton instance
 if __name__ == '__main__':

@@ -1,3 +1,5 @@
+from typing import Optional  # Add this with other imports
+from typing import List, Dict, Any, Optional  # All type hints you need
 import time
 import smtplib
 from email.mime.text import MIMEText
@@ -6,17 +8,15 @@ from database_service import dbs
 import os
 from dotenv import load_dotenv
 import logging
-from typing import List, Dict, Any, Optional
 import sys
-import ssl  # Added for better SSL handling
+import ssl
 
-# Windows console encoding fix
-if sys.platform == "win32":
+# UTF-8 encoding for Windows
+if sys.platform == 'win32':
     import io
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
     sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8', errors='replace')
 
-# Load environment variables
 load_dotenv()
 
 # Configure logging
@@ -36,12 +36,11 @@ SMTP_CONFIG = {
     'port': int(os.getenv('SMTP_PORT', 587)),
     'address': os.getenv('EMAIL_ADDRESS'),
     'password': os.getenv('EMAIL_PASSWORD'),
-    'timeout': 30  # Increased timeout for slow connections
+    'timeout': 30
 }
 
-# Validate configuration
 if not all(SMTP_CONFIG.values()):
-    logger.error("Missing email configuration in environment variables")
+    logger.error('Missing email configuration in environment variables')
     exit(1)
 
 class EmailScheduler:
@@ -49,6 +48,7 @@ class EmailScheduler:
         self.last_run = None
         self.retry_count = 0
         self.max_retries = 3
+        self.smtp_connection = None
 
     @staticmethod
     def get_current_time_formatted() -> str:
@@ -57,20 +57,18 @@ class EmailScheduler:
         return f"{now.hour:02d}:{now.minute:02d}"
 
     def create_smtp_connection(self) -> Optional[smtplib.SMTP]:
-        """Create secure SMTP connection with retry logic"""
+        """Create and return SMTP connection with retries"""
         try:
             context = ssl.create_default_context()
             server = smtplib.SMTP(
-                SMTP_CONFIG['server'], 
+                SMTP_CONFIG['server'],
                 SMTP_CONFIG['port'],
                 timeout=SMTP_CONFIG['timeout']
             )
-            
-            server.set_debuglevel(1)  # Debug output
             server.starttls(context=context)
             server.login(SMTP_CONFIG['address'], SMTP_CONFIG['password'])
+            logger.info("SMTP connection established")
             return server
-            
         except smtplib.SMTPException as e:
             logger.error(f"SMTP connection failed: {str(e)}")
             if self.retry_count < self.max_retries:
@@ -81,91 +79,134 @@ class EmailScheduler:
             return None
 
     def send_email(self, to_email: str, subject: str, body: str) -> bool:
-        """Send email with enhanced error handling"""
+        """Send email with proper error handling"""
         try:
             msg = MIMEText(body, 'plain', 'utf-8')
-            msg["Subject"] = subject
-            msg["From"] = f"FitTrackPro <{SMTP_CONFIG['address']}>"
-            msg["To"] = to_email
+            msg['Subject'] = subject
+            msg['From'] = f"FitTrackPro <{SMTP_CONFIG['address']}>"
+            msg['To'] = to_email
 
             with self.create_smtp_connection() as server:
                 if server:
                     server.send_message(msg)
                     logger.info(f"Email sent to {to_email}")
-                    self.retry_count = 0  # Reset on success
+                    self.retry_count = 0
                     return True
-                return False
-                
+            return False
         except Exception as e:
             logger.error(f"Error sending email to {to_email}: {str(e)}")
             return False
 
-    def process_schedule(self, schedule: Dict[str, Any]) -> bool:
-        """Process individual schedule entry"""
-        required_keys = {'email', 'title', 'video_id'}
-        if not required_keys.issubset(schedule.keys()):
-            missing = required_keys - set(schedule.keys())
-            logger.warning(f"Invalid schedule - missing {missing}")
+    def process_reminder(self, reminder: Dict[str, Any]) -> bool:
+        """Process a single reminder"""
+        required_keys = {'email', 'video_id'}
+        if not all(key in reminder for key in required_keys):
+            logger.warning(f"Invalid reminder - missing keys: {required_keys - set(reminder.keys())}")
             return False
 
-        email = schedule['email']
-        title = schedule['title']
-        video_url = f"https://youtu.be/{schedule['video_id']}"
-        
-        logger.info(f"Processing reminder for {email} - {title}")
-        return self.send_email(
-            email,
-            "Your Daily Workout Reminder!",
-            f"""Hi there!\n\nIt's time for your scheduled workout:
-            \nWorkout: {title}
-            \nWatch now: {video_url}
-            \n\nStay fit!\nThe FitTrackPro Team"""
-        )
-
-    def check_alerts(self) -> None:
-        """Check and process all scheduled alerts"""
-        current_time = self.get_current_time_formatted()
-        logger.info(f"Checking alerts at {current_time}")
-        
         try:
-            schedules = dbs.get_schedules_by_time(current_time)
-            if not schedules:
-                logger.debug(f"No reminders for {current_time}")
-                return
+            # Get workout details
+            workout = dbs.get_workout_by_id(reminder['video_id'])
+            if not workout:
+                logger.error(f"No workout found for video_id: {reminder['video_id']}")
+                return False
 
-            logger.info(f"Found {len(schedules)} reminders")
-            success_count = sum(self.process_schedule(s) for s in schedules)
-            logger.info(f"Processed {success_count}/{len(schedules)} successfully")
+            # Prepare email
+            subject = "Your Workout Reminder!"
+            body = f"""Hi there!
 
+It's time for your scheduled workout:
+            
+Workout: {workout['title']}
+            
+Watch now: https://youtu.be/{workout['video_id']}
+            
+
+Stay fit!
+The FitTrackPro Team"""
+
+            # Send email
+            if self.send_email(reminder['email'], subject, body):
+                # Mark as sent in database
+                conn = dbs.get_connection()
+                try:
+                    with conn.cursor() as cursor:
+                        cursor.execute('''
+                            UPDATE schedule 
+                            SET is_sent = TRUE 
+                            WHERE email = %s AND video_id = %s
+                        ''', (reminder['email'], reminder['video_id']))
+                        conn.commit()
+                    return True
+                finally:
+                    conn.close()
+            return False
         except Exception as e:
-            logger.error(f"Error processing alerts: {str(e)}", exc_info=True)
+            logger.error(f"Error processing reminder: {str(e)}")
+            return False
 
-    def run(self) -> None:
-        """Main scheduler loop with precise timing"""
-        logger.info("Starting FitTrackPro Email Scheduler")
-        
-        # Align with whole minutes
-        next_run = datetime.now().replace(second=0, microsecond=0) + timedelta(minutes=1)
-        initial_delay = (next_run - datetime.now()).total_seconds()
-        time.sleep(max(0, initial_delay))
+    def check_and_send_reminders(self):
+        """Main scheduler loop"""
+        logger.info("Starting reminder scheduler")
         
         while True:
+            current_time = self.get_current_time_formatted()
+            logger.info(f"Checking reminders at {current_time}")
+            
+            conn = None
             try:
-                start_time = time.time()
-                self.check_alerts()
-                self.last_run = datetime.now()
-                
-                # Sleep until next whole minute
-                sleep_time = 60 - (time.time() % 60)
-                time.sleep(sleep_time)
-                
-            except KeyboardInterrupt:
-                logger.info("Scheduler stopped by user")
-                break
-            except Exception as e:
-                logger.error(f"Main loop error: {str(e)}")
-                time.sleep(60)  # Prevent tight error loop
+                # Get due reminders
+                conn = dbs.get_connection()
+                with conn.cursor(dictionary=True) as cursor:
+                    cursor.execute('''
+                        SELECT * FROM schedule 
+                        WHERE time = %s AND is_sent = FALSE
+                        ORDER BY time ASC
+                    ''', (current_time,))
+                    reminders = cursor.fetchall()
 
-if __name__ == "__main__":
+                logger.info(f"Found {len(reminders)} reminders to process")
+
+                # Process each reminder
+                success_count = 0
+                for reminder in reminders:
+                    if self.process_reminder(reminder):
+                        success_count += 1
+
+                logger.info(f"Processed {success_count}/{len(reminders)} reminders successfully")
+
+            except Exception as e:
+                logger.error(f"Error in scheduler loop: {str(e)}")
+                if conn:
+                    conn.rollback()
+
+            finally:
+                if conn:
+                    conn.close()
+
+            # Wait for next minute
+            sleep_time = 60 - (time.time() % 60)
+            time.sleep(sleep_time)
+
+def manual_test():
+    """Test email sending manually"""
+    test_email = os.getenv('TEST_EMAIL', 'your_email@gmail.com')
+    test_subject = 'TEST: Workout Reminder'
+    test_body = 'This is a manual test email from the scheduler.'
+    
     scheduler = EmailScheduler()
-    scheduler.run()
+    success = scheduler.send_email(test_email, test_subject, test_body)
+    
+    print(f"\nTEST RESULT: {'SUCCESS' if success else 'FAILED'}")
+
+if __name__ == '__main__':
+    logger.info('Starting FitTrackPro Email Scheduler')
+    
+    # Choose one of these to run:
+    
+    # 1. Run manual test
+    # manual_test()
+    
+    # 2. Run the scheduler
+    scheduler = EmailScheduler()
+    scheduler.check_and_send_reminders()
