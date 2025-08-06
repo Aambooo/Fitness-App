@@ -25,43 +25,29 @@ load_dotenv()
 auth_service.dbs = dbs
 
 
-# ADD AT THE VERY TOP OF YOUR APP (before other routes)
-if st.secrets.get("nuclear_debug") == "enabled":
-    print("\n💣💣💣 NUCLEAR DEBUG ACTIVATED 💣💣💣")
+# EMERGENCY DEBUG - Add at the very top of your reset handler
+if "token" in st.query_params and st.query_params.get("reset") == "true":
+    token = st.query_params["token"]
 
-    # Bypass all Streamlit logic
-    from auth import auth_service
-    from database_service import dbs
-    import bcrypt
+    # Clear URL parameters immediately
+    st.query_params.clear()
 
-    # 1. Manual password update
-    email = "nabdabop10@gmail.com"
-    new_pass = "NuclearPass123!"  # Change this each test
-    hashed = bcrypt.hashpw(new_pass.encode(), bcrypt.gensalt()).decode()
+    with st.form("reset_form"):
+        new_pass = st.text_input("New Password", type="password")
+        confirm_pass = st.text_input("Confirm Password", type="password")
 
-    # 2. Direct database assault
-    conn = dbs.get_connection()
-    cursor = conn.cursor()
-
-    # 3. Execute RAW SQL with verification
-    print(
-        f"\n🚀 EXECUTING: UPDATE users SET password_hash='{hashed[:30]}...' WHERE email='{email}'"
-    )
-    cursor.execute(
-        "UPDATE users SET password_hash = %s WHERE email = %s", (hashed, email)
-    )
-    conn.commit()
-
-    # 4. Immediate verification
-    cursor.execute("SELECT password_hash FROM users WHERE email = %s", (email,))
-    result = cursor.fetchone()[0]
-    print(f"🔍 DATABASE STATE: {result[:60]}...")
-    print(f"✅ {'MATCH' if result == hashed else '❌ MISMATCH'}")
-
-    # 5. Force quit to prevent Streamlit interference
-    import os
-
-    os._exit(1)
+        if st.form_submit_button("Update Password"):
+            if new_pass == confirm_pass:
+                if auth_service.reset_password(token, new_pass):
+                    # Force complete reset
+                    st.session_state.clear()
+                    st.success("Password updated! Please login with your new password")
+                    time.sleep(2)
+                    st.rerun()
+                else:
+                    st.error("Password update failed")
+            else:
+                st.error("Passwords don't match")
 
 # =============================================
 # PASSWORD RESET HANDLER (MUST BE FIRST)
