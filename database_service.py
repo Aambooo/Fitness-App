@@ -183,77 +183,48 @@ class DatabaseService:
                 conn.close()
 
     def update_user_password(self, email: str, new_hash: str) -> bool:
-        """Nuclear password update with guaranteed debug output"""
-        print("\n🔥🔥🔥 ENTERING PASSWORD UPDATE 🔥🔥🔥")
-        print(f"Email: {email}")
-        print(f"Incoming Hash: {new_hash[:60]}...")
-
+        """Update user password"""
         conn = None
         try:
-            # Force connection debug
             conn = self.get_connection()
-            print(f"🔥 Connection ID: {conn.connection_id}")
-
-            # 1. Get current hash (FORCE OUTPUT)
             cursor = conn.cursor()
-            cursor.execute("SELECT password_hash FROM users WHERE email = %s", (email,))
-            current = cursor.fetchone()
-            current_hash = current[0] if current else None
-            print(
-                f"🔍 CURRENT DB HASH: {current_hash[:60]}..."
-                if current_hash
-                else "❌ NO USER FOUND"
-            )
 
-            # 2. Execute update (FORCE VERBOSE)
-            print("\n💥 EXECUTING UPDATE COMMAND:")
-            print(
-                f"UPDATE users SET password_hash = '{new_hash[:60]}...' WHERE email = '{email}'"
-            )
             cursor.execute(
                 "UPDATE users SET password_hash = %s WHERE email = %s",
                 (new_hash, email),
             )
             conn.commit()
-            print("✅ UPDATE COMMITTED")
-
-            # 3. Immediate verification (DIRECT QUERY)
-            print("\n🔍 VERIFYING UPDATE:")
-            cursor.execute("SELECT password_hash FROM users WHERE email = %s", (email,))
-            updated = cursor.fetchone()
-            updated_hash = updated[0] if updated else None
-            print(
-                f"NEW DB HASH: {updated_hash[:60]}..."
-                if updated_hash
-                else "❌ VERIFICATION FAILED"
-            )
-
-            # 4. Binary comparison
-            success = updated_hash == new_hash
-            print(f"\n💡 RESULT: {'SUCCESS' if success else 'FAILURE'}")
-            return success
-
-        except Exception as e:
-            print(f"💥 CRITICAL ERROR: {str(e)}")
+            return cursor.rowcount > 0
+        except Error as e:
+            logging.error(f"Password update failed for {email}: {e}")
             return False
         finally:
             if conn:
                 conn.close()
-            print("🔥🔥🔥 UPDATE PROCESS COMPLETE 🔥🔥🔥\n")
 
-    def invalidate_sessions(self, email: str):
-        """Force logout all devices"""
+    # Add this to database_service.py
+    def delete_unverified_users(self, older_than_days=3):
+        """Cleanup unverified accounts"""
         conn = None
         try:
             conn = self.get_connection()
             cursor = conn.cursor()
+            cutoff = int(time.time() * 1000) - (older_than_days * 24 * 60 * 60 * 1000)
+
             cursor.execute(
-                "UPDATE users SET last_logout = NOW() WHERE email = %s", (email,)
+                """
+               DELETE FROM users 
+               WHERE is_verified = FALSE 
+               AND created_at < %s
+           """,
+                (cutoff,),
             )
+
             conn.commit()
-        finally:
-            if conn:
-                conn.close()
+            return cursor.rowcount
+        except Error as e:
+            logging.error(f"Cleanup failed: {e}")
+            return 0
 
     def get_user_by_email(self, email: str) -> Optional[Dict[str, Any]]:
         conn = None
@@ -283,52 +254,80 @@ class DatabaseService:
             return False
 
     def register_user(
-        self, email: str, password: str, full_name: str, is_verified: bool = False
+        self, email: str, password: str, full_name: str
     ) -> Tuple[bool, str]:
-        """Register new user with email/password"""
+        """Register new user with email/password (unverified by default)
+
+        Args:
+            email: User's email address (must be valid)
+            password: Plain text password (will be hashed)
+            full_name: User's full name
+
+        Returns:
+            Tuple of (success: bool, message: str)
+        """
         conn = None
         try:
-            # Validate email format
-            valid = validate_email(email)
-            email = valid.email
+            # 1. Validate email format
+            try:
+                valid = validate_email(email)
+                email = valid.email  # Normalized email
+            except EmailNotValidError as e:
+                return False, f"Invalid email: {str(e)}"
 
+            # 2. Verify email domain exists
             if not self.verify_email_domain(email):
                 return False, "Email domain does not exist"
+
+            # 3. Check password strength (minimum 8 chars)
+            if len(password) < 8:
+                return False, "Password must be at least 8 characters"
 
             conn = self.get_connection()
             cursor = conn.cursor()
 
-            # Check if user exists
+            # 4. Check if email already exists (verified or unverified)
             if self.get_user_by_email(email):
                 return False, "Email already registered"
 
-            # Generate user data
+            # 5. Create user record
             user_id = f"usr_{int(time.time()*1000)}"
             hashed_pw = bcrypt.hashpw(password.encode(), bcrypt.gensalt()).decode()
+            created_at = int(time.time() * 1000)
 
-            query = """
+            cursor.execute(
+                """
                 INSERT INTO users 
                 (user_id, email, password_hash, full_name, is_verified, created_at)
-                VALUES (%s, %s, %s, %s, %s, %s)
-            """
-            values = (
-                user_id,
-                email,
-                hashed_pw,
-                full_name,
-                is_verified,
-                int(time.time() * 1000),
+                VALUES (%s, %s, %s, %s, FALSE, %s)
+                """,
+                (user_id, email, hashed_pw, full_name, created_at),
             )
-
-            cursor.execute(query, values)
             conn.commit()
-            return True, "Registration successful"
 
-        except EmailNotValidError as e:
-            return False, f"Invalid email: {str(e)}"
+            logging.info(f"New user registered (unverified): {email}")
+            return True, "Verification email sent"
+
         except Error as e:
-            logging.error(f"Registration failed for {email}: {e}")
-            return False, str(e)
+            logging.error(f"Registration failed for {email}: {str(e)}")
+            return False, "Registration failed. Please try again."
+
+        finally:
+            if conn:
+                conn.close()
+
+    def delete_user(self, email: str) -> bool:
+        """Delete a user by email (for rollback purposes)"""
+        conn = None
+        try:
+            conn = self.get_connection()
+            cursor = conn.cursor()
+            cursor.execute("DELETE FROM users WHERE email = %s", (email,))
+            conn.commit()
+            return cursor.rowcount > 0
+        except Error as e:
+            logging.error(f"Failed to delete user {email}: {e}")
+            return False
         finally:
             if conn:
                 conn.close()

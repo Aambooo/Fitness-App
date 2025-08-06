@@ -6,7 +6,6 @@ import time
 import re
 import os
 from dotenv import load_dotenv
-
 import logging
 
 
@@ -24,75 +23,6 @@ logging.basicConfig(level=logging.DEBUG)
 load_dotenv()
 auth_service.dbs = dbs
 
-
-# EMERGENCY DEBUG - Add at the very top of your reset handler
-if "token" in st.query_params and st.query_params.get("reset") == "true":
-    token = st.query_params["token"]
-
-    # Clear URL parameters immediately
-    st.query_params.clear()
-
-    with st.form("reset_form"):
-        new_pass = st.text_input("New Password", type="password")
-        confirm_pass = st.text_input("Confirm Password", type="password")
-
-        if st.form_submit_button("Update Password"):
-            if new_pass == confirm_pass:
-                if auth_service.reset_password(token, new_pass):
-                    # Force complete reset
-                    st.session_state.clear()
-                    st.success("Password updated! Please login with your new password")
-                    time.sleep(2)
-                    st.rerun()
-                else:
-                    st.error("Password update failed")
-            else:
-                st.error("Passwords don't match")
-
-# =============================================
-# PASSWORD RESET HANDLER (MUST BE FIRST)
-# =============================================
-# =============================================
-# PASSWORD RESET HANDLER (MUST BE FIRST)
-# =============================================
-if "token" in st.query_params and st.query_params.get("reset") == "true":
-    token = st.query_params["token"]
-    st.query_params.clear()  # Clear immediately
-
-    # FORCE DEBUG OUTPUT
-    print("\n⚡⚡⚡ RESET FLOW TRIGGERED ⚡⚡⚡")
-    print(f"Token: {token[:50]}...")
-
-    with st.form("reset_form"):
-        new_pass = st.text_input("New Password", type="password")
-        confirm_pass = st.text_input("Confirm Password", type="password")
-
-        if st.form_submit_button("Update Password"):
-            print(f"\n🔑 USER INPUT: {new_pass[:2]}... (length: {len(new_pass)})")
-
-            if new_pass != confirm_pass:
-                st.error("Passwords don't match!")
-            else:
-                # Generate hash with debug
-                hashed = bcrypt.hashpw(new_pass.encode(), bcrypt.gensalt()).decode()
-                print(f"🔑 HASHED VERSION: {hashed[:60]}...")
-
-                # Nuclear update
-                if auth_service.reset_password(token, new_pass):
-                    print("\n🎉 RESET SUCCESSFUL - VERIFYING LOGIN")
-                    # Immediate test
-                    test_result = auth_service.verify_password(
-                        "nabdabop10@gmail.com", new_pass
-                    )
-                    print(f"🧪 LOGIN TEST RESULT: {test_result}")
-
-                    st.success("Password updated!")
-                    st.session_state.clear()
-                    time.sleep(2)
-                    st.rerun()
-                else:
-                    st.error("Reset failed")
-
 # Handle email verification tokens
 if "token" in st.query_params:
     if auth_service.verify_email_token(st.query_params["token"]):
@@ -109,11 +39,6 @@ if "authenticated" not in st.session_state:
     st.session_state.authenticated = False
 if "user" not in st.session_state:
     st.session_state.user = None
-
-if "show_reset" not in st.session_state:
-    st.session_state.show_reset = False
-if "reset_requested" not in st.session_state:
-    st.session_state.reset_requested = False
 
 
 # =============================================
@@ -225,11 +150,6 @@ def email_reminder_section(user):
 # =============================================
 def main_app():
 
-    if st.sidebar.button("🛑 DEBUG: Check Password Hash"):
-        if st.session_state.get("user"):
-            email = st.session_state.user["email"]
-            debug_user_lookup(email)
-            st.rerun()
     # Authentication check
     if not st.session_state.authenticated:
         auth_service.show_auth()

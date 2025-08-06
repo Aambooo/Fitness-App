@@ -1905,3 +1905,39 @@ tornado.websocket.WebSocketClosedError
 2025-08-06 16:05:06,028 - INFO - MySQL connection pool created successfully
 2025-08-06 16:05:06,031 - INFO - Tables created/verified successfully
 2025-08-06 16:05:06,033 - INFO - DatabaseService initialized with MySQL
+2025-08-06 20:37:45,650 - ERROR - Connection attempt 1 failed: 2003 (HY000): Can't connect to MySQL server on 'localhost:3306' (10061)
+2025-08-06 20:37:51,765 - ERROR - Connection attempt 2 failed: 2003 (HY000): Can't connect to MySQL server on 'localhost:3306' (10061)
+2025-08-06 20:37:57,859 - ERROR - Connection attempt 3 failed: 2003 (HY000): Can't connect to MySQL server on 'localhost:3306' (10061)
+2025-08-06 20:38:24,389 - INFO - MySQL connection pool created successfully
+2025-08-06 20:38:24,400 - INFO - Tables created/verified successfully
+2025-08-06 20:38:24,401 - INFO - DatabaseService initialized with MySQL
+2025-08-06 20:52:01,619 - INFO - MySQL connection pool created successfully
+2025-08-06 20:52:01,626 - INFO - Tables created/verified successfully
+2025-08-06 20:52:01,627 - INFO - DatabaseService initialized with MySQL
+2025-08-06 20:55:09,426 - INFO - MySQL connection pool created successfully
+2025-08-06 20:55:09,431 - INFO - Tables created/verified successfully
+2025-08-06 20:55:09,432 - INFO - DatabaseService initialized with MySQL
+2025-08-06 22:12:53,663 - INFO - MySQL connection pool created successfully
+2025-08-06 22:12:53,668 - INFO - Tables created/verified successfully
+2025-08-06 22:12:53,669 - INFO - DatabaseService initialized with MySQL
+2025-08-06 22:14:28,261 - INFO - MySQL connection pool created successfully
+2025-08-06 22:14:28,264 - INFO - Tables created/verified successfully
+2025-08-06 22:14:28,265 - INFO - DatabaseService initialized with MySQL
+2025-08-06 22:15:38,656 - INFO - MySQL connection pool created successfully
+2025-08-06 22:15:38,660 - INFO - Tables created/verified successfully
+2025-08-06 22:15:38,660 - INFO - DatabaseService initialized with MySQL
+2025-08-06 22:27:15,675 - INFO - MySQL connection pool created successfully
+2025-08-06 22:27:15,683 - INFO - Tables created/verified successfully
+2025-08-06 22:27:15,684 - INFO - DatabaseService initialized with MySQL
+2025-08-06 22:54:28,244 - INFO - MySQL connection pool created successfully
+2025-08-06 22:54:28,250 - INFO - Tables created/verified successfully
+2025-08-06 22:54:28,251 - INFO - DatabaseService initialized with MySQL
+2025-08-06 22:55:14,719 - INFO - New user registered (unverified): nabdabop10@gmail.com
+2025-08-06 23:00:51,557 - INFO - MySQL connection pool created successfully
+2025-08-06 23:00:51,565 - INFO - Tables created/verified successfully
+2025-08-06 23:00:51,566 - INFO - DatabaseService initialized with MySQL
+2025-08-06 23:01:14,553 - INFO - New user registered (unverified): nabdabop10@gmail.com
+2025-08-06 23:04:09,124 - INFO - MySQL connection pool created successfully
+2025-08-06 23:04:09,124 - INFO - Tables created/verified successfully
+2025-08-06 23:04:09,124 - INFO - DatabaseService initialized with MySQL
+2025-08-06 23:07:48,268 - INFO - New user registered (unverified): pulaminabin10@gmail.com

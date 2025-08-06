@@ -7,11 +7,6 @@ from typing import Optional
 import re
 import smtplib
 from email.mime.text import MIMEText
-from google.oauth2 import service_account
-from google_auth_oauthlib.flow import InstalledAppFlow
-from googleapiclient.discovery import build
-from googleapiclient.errors import HttpError
-
 
 load_dotenv()
 
@@ -96,7 +91,7 @@ class AuthService:
         """Send email with verification link"""
         token = self.generate_token(email)
         verification_link = (
-            f"http://localhost:8503/verify?token={token}"  # Add `/verify` path
+            f"http://localhost:8501/verify?token={token}"  # Add `/verify` path
         )
 
         message = f"""
@@ -132,21 +127,10 @@ class AuthService:
             with st.form("login_form"):
                 email = st.text_input("Email", placeholder="your@gmail.com")
                 password = st.text_input("Password", type="password")
-
-                col1, col2 = st.columns([0.3, 0.7])
-                with col1:
-                    login_submitted = st.form_submit_button("Login")
-                with col2:
-                    forgot_clicked = st.form_submit_button("Forgot password?")
+                login_submitted = st.form_submit_button("Login")
 
                 if login_submitted:
                     self._handle_login(email, password)
-                elif forgot_clicked:
-                    st.session_state.show_reset = True
-                    st.rerun()
-
-            if st.session_state.get("show_reset"):
-                self._show_password_reset_ui()
 
         with tab2:
             with st.form("register_form"):
@@ -163,27 +147,21 @@ class AuthService:
                     self._handle_register(email, full_name, password, confirm_pass)
 
     def _handle_login(self, email: str, password: str):
-        # 1. Validate email format first
-        if not self._validate_gmail_format(email):
-            return
-
-        # 2. Check if email exists in database
         user = self.dbs.get_user_by_email(email)
+
         if not user:
-            st.error("❌ Email not registered. Please register first.")
+            st.error("❌ Account not found")
             return
 
-        # 3. Check if email is verified
-        if not user.get("is_verified", False):
+        if not user.get("is_verified"):
             st.error("⚠️ Please verify your email first. Check your inbox.")
             return
 
-        # 4. Verify password
         if not self.verify_password(email, password):
-            st.error("❌ Wrong password. Try again or reset your password.")
+            st.error("❌ Invalid credentials")
             return
 
-        # 5. Login successful
+        # Successful login
         st.session_state.update(
             {
                 "authenticated": True,
@@ -199,25 +177,42 @@ class AuthService:
     def _handle_register(
         self, email: str, full_name: str, password: str, confirm_pass: str
     ):
-        # 1. Validate email format (basic check)
+        """Handle user registration with email verification flow
+
+        Args:
+            email: User's email address
+            full_name: User's full name
+            password: User's password
+            confirm_pass: Password confirmation
+        """
+        # 1. Validate email format (strict Gmail check)
         if not self._validate_gmail_format(email):
+            st.error("❌ Only @gmail.com addresses are allowed")
             return
 
-        # 2. Check if Gmail exists via SMTP (NEW)
+        # 2. Verify Gmail existence via SMTP
         try:
             if not self._verify_gmail_exists(email):
                 st.error("❌ This Gmail doesn't exist. Use a valid Google account.")
                 return
         except Exception as e:
             st.error(f"❌ Email verification failed: {str(e)}")
-            return  # Block registration if validation fails
-
-        # 3. Check if email is already registered
-        if self.dbs.get_user_by_email(email):
-            st.error("❌ Email already registered")
             return
 
-        # 4. Validate password
+        # 3. Check if email is already registered (including unverified accounts)
+        existing_user = self.dbs.get_user_by_email(email)
+        if existing_user:
+            if existing_user.get("is_verified"):
+                st.error("❌ Email already registered")
+            else:
+                st.warning(
+                    "⚠️ This email has an unverified account. Resending verification..."
+                )
+                self.send_verification_email(email)
+                st.success("✅ New verification email sent! Check your inbox.")
+            return
+
+        # 4. Validate password requirements
         if len(password) < 8:
             st.error("❌ Password must be at least 8 characters")
             return
@@ -225,15 +220,30 @@ class AuthService:
             st.error("❌ Passwords don't match")
             return
 
-        # 5. Proceed with registration
+        # 5. Register new unverified user
         success, message = self.dbs.register_user(
-            email=email, password=password, full_name=full_name, is_verified=False
+            email=email, password=password, full_name=full_name
         )
+
         if success:
-            self.send_verification_email(email)
-            st.success("✅ Verification email sent! Check your inbox.")
+            # Send verification email
+            if self.send_verification_email(email):
+                st.success("✅ Verification email sent! Check your inbox.")
+                # Optional: Show the verification reminder
+                with st.expander("Didn't receive the email?"):
+                    st.markdown(
+                        """
+                    - Check your spam folder
+                    - Wait 2-3 minutes
+                    - [Click here to resend](#) (implement resend logic)
+                    """
+                    )
+            else:
+                # Rollback registration if email fails
+                self.dbs.delete_user(email)
+                st.error("❌ Failed to send verification email")
         else:
-            st.error(message)
+            st.error(f"❌ {message}")
 
     def _validate_gmail_format(self, email: str) -> bool:
         """More robust email validation"""
@@ -279,124 +289,8 @@ class AuthService:
         st.session_state.pop("user", None)
         st.rerun()
 
-    def send_password_reset_email(self, email: str) -> bool:
-        """More reliable reset email sender"""
-        try:
-            if not self._validate_gmail_format(email):
-                st.error("Invalid email format")
-                return False
 
-            user = self.dbs.get_user_by_email(email)
-            if not user:
-                st.error("❌ Email not registered")
-                return False
-
-            token = self.generate_token(email)
-            reset_link = f"http://localhost:8501/?reset=true&token={token}"
-
-            # For development - show in console and UI
-            print(f"\n🔗 RESET LINK FOR {email}: {reset_link}\n")
-
-            st.session_state.generated_reset_link = reset_link  # Store for display
-
-            # For testing email template
-            message = f"""
-            <html>
-                <body>
-                    <h3>Password Reset Request</h3>
-                    <p>Click to reset your password:</p>
-                    <a href="{reset_link}">Reset Password</a>
-                    <p>This link expires in 1 hour.</p>
-                    <p>If you didn't request this, please ignore this email.</p>
-                </body>
-            </html>
-            """
-
-            # Display in app for development
-            with st.expander("Email Preview (would be sent in production)"):
-                st.markdown(message, unsafe_allow_html=True)
-
-            return True
-
-        except Exception as e:
-            st.error(f"Reset failed: {str(e)}")
-            print(f"ERROR in send_password_reset_email: {str(e)}")
-            return False
-
-    def reset_password(self, token: str, new_password: str) -> bool:
-        try:
-            email = self.verify_token(token)
-            if not email:
-                st.error("Invalid or expired token")
-                return False
-
-            # Check password history
-            if self.is_recent_password(email, new_password):
-                st.error("Cannot reuse recent passwords")
-                return False
-
-            # Generate and update hash
-            new_hash = bcrypt.hashpw(new_password.encode(), bcrypt.gensalt()).decode()
-
-            # Debug output
-            print(f"\n🔑 Password Reset Debug:")
-            print(f"Email: {email}")
-            print(f"New Hash: {new_hash[:60]}...")
-
-            if not self.dbs.update_user_password(email, new_hash):
-                st.error("Database update failed")
-                return False
-
-            # Force logout all sessions
-            self.dbs.invalidate_sessions(email)
-            return True
-
-        except Exception as e:
-            st.error(f"System error: {str(e)}")
-            return False
-
-    def _show_password_reset_ui(self):
-        """Improved reset password UI with error handling"""
-        st.title("🔑 Reset Password")
-
-        # Initialize state if not exists
-        if "reset_requested" not in st.session_state:
-            st.session_state.reset_requested = False
-
-        if not st.session_state.reset_requested:
-            with st.form("reset_request_form", clear_on_submit=True):
-                email = st.text_input("Enter your registered email", key="reset_email")
-
-                if st.form_submit_button("Get Reset Link"):
-                    if email and self._validate_gmail_format(email):
-                        if self.send_password_reset_email(email):
-                            st.session_state.reset_requested = True
-                            st.rerun()
-                        else:
-                            st.error("Failed to generate reset link")
-                    else:
-                        st.error("Please enter a valid @gmail.com address")
-
-                if st.form_submit_button("Back to Login"):
-                    st.session_state.show_reset = False
-                    st.rerun()
-        else:
-            st.success("✅ Reset link generated!")
-            st.markdown(
-                """
-                **Development Mode:**  
-                - Check your terminal for the reset link  
-                - In production, this would be emailed to you
-            """
-            )
-
-            if st.button("← Back to Login"):
-                st.session_state.show_reset = False
-                st.session_state.reset_requested = False
-                st.rerun()
-
-
-# Singleton instance
+# Singleton instance for easy imports
 auth_service = AuthService(dbs_service=None)
 show_auth = auth_service.show_auth
 logout = auth_service.logout
