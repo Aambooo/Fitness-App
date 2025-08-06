@@ -10,3 +10,5 @@ __pycache__/
 *.env               # Blocks all .env files
 .env*               # Extra protection for variants
 !.env.example       # Exception (keep template files)
+
+service-account.json
