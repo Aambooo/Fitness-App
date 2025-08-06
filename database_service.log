@@ -1668,3 +1668,240 @@ AttributeError: module 'database_service' has no attribute 'get_schedules_by_tim
 2025-08-04 19:43:23,098 - INFO - DatabaseService initialized
 2025-08-04 20:07:52,695 - INFO - MySQL connection pool created successfully
 2025-08-04 20:07:52,696 - INFO - DatabaseService initialized
+2025-08-04 21:42:45,143 - INFO - MySQL connection pool created successfully
+2025-08-04 21:42:45,145 - INFO - DatabaseService initialized
+2025-08-04 21:56:16,267 - INFO - MySQL connection pool created successfully
+2025-08-04 21:56:16,267 - INFO - DatabaseService initialized
+2025-08-04 21:56:47,078 - ERROR - Registration failed for ok@gmail.com: 1054 (42S22): Unknown column 'is_verified' in 'field list'
+2025-08-04 21:57:00,744 - ERROR - Registration failed for nabdabop10@gmail.com: 1054 (42S22): Unknown column 'is_verified' in 'field list'
+2025-08-04 21:59:37,144 - ERROR - Registration failed for nabdabop10@gmail.com: 1054 (42S22): Unknown column 'is_verified' in 'field list'
+2025-08-04 22:07:23,325 - INFO - MySQL connection pool created successfully
+2025-08-04 22:07:23,325 - INFO - DatabaseService initialized
+2025-08-04 22:07:23,327 - INFO - Starting database migrations
+2025-08-04 22:07:23,360 - ERROR - Failed to fetch schedules: 'DatabaseService' object has no attribute 'get_all_schedules'
+2025-08-04 22:07:23,360 - INFO - No schedules found for migration
+2025-08-04 22:07:23,362 - INFO - All migrations completed
+2025-08-04 22:07:23,385 - INFO - Connection pool closed
+2025-08-04 22:07:50,430 - INFO - MySQL connection pool created successfully
+2025-08-04 22:07:50,430 - INFO - DatabaseService initialized
+2025-08-04 22:09:00,464 - INFO - MySQL connection pool created successfully
+2025-08-04 22:09:00,465 - INFO - DatabaseService initialized
+2025-08-04 22:23:35,137 - INFO - MySQL connection pool created successfully
+2025-08-04 22:23:35,138 - INFO - DatabaseService initialized
+2025-08-04 22:31:41,375 - INFO - MySQL connection pool created successfully
+2025-08-04 22:31:41,375 - INFO - DatabaseService initialized
+2025-08-05 10:53:11,044 - INFO - MySQL connection pool created successfully
+2025-08-05 10:53:11,045 - INFO - DatabaseService initialized
+2025-08-05 11:10:27,374 - INFO - MySQL connection pool created successfully
+2025-08-05 11:10:27,374 - INFO - DatabaseService initialized
+2025-08-05 11:32:00,979 - INFO - MySQL connection pool created successfully
+2025-08-05 11:32:00,980 - INFO - DatabaseService initialized
+2025-08-05 11:50:32,956 - INFO - MySQL connection pool created successfully
+2025-08-05 11:50:32,956 - INFO - DatabaseService initialized
+2025-08-05 12:05:51,077 - INFO - MySQL connection pool created successfully
+2025-08-05 12:05:51,079 - INFO - DatabaseService initialized
+2025-08-05 12:11:38,066 - INFO - MySQL connection pool created successfully
+2025-08-05 12:11:38,067 - INFO - DatabaseService initialized
+2025-08-05 12:20:51,829 - INFO - MySQL connection pool created successfully
+2025-08-05 12:20:51,830 - INFO - DatabaseService initialized
+2025-08-05 12:43:23,475 - INFO - MySQL connection pool created successfully
+2025-08-05 12:43:23,475 - INFO - DatabaseService initialized
+2025-08-05 12:44:59,852 - INFO - MySQL connection pool created successfully
+2025-08-05 12:44:59,855 - INFO - DatabaseService initialized
+2025-08-05 12:54:48,988 - INFO - MySQL connection pool created successfully
+2025-08-05 12:54:48,988 - INFO - DatabaseService initialized
+2025-08-05 12:55:14,797 - INFO - MySQL connection pool created successfully
+2025-08-05 12:55:14,797 - INFO - DatabaseService initialized
+2025-08-05 13:09:12,559 - INFO - MySQL connection pool created successfully
+2025-08-05 13:09:12,559 - INFO - DatabaseService initialized
+2025-08-05 13:35:21,605 - INFO - MySQL connection pool created successfully
+2025-08-05 13:35:21,605 - INFO - DatabaseService initialized
+2025-08-05 14:08:32,982 - INFO - MySQL connection pool created successfully
+2025-08-05 14:08:32,983 - INFO - DatabaseService initialized
+2025-08-05 14:23:46,269 - INFO - MySQL connection pool created successfully
+2025-08-05 14:23:46,271 - INFO - DatabaseService initialized
+2025-08-05 14:25:17,135 - INFO - MySQL connection pool created successfully
+2025-08-05 14:25:17,135 - INFO - DatabaseService initialized
+2025-08-05 14:27:59,592 - INFO - MySQL connection pool created successfully
+2025-08-05 14:27:59,593 - INFO - DatabaseService initialized
+2025-08-05 14:31:21,430 - INFO - MySQL connection pool created successfully
+2025-08-05 14:31:21,431 - INFO - DatabaseService initialized
+2025-08-05 14:57:03,918 - INFO - MySQL connection pool created successfully
+2025-08-05 14:57:03,919 - INFO - DatabaseService initialized
+2025-08-05 16:00:16,588 - INFO - MySQL connection pool created successfully
+2025-08-05 16:00:16,590 - INFO - DatabaseService initialized
+2025-08-05 16:57:10,690 - INFO - MySQL connection pool created successfully
+2025-08-05 16:57:10,693 - INFO - DatabaseService initialized
+2025-08-05 17:03:04,775 - INFO - MySQL connection pool created successfully
+2025-08-05 17:03:04,776 - INFO - DatabaseService initialized
+2025-08-05 17:32:15,297 - INFO - MySQL connection pool created successfully
+2025-08-05 17:32:15,298 - INFO - DatabaseService initialized
+2025-08-05 17:33:29,899 - INFO - MySQL connection pool created successfully
+2025-08-05 17:33:29,900 - INFO - DatabaseService initialized
+2025-08-05 18:32:49,440 - INFO - MySQL connection pool created successfully
+2025-08-05 18:32:49,441 - INFO - DatabaseService initialized
+2025-08-05 18:44:05,858 - INFO - MySQL connection pool created successfully
+2025-08-05 18:44:05,859 - INFO - DatabaseService initialized
+2025-08-05 18:44:23,440 - INFO - file_cache is only supported with oauth2client<4.0.0
+2025-08-05 18:44:59,507 - INFO - file_cache is only supported with oauth2client<4.0.0
+2025-08-05 19:14:10,880 - INFO - MySQL connection pool created successfully
+2025-08-05 19:14:10,883 - INFO - DatabaseService initialized
+2025-08-05 19:16:03,891 - INFO - MySQL connection pool created successfully
+2025-08-05 19:16:03,892 - INFO - DatabaseService initialized
+2025-08-05 19:16:24,310 - INFO - MySQL connection pool created successfully
+2025-08-05 19:16:24,310 - INFO - DatabaseService initialized
+2025-08-05 19:24:14,441 - INFO - MySQL connection pool created successfully
+2025-08-05 19:24:14,441 - INFO - DatabaseService initialized
+2025-08-05 19:25:35,930 - INFO - MySQL connection pool created successfully
+2025-08-05 19:25:35,930 - INFO - DatabaseService initialized
+2025-08-05 19:26:49,648 - INFO - MySQL connection pool created successfully
+2025-08-05 19:26:49,649 - INFO - DatabaseService initialized
+2025-08-05 20:03:21,828 - INFO - MySQL connection pool created successfully
+2025-08-05 20:03:21,830 - INFO - DatabaseService initialized
+2025-08-05 20:11:21,965 - INFO - MySQL connection pool created successfully
+2025-08-05 20:11:21,965 - INFO - DatabaseService initialized
+2025-08-05 20:17:38,842 - INFO - MySQL connection pool created successfully
+2025-08-05 20:17:38,845 - INFO - DatabaseService initialized
+2025-08-05 20:25:29,195 - INFO - MySQL connection pool created successfully
+2025-08-05 20:25:29,196 - INFO - DatabaseService initialized
+2025-08-05 20:30:13,027 - INFO - MySQL connection pool created successfully
+2025-08-05 20:30:13,027 - INFO - DatabaseService initialized
+2025-08-05 20:36:09,934 - INFO - MySQL connection pool created successfully
+2025-08-05 20:36:09,934 - INFO - DatabaseService initialized
+2025-08-05 20:45:28,164 - INFO - MySQL connection pool created successfully
+2025-08-05 20:45:28,166 - INFO - DatabaseService initialized
+2025-08-05 20:58:05,678 - INFO - MySQL connection pool created successfully
+2025-08-05 20:58:05,679 - INFO - DatabaseService initialized
+2025-08-05 21:06:37,657 - INFO - MySQL connection pool created successfully
+2025-08-05 21:06:37,659 - INFO - DatabaseService initialized
+2025-08-05 21:11:38,463 - INFO - MySQL connection pool created successfully
+2025-08-05 21:11:38,464 - INFO - DatabaseService initialized
+2025-08-05 21:19:48,840 - INFO - MySQL connection pool created successfully
+2025-08-05 21:19:48,840 - INFO - DatabaseService initialized
+2025-08-05 21:27:42,213 - INFO - MySQL connection pool created successfully
+2025-08-05 21:27:42,213 - INFO - DatabaseService initialized
+2025-08-05 21:36:09,173 - INFO - MySQL connection pool created successfully
+2025-08-05 21:36:09,174 - INFO - DatabaseService initialized
+2025-08-05 21:38:03,823 - INFO - MySQL connection pool created successfully
+2025-08-05 21:38:03,823 - INFO - DatabaseService initialized
+2025-08-05 21:40:18,728 - INFO - MySQL connection pool created successfully
+2025-08-05 21:40:18,728 - INFO - DatabaseService initialized
+2025-08-05 21:53:35,312 - INFO - MySQL connection pool created successfully
+2025-08-05 21:53:35,315 - INFO - DatabaseService initialized
+2025-08-05 21:58:43,952 - INFO - MySQL connection pool created successfully
+2025-08-05 21:58:43,953 - INFO - DatabaseService initialized
+2025-08-05 22:00:13,094 - INFO - MySQL connection pool created successfully
+2025-08-05 22:00:13,095 - INFO - DatabaseService initialized
+2025-08-05 22:06:19,378 - INFO - MySQL connection pool created successfully
+2025-08-05 22:06:19,379 - INFO - DatabaseService initialized
+2025-08-05 22:17:47,054 - INFO - MySQL connection pool created successfully
+2025-08-05 22:17:47,054 - INFO - DatabaseService initialized
+2025-08-05 22:22:54,124 - INFO - MySQL connection pool created successfully
+2025-08-05 22:22:54,126 - INFO - DatabaseService initialized
+2025-08-05 22:24:22,014 - INFO - MySQL connection pool created successfully
+2025-08-05 22:24:22,014 - INFO - DatabaseService initialized
+2025-08-05 22:41:44,380 - INFO - MySQL connection pool created successfully
+2025-08-05 22:41:44,381 - INFO - DatabaseService initialized
+2025-08-06 10:35:58,248 - ERROR - Task exception was never retrieved
+future: <Task finished name='Task-25' coro=<WebSocketProtocol13.write_message.<locals>.wrapper() done, defined at C:\Users\pulam\OneDrive\Desktop\Fitness App\env\lib\site-packages\tornado\websocket.py:1111> exception=WebSocketClosedError()>
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\env\lib\site-packages\streamlit\web\bootstrap.py", line 348, in run
+    if asyncio.get_running_loop().is_running():
+RuntimeError: no running event loop
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\env\lib\site-packages\tornado\websocket.py", line 1113, in wrapper
+    await fut
+tornado.iostream.StreamClosedError: Stream is closed
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\pulam\OneDrive\Desktop\Fitness App\env\lib\site-packages\tornado\websocket.py", line 1115, in wrapper
+    raise WebSocketClosedError()
+tornado.websocket.WebSocketClosedError
+2025-08-06 10:42:52,915 - INFO - DatabaseService initialized
+2025-08-06 10:51:50,212 - INFO - DatabaseService initialized
+2025-08-06 10:53:11,016 - INFO - DatabaseService initialized
+2025-08-06 11:06:58,590 - INFO - MySQL connection pool created successfully
+2025-08-06 11:06:58,590 - INFO - Tables created/verified successfully
+2025-08-06 11:06:58,590 - INFO - DatabaseService initialized with MySQL
+2025-08-06 11:15:58,435 - INFO - MySQL connection pool created successfully
+2025-08-06 11:15:58,439 - INFO - Tables created/verified successfully
+2025-08-06 11:15:58,441 - INFO - DatabaseService initialized with MySQL
+2025-08-06 11:28:59,579 - INFO - MySQL connection pool created successfully
+2025-08-06 11:28:59,582 - INFO - Tables created/verified successfully
+2025-08-06 11:28:59,583 - INFO - DatabaseService initialized with MySQL
+2025-08-06 11:36:18,884 - INFO - MySQL connection pool created successfully
+2025-08-06 11:36:18,889 - INFO - Tables created/verified successfully
+2025-08-06 11:36:18,890 - INFO - DatabaseService initialized with MySQL
+2025-08-06 11:44:46,235 - INFO - MySQL connection pool created successfully
+2025-08-06 11:44:46,241 - INFO - Tables created/verified successfully
+2025-08-06 11:44:46,242 - INFO - DatabaseService initialized with MySQL
+2025-08-06 12:10:06,296 - INFO - MySQL connection pool created successfully
+2025-08-06 12:10:06,302 - INFO - Tables created/verified successfully
+2025-08-06 12:10:06,303 - INFO - DatabaseService initialized with MySQL
+2025-08-06 12:11:41,983 - INFO - MySQL connection pool created successfully
+2025-08-06 12:11:41,987 - INFO - Tables created/verified successfully
+2025-08-06 12:11:41,988 - INFO - DatabaseService initialized with MySQL
+2025-08-06 12:20:35,528 - INFO - MySQL connection pool created successfully
+2025-08-06 12:20:35,531 - INFO - Tables created/verified successfully
+2025-08-06 12:20:35,532 - INFO - DatabaseService initialized with MySQL
+2025-08-06 12:33:28,014 - INFO - MySQL connection pool created successfully
+2025-08-06 12:33:28,017 - INFO - Tables created/verified successfully
+2025-08-06 12:33:28,018 - INFO - DatabaseService initialized with MySQL
+2025-08-06 12:44:59,996 - INFO - MySQL connection pool created successfully
+2025-08-06 12:45:00,000 - INFO - Tables created/verified successfully
+2025-08-06 12:45:00,001 - INFO - DatabaseService initialized with MySQL
+2025-08-06 12:50:15,487 - INFO - MySQL connection pool created successfully
+2025-08-06 12:50:15,489 - INFO - Tables created/verified successfully
+2025-08-06 12:50:15,490 - INFO - DatabaseService initialized with MySQL
+2025-08-06 13:23:37,883 - INFO - MySQL connection pool created successfully
+2025-08-06 13:23:37,894 - INFO - Tables created/verified successfully
+2025-08-06 13:23:37,896 - INFO - DatabaseService initialized with MySQL
+2025-08-06 13:23:38,776 - INFO - Connection pool closed
+2025-08-06 14:07:33,080 - INFO - MySQL connection pool created successfully
+2025-08-06 14:07:33,083 - INFO - Tables created/verified successfully
+2025-08-06 14:07:33,085 - INFO - DatabaseService initialized with MySQL
+2025-08-06 14:07:34,373 - INFO - Connection pool closed
+2025-08-06 14:19:17,564 - INFO - MySQL connection pool created successfully
+2025-08-06 14:19:17,568 - INFO - Tables created/verified successfully
+2025-08-06 14:19:17,568 - INFO - DatabaseService initialized with MySQL
+2025-08-06 14:19:18,103 - INFO - MySQL connection pool created successfully
+2025-08-06 14:22:21,809 - INFO - MySQL connection pool created successfully
+2025-08-06 14:22:21,811 - INFO - Tables created/verified successfully
+2025-08-06 14:22:21,812 - INFO - DatabaseService initialized with MySQL
+2025-08-06 14:22:59,306 - INFO - MySQL connection pool created successfully
+2025-08-06 14:24:03,224 - INFO - MySQL connection pool created successfully
+2025-08-06 14:24:03,227 - INFO - Tables created/verified successfully
+2025-08-06 14:24:03,228 - INFO - DatabaseService initialized with MySQL
+2025-08-06 14:24:03,709 - INFO - MySQL connection pool created successfully
+2025-08-06 14:31:00,501 - INFO - MySQL connection pool created successfully
+2025-08-06 14:31:00,503 - INFO - Tables created/verified successfully
+2025-08-06 14:31:00,507 - INFO - DatabaseService initialized with MySQL
+2025-08-06 14:58:27,291 - INFO - MySQL connection pool created successfully
+2025-08-06 14:58:27,291 - INFO - Tables created/verified successfully
+2025-08-06 14:58:27,291 - INFO - DatabaseService initialized with MySQL
+2025-08-06 15:05:54,272 - INFO - MySQL connection pool created successfully
+2025-08-06 15:05:54,275 - INFO - Tables created/verified successfully
+2025-08-06 15:05:54,276 - INFO - DatabaseService initialized with MySQL
+2025-08-06 15:13:30,790 - INFO - MySQL connection pool created successfully
+2025-08-06 15:13:30,799 - INFO - Tables created/verified successfully
+2025-08-06 15:13:30,801 - INFO - DatabaseService initialized with MySQL
+2025-08-06 15:22:22,542 - INFO - MySQL connection pool created successfully
+2025-08-06 15:22:22,547 - INFO - Tables created/verified successfully
+2025-08-06 15:22:22,548 - INFO - DatabaseService initialized with MySQL
+2025-08-06 15:51:05,801 - INFO - MySQL connection pool created successfully
+2025-08-06 15:51:05,805 - INFO - Tables created/verified successfully
+2025-08-06 15:51:05,805 - INFO - DatabaseService initialized with MySQL
+2025-08-06 15:58:33,976 - INFO - MySQL connection pool created successfully
+2025-08-06 15:58:33,979 - INFO - Tables created/verified successfully
+2025-08-06 15:58:33,980 - INFO - DatabaseService initialized with MySQL
+2025-08-06 16:02:53,290 - INFO - MySQL connection pool created successfully
+2025-08-06 16:02:53,292 - INFO - Tables created/verified successfully
+2025-08-06 16:02:53,293 - INFO - DatabaseService initialized with MySQL
+2025-08-06 16:05:06,028 - INFO - MySQL connection pool created successfully
+2025-08-06 16:05:06,031 - INFO - Tables created/verified successfully
+2025-08-06 16:05:06,033 - INFO - DatabaseService initialized with MySQL

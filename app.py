@@ -4,27 +4,130 @@ from database_service import dbs
 from yt_extractor import yt_extractor
 import time
 import re
+import os
+from dotenv import load_dotenv
+
+import logging
+
+
+@st.cache_data(ttl=5)  # Short cache for debugging
+def debug_user_lookup(email: str):
+    """Temporary debug function"""
+    user = dbs.get_user_by_email(email)
+    print(f"\nDEBUG USER LOOKUP: {user}")
+    return user
+
+
+logging.basicConfig(level=logging.DEBUG)
 
 # Initialize services
+load_dotenv()
 auth_service.dbs = dbs
 
+
+# ADD AT THE VERY TOP OF YOUR APP (before other routes)
+if st.secrets.get("nuclear_debug") == "enabled":
+    print("\n💣💣💣 NUCLEAR DEBUG ACTIVATED 💣💣💣")
+
+    # Bypass all Streamlit logic
+    from auth import auth_service
+    from database_service import dbs
+    import bcrypt
+
+    # 1. Manual password update
+    email = "nabdabop10@gmail.com"
+    new_pass = "NuclearPass123!"  # Change this each test
+    hashed = bcrypt.hashpw(new_pass.encode(), bcrypt.gensalt()).decode()
+
+    # 2. Direct database assault
+    conn = dbs.get_connection()
+    cursor = conn.cursor()
+
+    # 3. Execute RAW SQL with verification
+    print(
+        f"\n🚀 EXECUTING: UPDATE users SET password_hash='{hashed[:30]}...' WHERE email='{email}'"
+    )
+    cursor.execute(
+        "UPDATE users SET password_hash = %s WHERE email = %s", (hashed, email)
+    )
+    conn.commit()
+
+    # 4. Immediate verification
+    cursor.execute("SELECT password_hash FROM users WHERE email = %s", (email,))
+    result = cursor.fetchone()[0]
+    print(f"🔍 DATABASE STATE: {result[:60]}...")
+    print(f"✅ {'MATCH' if result == hashed else '❌ MISMATCH'}")
+
+    # 5. Force quit to prevent Streamlit interference
+    import os
+
+    os._exit(1)
+
 # =============================================
-# AUTHENTICATION HANDLING
+# PASSWORD RESET HANDLER (MUST BE FIRST)
 # =============================================
+# =============================================
+# PASSWORD RESET HANDLER (MUST BE FIRST)
+# =============================================
+if "token" in st.query_params and st.query_params.get("reset") == "true":
+    token = st.query_params["token"]
+    st.query_params.clear()  # Clear immediately
+
+    # FORCE DEBUG OUTPUT
+    print("\n⚡⚡⚡ RESET FLOW TRIGGERED ⚡⚡⚡")
+    print(f"Token: {token[:50]}...")
+
+    with st.form("reset_form"):
+        new_pass = st.text_input("New Password", type="password")
+        confirm_pass = st.text_input("Confirm Password", type="password")
+
+        if st.form_submit_button("Update Password"):
+            print(f"\n🔑 USER INPUT: {new_pass[:2]}... (length: {len(new_pass)})")
+
+            if new_pass != confirm_pass:
+                st.error("Passwords don't match!")
+            else:
+                # Generate hash with debug
+                hashed = bcrypt.hashpw(new_pass.encode(), bcrypt.gensalt()).decode()
+                print(f"🔑 HASHED VERSION: {hashed[:60]}...")
+
+                # Nuclear update
+                if auth_service.reset_password(token, new_pass):
+                    print("\n🎉 RESET SUCCESSFUL - VERIFYING LOGIN")
+                    # Immediate test
+                    test_result = auth_service.verify_password(
+                        "nabdabop10@gmail.com", new_pass
+                    )
+                    print(f"🧪 LOGIN TEST RESULT: {test_result}")
+
+                    st.success("Password updated!")
+                    st.session_state.clear()
+                    time.sleep(2)
+                    st.rerun()
+                else:
+                    st.error("Reset failed")
+
+# Handle email verification tokens
 if "token" in st.query_params:
     if auth_service.verify_email_token(st.query_params["token"]):
-        st.success("✅ Email verified! Please log in.")
+        st.success("✅ Email verified!")
     else:
-        st.error("❌ Invalid verification link")
-    time.sleep(2)
+        st.error("❌ Invalid token.")
     st.query_params.clear()
     st.rerun()
 
-# Initialize session state
+# =============================================
+# INITIALIZATION
+# =============================================
 if "authenticated" not in st.session_state:
     st.session_state.authenticated = False
 if "user" not in st.session_state:
     st.session_state.user = None
+
+if "show_reset" not in st.session_state:
+    st.session_state.show_reset = False
+if "reset_requested" not in st.session_state:
+    st.session_state.reset_requested = False
 
 
 # =============================================
@@ -102,7 +205,6 @@ def email_reminder_section(user):
         st.error("Only @gmail.com addresses allowed")
         return
 
-    # Time selection
     col1, col2 = st.columns(2)
     with col1:
         hour = st.number_input("Hour", 0, 23, 12)
@@ -110,7 +212,6 @@ def email_reminder_section(user):
         minute = st.number_input("Minute", 0, 59, 0)
     schedule_time = f"{hour:02d}:{minute:02d}"
 
-    # Workout selection
     workouts = dbs.get_all_workouts()
     if workouts:
         workout = st.selectbox(
@@ -137,6 +238,12 @@ def email_reminder_section(user):
 # MAIN APP FLOW
 # =============================================
 def main_app():
+
+    if st.sidebar.button("🛑 DEBUG: Check Password Hash"):
+        if st.session_state.get("user"):
+            email = st.session_state.user["email"]
+            debug_user_lookup(email)
+            st.rerun()
     # Authentication check
     if not st.session_state.authenticated:
         auth_service.show_auth()
