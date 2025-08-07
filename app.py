@@ -1,4 +1,7 @@
 import streamlit as st
+
+st.set_page_config(page_title="Workout Reminder", layout="centered")
+
 from auth import auth_service, logout
 from database_service import dbs
 from yt_extractor import yt_extractor
@@ -7,6 +10,7 @@ import re
 import os
 from dotenv import load_dotenv
 import logging
+from home import landing_page
 
 
 @st.cache_data(ttl=5)  # Short cache for debugging
@@ -23,6 +27,24 @@ logging.basicConfig(level=logging.DEBUG)
 load_dotenv()
 auth_service.dbs = dbs
 
+# =============================================
+# INITIALIZATION
+# =============================================
+if "authenticated" not in st.session_state:
+    st.session_state.authenticated = False
+if "user" not in st.session_state:
+    st.session_state.user = None
+if "show_login" not in st.session_state:
+    st.session_state.show_login = False
+
+# =============================================
+# HANDLE LOGIN TRIGGER FROM home.py
+# =============================================
+if st.query_params.get("login") == "1":
+    st.session_state.show_login = True
+    st.query_params.clear()
+    st.rerun()
+
 # Handle email verification tokens
 if "token" in st.query_params:
     if auth_service.verify_email_token(st.query_params["token"]):
@@ -31,14 +53,6 @@ if "token" in st.query_params:
         st.error("❌ Invalid token.")
     st.query_params.clear()
     st.rerun()
-
-# =============================================
-# INITIALIZATION
-# =============================================
-if "authenticated" not in st.session_state:
-    st.session_state.authenticated = False
-if "user" not in st.session_state:
-    st.session_state.user = None
 
 
 # =============================================
@@ -149,7 +163,6 @@ def email_reminder_section(user):
 # MAIN APP FLOW
 # =============================================
 def main_app():
-
     # Authentication check
     if not st.session_state.authenticated:
         auth_service.show_auth()
@@ -192,5 +205,13 @@ def todays_workout_ui():
                 st.rerun()
 
 
+# =============================================
+# ROUTING: MAIN ENTRY
+# =============================================
 if __name__ == "__main__":
-    main_app()
+
+    # Route based on login state
+    if st.session_state.show_login:
+        main_app()
+    else:
+        landing_page()

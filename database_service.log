@@ -1941,3 +1941,204 @@ tornado.websocket.WebSocketClosedError
 2025-08-06 23:04:09,124 - INFO - Tables created/verified successfully
 2025-08-06 23:04:09,124 - INFO - DatabaseService initialized with MySQL
 2025-08-06 23:07:48,268 - INFO - New user registered (unverified): pulaminabin10@gmail.com
+2025-08-07 11:21:32,166 - ERROR - Connection attempt 1 failed: 2003 (HY000): Can't connect to MySQL server on 'localhost:3306' (10061)
+2025-08-07 11:21:38,228 - ERROR - Connection attempt 2 failed: 2003 (HY000): Can't connect to MySQL server on 'localhost:3306' (10061)
+2025-08-07 11:21:44,325 - ERROR - Connection attempt 3 failed: 2003 (HY000): Can't connect to MySQL server on 'localhost:3306' (10061)
+2025-08-07 11:23:00,367 - INFO - MySQL connection pool created successfully
+2025-08-07 11:23:00,370 - INFO - Tables created/verified successfully
+2025-08-07 11:23:00,370 - INFO - DatabaseService initialized with MySQL
+2025-08-07 11:23:44,578 - INFO - MySQL connection pool created successfully
+2025-08-07 11:23:44,584 - INFO - Tables created/verified successfully
+2025-08-07 11:23:44,585 - INFO - DatabaseService initialized with MySQL
+2025-08-07 11:36:58,906 - INFO - MySQL connection pool created successfully
+2025-08-07 11:36:58,906 - INFO - Tables created/verified successfully
+2025-08-07 11:36:58,906 - INFO - DatabaseService initialized with MySQL
+2025-08-07 11:37:27,244 - INFO - MySQL connection pool created successfully
+2025-08-07 11:37:27,250 - INFO - Tables created/verified successfully
+2025-08-07 11:37:27,251 - INFO - DatabaseService initialized with MySQL
+2025-08-07 11:41:19,940 - INFO - MySQL connection pool created successfully
+2025-08-07 11:41:19,949 - INFO - Tables created/verified successfully
+2025-08-07 11:41:19,950 - INFO - DatabaseService initialized with MySQL
+2025-08-07 11:41:54,323 - INFO - MySQL connection pool created successfully
+2025-08-07 11:41:54,329 - INFO - Tables created/verified successfully
+2025-08-07 11:41:54,330 - INFO - DatabaseService initialized with MySQL
+2025-08-07 11:44:49,988 - INFO - MySQL connection pool created successfully
+2025-08-07 11:44:49,996 - INFO - Tables created/verified successfully
+2025-08-07 11:44:49,997 - INFO - DatabaseService initialized with MySQL
+2025-08-07 11:47:56,575 - INFO - MySQL connection pool created successfully
+2025-08-07 11:47:56,581 - INFO - Tables created/verified successfully
+2025-08-07 11:47:56,581 - INFO - DatabaseService initialized with MySQL
+2025-08-07 11:49:16,521 - INFO - MySQL connection pool created successfully
+2025-08-07 11:49:16,528 - INFO - Tables created/verified successfully
+2025-08-07 11:49:16,529 - INFO - DatabaseService initialized with MySQL
+2025-08-07 11:49:57,088 - INFO - MySQL connection pool created successfully
+2025-08-07 11:49:57,089 - INFO - Tables created/verified successfully
+2025-08-07 11:49:57,089 - INFO - DatabaseService initialized with MySQL
+2025-08-07 11:58:04,502 - INFO - MySQL connection pool created successfully
+2025-08-07 11:58:04,514 - INFO - Tables created/verified successfully
+2025-08-07 11:58:04,516 - INFO - DatabaseService initialized with MySQL
+2025-08-07 12:07:49,840 - INFO - MySQL connection pool created successfully
+2025-08-07 12:07:49,840 - INFO - Tables created/verified successfully
+2025-08-07 12:07:49,840 - INFO - DatabaseService initialized with MySQL
+2025-08-07 12:18:01,204 - INFO - MySQL connection pool created successfully
+2025-08-07 12:18:01,213 - INFO - Tables created/verified successfully
+2025-08-07 12:18:01,214 - INFO - DatabaseService initialized with MySQL
+2025-08-07 12:32:06,332 - INFO - MySQL connection pool created successfully
+2025-08-07 12:32:06,343 - INFO - Tables created/verified successfully
+2025-08-07 12:32:06,343 - INFO - DatabaseService initialized with MySQL
+2025-08-07 12:40:14,413 - INFO - MySQL connection pool created successfully
+2025-08-07 12:40:14,469 - INFO - Tables created/verified successfully
+2025-08-07 12:40:14,470 - INFO - DatabaseService initialized with MySQL
+2025-08-07 12:42:50,885 - INFO - MySQL connection pool created successfully
+2025-08-07 12:42:50,897 - INFO - Tables created/verified successfully
+2025-08-07 12:42:50,899 - INFO - DatabaseService initialized with MySQL
+2025-08-07 12:44:57,855 - INFO - MySQL connection pool created successfully
+2025-08-07 12:44:57,865 - INFO - Tables created/verified successfully
+2025-08-07 12:44:57,866 - INFO - DatabaseService initialized with MySQL
+2025-08-07 12:45:54,223 - INFO - MySQL connection pool created successfully
+2025-08-07 12:45:54,228 - INFO - Tables created/verified successfully
+2025-08-07 12:45:54,229 - INFO - DatabaseService initialized with MySQL
+2025-08-07 12:53:28,451 - INFO - MySQL connection pool created successfully
+2025-08-07 12:53:28,451 - INFO - Tables created/verified successfully
+2025-08-07 12:53:28,451 - INFO - DatabaseService initialized with MySQL
+2025-08-07 12:54:05,799 - INFO - MySQL connection pool created successfully
+2025-08-07 12:54:05,805 - INFO - Tables created/verified successfully
+2025-08-07 12:54:05,807 - INFO - DatabaseService initialized with MySQL
+2025-08-07 12:55:01,483 - INFO - MySQL connection pool created successfully
+2025-08-07 12:55:01,490 - INFO - Tables created/verified successfully
+2025-08-07 12:55:01,491 - INFO - DatabaseService initialized with MySQL
+2025-08-07 12:57:44,638 - INFO - MySQL connection pool created successfully
+2025-08-07 12:57:44,638 - INFO - Tables created/verified successfully
+2025-08-07 12:57:44,638 - INFO - DatabaseService initialized with MySQL
+2025-08-07 13:01:26,655 - INFO - MySQL connection pool created successfully
+2025-08-07 13:01:26,655 - INFO - Tables created/verified successfully
+2025-08-07 13:01:26,655 - INFO - DatabaseService initialized with MySQL
+2025-08-07 13:19:29,660 - INFO - MySQL connection pool created successfully
+2025-08-07 13:19:29,673 - INFO - Tables created/verified successfully
+2025-08-07 13:19:29,675 - INFO - DatabaseService initialized with MySQL
+2025-08-07 13:30:16,810 - INFO - MySQL connection pool created successfully
+2025-08-07 13:30:16,815 - INFO - Tables created/verified successfully
+2025-08-07 13:30:16,817 - INFO - DatabaseService initialized with MySQL
+2025-08-07 13:34:53,460 - INFO - MySQL connection pool created successfully
+2025-08-07 13:34:53,467 - INFO - Tables created/verified successfully
+2025-08-07 13:34:53,469 - INFO - DatabaseService initialized with MySQL
+2025-08-07 13:35:22,788 - INFO - MySQL connection pool created successfully
+2025-08-07 13:35:22,794 - INFO - Tables created/verified successfully
+2025-08-07 13:35:22,796 - INFO - DatabaseService initialized with MySQL
+2025-08-07 13:42:52,915 - INFO - MySQL connection pool created successfully
+2025-08-07 13:42:52,920 - INFO - Tables created/verified successfully
+2025-08-07 13:42:52,922 - INFO - DatabaseService initialized with MySQL
+2025-08-07 13:57:54,783 - INFO - MySQL connection pool created successfully
+2025-08-07 13:57:54,793 - INFO - Tables created/verified successfully
+2025-08-07 13:57:54,794 - INFO - DatabaseService initialized with MySQL
+2025-08-07 13:59:12,041 - INFO - MySQL connection pool created successfully
+2025-08-07 13:59:12,041 - INFO - Tables created/verified successfully
+2025-08-07 13:59:12,041 - INFO - DatabaseService initialized with MySQL
+2025-08-07 14:00:13,425 - INFO - MySQL connection pool created successfully
+2025-08-07 14:00:13,425 - INFO - Tables created/verified successfully
+2025-08-07 14:00:13,425 - INFO - DatabaseService initialized with MySQL
+2025-08-07 14:06:40,285 - INFO - MySQL connection pool created successfully
+2025-08-07 14:06:40,285 - INFO - Tables created/verified successfully
+2025-08-07 14:06:40,285 - INFO - DatabaseService initialized with MySQL
+2025-08-07 14:07:29,578 - INFO - MySQL connection pool created successfully
+2025-08-07 14:07:29,581 - INFO - Tables created/verified successfully
+2025-08-07 14:07:29,582 - INFO - DatabaseService initialized with MySQL
+2025-08-07 14:12:45,297 - INFO - MySQL connection pool created successfully
+2025-08-07 14:12:45,301 - INFO - Tables created/verified successfully
+2025-08-07 14:12:45,303 - INFO - DatabaseService initialized with MySQL
+2025-08-07 14:13:24,054 - INFO - MySQL connection pool created successfully
+2025-08-07 14:13:24,057 - INFO - Tables created/verified successfully
+2025-08-07 14:13:24,058 - INFO - DatabaseService initialized with MySQL
+2025-08-07 14:51:51,961 - INFO - MySQL connection pool created successfully
+2025-08-07 14:51:51,980 - INFO - Tables created/verified successfully
+2025-08-07 14:51:51,981 - INFO - DatabaseService initialized with MySQL
+2025-08-07 14:52:15,899 - INFO - MySQL connection pool created successfully
+2025-08-07 14:52:15,905 - INFO - Tables created/verified successfully
+2025-08-07 14:52:15,906 - INFO - DatabaseService initialized with MySQL
+2025-08-07 15:07:15,601 - INFO - MySQL connection pool created successfully
+2025-08-07 15:07:15,615 - INFO - Tables created/verified successfully
+2025-08-07 15:07:15,617 - INFO - DatabaseService initialized with MySQL
+2025-08-07 15:45:07,133 - INFO - MySQL connection pool created successfully
+2025-08-07 15:45:07,154 - INFO - Tables created/verified successfully
+2025-08-07 15:45:07,156 - INFO - DatabaseService initialized with MySQL
+2025-08-07 15:45:40,190 - INFO - MySQL connection pool created successfully
+2025-08-07 15:45:40,195 - INFO - Tables created/verified successfully
+2025-08-07 15:45:40,196 - INFO - DatabaseService initialized with MySQL
+2025-08-07 15:52:18,756 - INFO - MySQL connection pool created successfully
+2025-08-07 15:52:18,772 - INFO - Tables created/verified successfully
+2025-08-07 15:52:18,774 - INFO - DatabaseService initialized with MySQL
+2025-08-07 16:15:12,294 - INFO - MySQL connection pool created successfully
+2025-08-07 16:15:12,313 - INFO - Tables created/verified successfully
+2025-08-07 16:15:12,315 - INFO - DatabaseService initialized with MySQL
+2025-08-07 16:16:22,723 - INFO - MySQL connection pool created successfully
+2025-08-07 16:16:22,729 - INFO - Tables created/verified successfully
+2025-08-07 16:16:22,731 - INFO - DatabaseService initialized with MySQL
+2025-08-07 16:25:08,055 - INFO - MySQL connection pool created successfully
+2025-08-07 16:25:08,063 - INFO - Tables created/verified successfully
+2025-08-07 16:25:08,064 - INFO - DatabaseService initialized with MySQL
+2025-08-07 16:26:32,348 - INFO - MySQL connection pool created successfully
+2025-08-07 16:26:32,353 - INFO - Tables created/verified successfully
+2025-08-07 16:26:32,354 - INFO - DatabaseService initialized with MySQL
+2025-08-07 16:29:08,480 - INFO - MySQL connection pool created successfully
+2025-08-07 16:29:08,485 - INFO - Tables created/verified successfully
+2025-08-07 16:29:08,486 - INFO - DatabaseService initialized with MySQL
+2025-08-07 16:29:31,730 - INFO - MySQL connection pool created successfully
+2025-08-07 16:29:31,735 - INFO - Tables created/verified successfully
+2025-08-07 16:29:31,736 - INFO - DatabaseService initialized with MySQL
+2025-08-07 16:32:22,322 - INFO - MySQL connection pool created successfully
+2025-08-07 16:32:22,328 - INFO - Tables created/verified successfully
+2025-08-07 16:32:22,329 - INFO - DatabaseService initialized with MySQL
+2025-08-07 16:33:15,336 - INFO - MySQL connection pool created successfully
+2025-08-07 16:33:15,341 - INFO - Tables created/verified successfully
+2025-08-07 16:33:15,342 - INFO - DatabaseService initialized with MySQL
+2025-08-07 16:38:37,876 - INFO - MySQL connection pool created successfully
+2025-08-07 16:38:37,876 - INFO - Tables created/verified successfully
+2025-08-07 16:38:37,876 - INFO - DatabaseService initialized with MySQL
+2025-08-07 16:48:37,377 - INFO - MySQL connection pool created successfully
+2025-08-07 16:48:37,391 - INFO - Tables created/verified successfully
+2025-08-07 16:48:37,391 - INFO - DatabaseService initialized with MySQL
+2025-08-07 16:49:27,352 - INFO - MySQL connection pool created successfully
+2025-08-07 16:49:27,360 - INFO - Tables created/verified successfully
+2025-08-07 16:49:27,361 - INFO - DatabaseService initialized with MySQL
+2025-08-07 16:55:00,670 - INFO - MySQL connection pool created successfully
+2025-08-07 16:55:00,690 - INFO - Tables created/verified successfully
+2025-08-07 16:55:00,692 - INFO - DatabaseService initialized with MySQL
+2025-08-07 17:03:56,646 - INFO - MySQL connection pool created successfully
+2025-08-07 17:03:56,660 - INFO - Tables created/verified successfully
+2025-08-07 17:03:56,663 - INFO - DatabaseService initialized with MySQL
+2025-08-07 17:12:59,636 - INFO - MySQL connection pool created successfully
+2025-08-07 17:12:59,652 - INFO - Tables created/verified successfully
+2025-08-07 17:12:59,660 - INFO - DatabaseService initialized with MySQL
+2025-08-07 17:13:42,070 - INFO - MySQL connection pool created successfully
+2025-08-07 17:13:42,075 - INFO - Tables created/verified successfully
+2025-08-07 17:13:42,077 - INFO - DatabaseService initialized with MySQL
+2025-08-07 17:33:58,252 - INFO - MySQL connection pool created successfully
+2025-08-07 17:33:58,271 - INFO - Tables created/verified successfully
+2025-08-07 17:33:58,272 - INFO - DatabaseService initialized with MySQL
+2025-08-07 17:36:36,941 - INFO - MySQL connection pool created successfully
+2025-08-07 17:36:36,949 - INFO - Tables created/verified successfully
+2025-08-07 17:36:36,951 - INFO - DatabaseService initialized with MySQL
+2025-08-07 17:39:10,262 - INFO - MySQL connection pool created successfully
+2025-08-07 17:39:10,270 - INFO - Tables created/verified successfully
+2025-08-07 17:39:10,271 - INFO - DatabaseService initialized with MySQL
+2025-08-07 17:39:36,612 - INFO - MySQL connection pool created successfully
+2025-08-07 17:39:36,616 - INFO - Tables created/verified successfully
+2025-08-07 17:39:36,616 - INFO - DatabaseService initialized with MySQL
+2025-08-07 17:43:13,276 - INFO - MySQL connection pool created successfully
+2025-08-07 17:43:13,282 - INFO - Tables created/verified successfully
+2025-08-07 17:43:13,282 - INFO - DatabaseService initialized with MySQL
+2025-08-07 17:47:01,299 - INFO - MySQL connection pool created successfully
+2025-08-07 17:47:01,304 - INFO - Tables created/verified successfully
+2025-08-07 17:47:01,305 - INFO - DatabaseService initialized with MySQL
+2025-08-07 17:58:42,670 - INFO - MySQL connection pool created successfully
+2025-08-07 17:58:42,678 - INFO - Tables created/verified successfully
+2025-08-07 17:58:42,678 - INFO - DatabaseService initialized with MySQL
+2025-08-07 18:00:31,772 - INFO - MySQL connection pool created successfully
+2025-08-07 18:00:31,779 - INFO - Tables created/verified successfully
+2025-08-07 18:00:31,779 - INFO - DatabaseService initialized with MySQL
+2025-08-07 18:03:18,857 - INFO - MySQL connection pool created successfully
+2025-08-07 18:03:18,862 - INFO - Tables created/verified successfully
+2025-08-07 18:03:18,863 - INFO - DatabaseService initialized with MySQL
+2025-08-07 18:04:06,786 - INFO - MySQL connection pool created successfully
+2025-08-07 18:04:06,790 - INFO - Tables created/verified successfully
+2025-08-07 18:04:06,791 - INFO - DatabaseService initialized with MySQL
